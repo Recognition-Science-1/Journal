@@ -1,0 +1,11 @@
+/* Hide any auto-generated page title from Jekyll theme */
+.page-content h1:first-child,
+.post-title,
+.page-title {
+  display: none !important;
+}
+
+/* Ensure our hero section is the first visible element */
+.hero-section {
+  margin-top: 0 !important;
+}
