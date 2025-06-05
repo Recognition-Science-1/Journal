@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: "Home"
 ---
 <!-- Force rebuild for navigation update -->
