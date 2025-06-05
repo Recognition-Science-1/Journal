@@ -1,6 +1,6 @@
 ---
-layout: home
-title: "Journal of Recognition Science"
+layout: page
+title: "Home"
 ---
 
 <div class="hero-section fade-in">
