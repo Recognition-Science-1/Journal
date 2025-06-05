@@ -1,0 +1,31 @@
+# Lean build artifacts
+/build
+/lake-packages
+/.lake
+lake-manifest.json
+
+# Editor files
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Backup files
+*.bak
+*.backup
+
+# Compiled files
+*.olean
+*.ilean
+*.c
+*.so
+*.dll
+
+# Dependencies
+/lean_packages
+
+# OS files
+Thumbs.db
+.Spotlight-V100
+.Trashes 
