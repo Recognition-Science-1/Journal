@@ -2,6 +2,7 @@
 layout: page
 title: "Home"
 ---
+<!-- Force rebuild for navigation update -->
 
 <div class="hero-section fade-in">
   <h1 class="hero-title">The Journal of Recognition Science</h1>
