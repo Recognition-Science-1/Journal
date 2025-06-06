@@ -3,15 +3,11 @@ layout: default
 title: "Home"
 ---
 
-<div class="hero-section fade-in">
-  <h1 class="hero-title">The Journal of Recognition Science</h1>
-  <p class="hero-subtitle">A machine-verifiable ledger where every observable phenomenon is traced—without adjustable constants—to a finite graph of bidirectional recognition axioms.</p>
-  <p class="hero-date"><em>May 11, 2025</em></p>
+<div class="subtitle-section">
+  <p class="elegant-subtitle"><em>A machine-verifiable ledger where every observable phenomenon is traced—without adjustable constants—to a finite graph of bidirectional recognition axioms.</em></p>
 </div>
 
 ---
-
-
 ## 🧪 The Eight Foundational Axioms
 
 A1: Discrete Recognition
@@ -159,6 +155,30 @@ A8: Self-Similarity
 @media (max-width: 480px) {
   .status-grid {
     grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<style>
+.subtitle-section {
+  text-align: center;
+  padding: 2rem 0 1rem 0;
+  margin-bottom: 1rem;
+}
+
+.elegant-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  font-style: italic;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .elegant-subtitle {
+    font-size: 1rem;
+    padding: 0 1rem;
   }
 }
 </style>
