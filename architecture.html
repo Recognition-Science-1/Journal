@@ -1,3 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Architecture - Journal of Recognition Science</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .header { background: white; border-bottom: 1px solid #e1e5e9; padding: 1rem 0; }
+        .nav { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: center; align-items: center; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: #666; text-decoration: none; font-weight: 500; }
+        .nav-links a:hover, .nav-links a.active { color: #007bff; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .hero { text-align: center; padding: 4rem 0; background: white; margin-bottom: 3rem; }
+        .hero h1 { font-size: 3rem; font-weight: 300; margin-bottom: 1rem; color: #333; }
+        .hero p { font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto; }
         .content-section { background: white; margin-bottom: 3rem; border-radius: 12px; padding: 3rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
         .section-title { font-size: 2.5rem; font-weight: 600; margin-bottom: 2rem; color: #333; text-align: center; }
         .axioms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0; }
@@ -6,19 +24,9 @@
         .axiom-number { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; background: rgba(255,255,255,0.2); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
         .axiom-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
         .axiom-description { font-size: 0.95rem; opacity: 0.9; line-height: 1.6; }
-        .hierarchy-container { background: #f8f9fa; border-radius: 12px; padding: 2rem; margin: 2rem 0; }
-        .hierarchy-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem; text-align: center; color: #333; }
-        .particle-row { display: flex; align-items: center; justify-content: space-between; padding: 1rem; margin: 0.5rem 0; background: white; border-radius: 8px; border-left: 4px solid #007bff; }
-        .particle-name { font-weight: 600; color: #333; }
-        .particle-rung { color: #666; font-family: monospace; }
-        .particle-mass { color: #007bff; font-weight: 500; }
         .formula-box { background: #1a1a1a; color: #00ff00; padding: 1.5rem; border-radius: 8px; font-family: monospace; text-align: center; margin: 2rem 0; font-size: 1.1rem; }
         .golden-ratio { color: #ffd700; font-weight: bold; }
-        .consciousness-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 12px; padding: 3rem; margin: 2rem 0; text-align: center; }
-        .consciousness-title { font-size: 2rem; font-weight: 600; margin-bottom: 1rem; }
-        .consciousness-formula { font-size: 1.5rem; font-family: monospace; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; margin: 1rem 0; }
-        .highlight-number { color: #ffd700; font-weight: bold; }
-        @media (max-width: 768px) { .hero h1 { font-size: 2rem; } .section-title { font-size: 2rem; } .axioms-grid { grid-template-columns: 1fr; } .particle-row { flex-direction: column; text-align: center; gap: 0.5rem; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 2rem; } .section-title { font-size: 2rem; } .axioms-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -41,30 +49,27 @@
                 <p>The complete mathematical framework of Recognition Science: eight axioms that generate all of reality</p>
             </div>
         </section>
+        
         <div class="container">
             <section class="content-section">
                 <h2 class="section-title">The Eight Foundational Axioms</h2>
                 <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 2rem;">These eight mathematical principles generate all observable phenomena without any adjustable parameters</p>
-                
                 <div class="axioms-grid">
                     <div class="axiom-card">
                         <div class="axiom-number">A1</div>
                         <div class="axiom-title">Discrete Recognition</div>
                         <div class="axiom-description">Reality consists of discrete recognition events, not continuous fields. Every interaction is quantized and countable.</div>
                     </div>
-                    
                     <div class="axiom-card">
                         <div class="axiom-number">A2</div>
                         <div class="axiom-title">Dual-Recognition Balance</div>
                         <div class="axiom-description">Every recognition creates both cost and credit in perfect balance. The universe maintains a zero-sum ledger at all scales.</div>
                     </div>
-                    
                     <div class="axiom-card">
                         <div class="axiom-number">A3</div>
                         <div class="axiom-title">Positivity of Cost</div>
                         <div class="axiom-description">All recognition operations require positive energy investment. This generates the arrow of time and thermodynamic irreversibility.</div>
                     </div>
-                    
                     <div class="axiom-card">
                         <div class="axiom-number">A4</div>
                         <div class="axiom-title">Unitary Evolution</div>
@@ -75,19 +80,16 @@
                         <div class="axiom-title">Irreducible Tick</div>
                         <div class="axiom-description">Time progresses in discrete, indivisible quantum intervals τ₀ = 7.33 femtoseconds. This quantizes temporal evolution.</div>
                     </div>
-                    
                     <div class="axiom-card">
                         <div class="axiom-number">A6</div>
                         <div class="axiom-title">Irreducible Voxel</div>
                         <div class="axiom-description">Space is quantized into fundamental, indivisible units L₀³ = (1.616×10⁻³⁵ m)³. This discretizes spatial geometry.</div>
                     </div>
-                    
                     <div class="axiom-card">
                         <div class="axiom-number">A7</div>
                         <div class="axiom-title">Eight-Beat Closure</div>
                         <div class="axiom-description">All stable patterns complete in cycles of eight operations. This generates the gauge symmetries SU(3)×SU(2)×U(1).</div>
                     </div>
-                    
                     <div class="axiom-card">
                         <div class="axiom-number">A8</div>
                         <div class="axiom-title">Self-Similarity</div>
@@ -98,11 +100,9 @@
             <section class="content-section">
                 <h2 class="section-title">Universal Mass Formula</h2>
                 <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 2rem;">All particle masses emerge from a single equation with zero free parameters</p>
-                
                 <div class="formula-box">
                     E = E_coh × <span class="golden-ratio">φ</span>^r
                 </div>
-                
                 <p style="text-align: center; margin: 1rem 0;">Where:</p>
                 <ul style="max-width: 600px; margin: 0 auto; color: #666;">
                     <li><strong>E_coh = 0.09473154 eV</strong> - Coherence energy derived from Higgs mass</li>
@@ -110,88 +110,21 @@
                     <li><strong>r</strong> - Rung position in the cosmic hierarchy</li>
                 </ul>
             </section>
-            <section class="content-section">
-                <h2 class="section-title">Particle Hierarchy</h2>
-                <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 2rem;">Precise predictions for all Standard Model particles</p>
-                
-                <div class="hierarchy-container">
-                    <div class="hierarchy-title">Fundamental Particles by Rung</div>
-                    
-                    <div class="particle-row">
-                        <span class="particle-name">Electron</span>
-                        <span class="particle-rung">Rung 32</span>
-                        <span class="particle-mass">0.511 MeV (0.07% error)</span>
-                    </div>
-                    
-                    <div class="particle-row">
-                        <span class="particle-name">Muon</span>
-                        <span class="particle-rung">Rung 43</span>
-                        <span class="particle-mass">105.7 MeV (0.09% error)</span>
-                    </div>
-                    
-                    <div class="particle-row">
-                        <span class="particle-name">Tau</span>
-                        <span class="particle-rung">Rung 54</span>
-                        <span class="particle-mass">1777 MeV (0.16% error)</span>
-                    </div>
-                    
-                    <div class="particle-row">
-                        <span class="particle-name">W Boson</span>
-                        <span class="particle-rung">Rung 57</span>
-                        <span class="particle-mass">80.4 GeV (0.12% error)</span>
-                    </div>
-                    
-                    <div class="particle-row">
-                        <span class="particle-name">Z Boson</span>
-                        <span class="particle-rung">Rung 57.2</span>
-                        <span class="particle-mass">91.2 GeV (0.08% error)</span>
-                    </div>
-                    
-                    <div class="particle-row">
-                        <span class="particle-name">Higgs Boson</span>
-                        <span class="particle-rung">Rung 60</span>
-                        <span class="particle-mass">125.1 GeV (calibration)</span>
-                    </div>
-                </div>
-            </section>
-            <section class="consciousness-section">
-                <div class="consciousness-title">Consciousness Emergence</div>
-                <p style="font-size: 1.1rem; margin-bottom: 1.5rem; opacity: 0.9;">The hard problem of consciousness solved through complexity threshold</p>
-                
-                <div class="consciousness-formula">
-                    Consciousness emerges when complexity reaches <span class="highlight-number">φ^67</span> ≈ <span class="highlight-number">10^14</span> operations
-                </div>
-                
-                <p style="opacity: 0.9; margin-top: 1rem;">At rung 67, patterns achieve sufficient complexity for self-recognition, creating the phenomenon we experience as consciousness. Decoherence time: 737 milliseconds.</p>
-            </section>
             
             <section class="content-section">
-                <h2 class="section-title">System Integration</h2>
-                <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 2rem;">How the eight axioms generate all observable phenomena</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-                    <div style="text-align: center; padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
-                        <div style="font-size: 2rem; margin-bottom: 1rem;">⚛️</div>
-                        <h4>Quantum Mechanics</h4>
-                        <p style="color: #666; font-size: 0.9rem;">Emerges from discrete recognition events and unitary evolution</p>
+                <h2 class="section-title">Key Achievements</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                    <div style="text-align: center; padding: 2rem; background: #f8f9fa; border-radius: 8px;">
+                        <div style="font-size: 2.5rem; font-weight: 700; color: #007bff; margin-bottom: 0.5rem;">99.877%</div>
+                        <div style="color: #666;">Particle Mass Accuracy</div>
                     </div>
-                    
-                    <div style="text-align: center; padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
-                        <div style="font-size: 2rem; margin-bottom: 1rem;">🌌</div>
-                        <h4>General Relativity</h4>
-                        <p style="color: #666; font-size: 0.9rem;">Spacetime curvature from quantized voxel interactions</p>
+                    <div style="text-align: center; padding: 2rem; background: #f8f9fa; border-radius: 8px;">
+                        <div style="font-size: 2.5rem; font-weight: 700; color: #10b981; margin-bottom: 0.5rem;">0</div>
+                        <div style="color: #666;">Free Parameters</div>
                     </div>
-                    
-                    <div style="text-align: center; padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
-                        <div style="font-size: 2rem; margin-bottom: 1rem;">🔬</div>
-                        <h4>Standard Model</h4>
-                        <p style="color: #666; font-size: 0.9rem;">Gauge symmetries from eight-beat closure patterns</p>
-                    </div>
-                    
-                    <div style="text-align: center; padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
-                        <div style="font-size: 2rem; margin-bottom: 1rem;">🧠</div>
-                        <h4>Consciousness</h4>
-                        <p style="color: #666; font-size: 0.9rem;">Self-recognition at sufficient complexity threshold</p>
+                    <div style="text-align: center; padding: 2rem; background: #f8f9fa; border-radius: 8px;">
+                        <div style="font-size: 2.5rem; font-weight: 700; color: #8b5cf6; margin-bottom: 0.5rem;">67</div>
+                        <div style="color: #666;">Consciousness Rung</div>
                     </div>
                 </div>
             </section>
