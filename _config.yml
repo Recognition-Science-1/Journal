@@ -1,62 +1,22 @@
 title: "Journal of Recognition Science"
 description: "A machine-verifiable ledger where every observable phenomenon is traced—without adjustable constants—to a finite graph of bidirectional recognition axioms."
-url: "https://recognition-science-1.github.io"
-baseurl: "/Journal"
 
-# Theme
-theme: minima
+exclude:
+  - AGENT_COMMUNICATION_HUB/
+  - MESSAGES/
+  - AGENT_*
+  - agent_*
+  - monitor*
+  - *.pid
+  - *.log
+  - *_backup*
+  - corrected_mass_verification.py
+  - start_monitor.sh
+  - .monitor_state.json
+
 plugins:
   - jekyll-feed
   - jekyll-sitemap
-  - jekyll-seo-tag
 
-# Navigation
-header_pages:
-  - index.md
-  - mission.md
-  - architecture.md
-  - submit.md
-  - review.md
-  - ledger.md
-  - about.md
-
-# Social
-github_username: Recognition-Science-1
-twitter_username: RecognitionSci
-
-# Build settings
 markdown: kramdown
 highlighter: rouge
-kramdown:
-  input: GFM
-  syntax_highlighter: rouge
-
-# Collections
-collections:
-  axioms:
-    output: true
-    permalink: /:collection/:name/
-  proofs:
-    output: true
-    permalink: /:collection/:name/
-  predictions:
-    output: true
-    permalink: /:collection/:name/
-
-# Defaults
-defaults:
-  - scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: "post"
-  - scope:
-      path: ""
-      type: "axioms"
-    values:
-      layout: "axiom"
-  - scope:
-      path: ""
-      type: "proofs"
-    values:
-      layout: "proof" 
