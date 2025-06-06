@@ -11,6 +11,20 @@ title: "Home"
 
 ---
 
+
+## 🧪 The Eight Foundational Axioms
+
+A1: Discrete Recognition
+A2: Dual-Recognition Balance
+A3: Positivity of Cost
+A4: Unitary Evolution
+A5: Irreducible Tick
+A6: Irreducible Voxel
+A7: Eight-Beat Closure
+A8: Self-Similarity
+
+---
+
 ## 🚀 Live System Status
 
 <div class="status-grid grid-4">
