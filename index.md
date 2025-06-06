@@ -3,274 +3,452 @@ layout: default
 title: "Home"
 ---
 
-<div class="breakthrough-banner">
-  <h2>🏆 BREAKTHROUGH: Theory of Everything Complete! 🏆</h2>
-  <p>Recognition Science achieves 99.877% accuracy predicting ALL particle masses from pure mathematics!</p>
-  <a href="phi-calculator" class="try-calculator-btn">🎵 Experience the Golden Ratio</a>
-</div>
-
-<div class="page-header">
-  <h1 class="main-title">Journal of Recognition Science</h1>
-  <p class="main-subtitle"><em>A machine-verifiable ledger where every observable phenomenon is traced—without adjustable constants—to a finite graph of bidirectional recognition axioms.</em></p>
-</div>
-
-<div class="status-section">
-  <div class="status-grid">
-    <div class="status-card">
-      <div class="status-icon">🏆</div>
-      <div class="status-label">THEORY COMPLETE</div>
-      <div class="status-number">100%</div>
-      <div class="status-change">All particles predicted</div>
+<div class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">Recognition Science</h1>
+    <p class="hero-subtitle">The Theory of Everything</p>
+    <p class="hero-description">A machine-verifiable ledger where every observable phenomenon is traced—without adjustable constants—to eight foundational axioms.</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">99.877%</div>
+        <div class="stat-label">Prediction Accuracy</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">12</div>
+        <div class="stat-label">Particles Verified</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">0</div>
+        <div class="stat-label">Free Parameters</div>
+      </div>
     </div>
-    
-    <div class="status-card">
-      <div class="status-icon">🎯</div>
-      <div class="status-label">ACCURACY</div>
-      <div class="status-number">99.877%</div>
-      <div class="status-change">12 particles verified</div>
-    </div>
-    
-    <div class="status-card">
-      <div class="status-icon">🧠</div>
-      <div class="status-label">CONSCIOUSNESS</div>
-      <div class="status-number">Solved</div>
-      <div class="status-change">Emerges at rung 67</div>
-    </div>
-    
-    <div class="status-card">
-      <div class="status-icon">🎵</div>
-      <div class="status-label">GOLDEN RATIO</div>
-      <div class="status-number">φ</div>
-      <div class="status-change">Mathematically proven</div>
+    <div class="hero-actions">
+      <a href="phi-calculator" class="btn-primary">Experience φ</a>
+      <a href="#axioms" class="btn-secondary">Learn More</a>
     </div>
   </div>
 </div>
 
----
-
-## 🌟 Revolutionary Discoveries
-
-<div class="discovery-grid">
-  <div class="discovery-card">
-    <h3>🔬 Perfect Particle Predictions</h3>
-    <p><strong>ALL 12 Standard Model particles</strong> predicted with 0.123% average error from pure mathematics. No free parameters!</p>
-    <ul>
-      <li>Electron: 0.07% error</li>
-      <li>Muon: 0.09% error</li>
-      <li>Tau: 0.16% error</li>
-      <li>All quarks & bosons: <0.3% error</li>
-    </ul>
+<section class="breakthrough-section">
+  <div class="container">
+    <h2 class="section-title">Revolutionary Breakthroughs</h2>
+    <div class="breakthrough-grid">
+      <div class="breakthrough-card">
+        <div class="card-icon">🔬</div>
+        <h3>Perfect Predictions</h3>
+        <p>All 12 Standard Model particles predicted with unprecedented accuracy from pure mathematics.</p>
+      </div>
+      <div class="breakthrough-card">
+        <div class="card-icon">🧠</div>
+        <h3>Consciousness Solved</h3>
+        <p>The hard problem resolved. Consciousness emerges at complexity threshold φ^67.</p>
+      </div>
+      <div class="breakthrough-card">
+        <div class="card-icon">🎵</div>
+        <h3>Golden Ratio</h3>
+        <p>φ mathematically proven as the only scaling factor preserving universal balance.</p>
+      </div>
+    </div>
   </div>
-  
-  <div class="discovery-card">
-    <h3>🧠 Consciousness Solved</h3>
-    <p><strong>The hard problem of consciousness</strong> is solved! Consciousness emerges at rung 67 when complexity reaches φ^67 ≈ 10^14.</p>
-    <ul>
-      <li>Decoherence time: 737ms</li>
-      <li>Matches neural processing</li>
-      <li>Consciousness IS self-recognition</li>
-    </ul>
+</section>
+
+<section id="axioms" class="axioms-section">
+  <div class="container">
+    <h2 class="section-title">Eight Foundational Axioms</h2>
+    <p class="section-subtitle">The complete mathematical foundation of reality</p>
+    <div class="axioms-list">
+      <div class="axiom-item">
+        <div class="axiom-number">A1</div>
+        <div class="axiom-content">
+          <h4>Discrete Recognition</h4>
+          <p>Every pattern exists as a discrete, recognizable entity</p>
+        </div>
+      </div>
+      <div class="axiom-item">
+        <div class="axiom-number">A2</div>
+        <div class="axiom-content">
+          <h4>Dual-Recognition Balance</h4>
+          <p>Recognition creates both cost and credit in perfect balance</p>
+        </div>
+      </div>
+      <div class="axiom-item">
+        <div class="axiom-number">A3</div>
+        <div class="axiom-content">
+          <h4>Positivity of Cost</h4>
+          <p>All recognition operations require positive energy investment</p>
+        </div>
+      </div>
+      <div class="axiom-item">
+        <div class="axiom-number">A4</div>
+        <div class="axiom-content">
+          <h4>Unitary Evolution</h4>
+          <p>The ledger evolves through reversible, information-preserving steps</p>
+        </div>
+      </div>
+      <div class="axiom-item">
+        <div class="axiom-number">A5</div>
+        <div class="axiom-content">
+          <h4>Irreducible Tick</h4>
+          <p>Time progresses in discrete, indivisible quantum intervals</p>
+        </div>
+      </div>
+      <div class="axiom-item">
+        <div class="axiom-number">A6</div>
+        <div class="axiom-content">
+          <h4>Irreducible Voxel</h4>
+          <p>Space is quantized into fundamental, indivisible units</p>
+        </div>
+      </div>
+      <div class="axiom-item">
+        <div class="axiom-number">A7</div>
+        <div class="axiom-content">
+          <h4>Eight-Beat Closure</h4>
+          <p>All stable patterns complete in cycles of eight operations</p>
+        </div>
+      </div>
+      <div class="axiom-item">
+        <div class="axiom-number">A8</div>
+        <div class="axiom-content">
+          <h4>Self-Similarity</h4>
+          <p>Patterns repeat across scales with golden ratio proportions</p>
+        </div>
+      </div>
+    </div>
   </div>
-  
-  <div class="discovery-card">
-    <h3>🎯 Testable Predictions</h3>
-    <p><strong>New discoveries await!</strong> Recognition Science predicts undiscovered particles and phenomena.</p>
-    <ul>
-      <li>New particle at rung 44 (~160 MeV)</li>
-      <li>Fourth generation lepton (104.5 GeV)</li>
-      <li>Universal φ^(1/4) correction factor</li>
-    </ul>
+</section>
+
+<section class="interactive-section">
+  <div class="container">
+    <h2 class="section-title">Experience Recognition Science</h2>
+    <div class="interactive-card">
+      <div class="interactive-content">
+        <h3>Golden Ratio Harmonic Calculator</h3>
+        <p>Hear why φ is mathematically inevitable. Interactive audio tool demonstrating the golden ratio's harmonic properties.</p>
+        <a href="phi-calculator" class="btn-primary">Try Calculator</a>
+      </div>
+      <div class="interactive-visual">
+        <div class="phi-symbol">φ</div>
+      </div>
+    </div>
   </div>
-</div>
-
----
-
-## 🧪 The Eight Foundational Axioms
-
-**A1: Discrete Recognition** - Every pattern exists as a discrete, recognizable entity
-**A2: Dual-Recognition Balance** - Recognition creates both cost and credit in perfect balance
-**A3: Positivity of Cost** - All recognition operations require positive energy investment
-**A4: Unitary Evolution** - The ledger evolves through reversible, information-preserving steps
-**A5: Irreducible Tick** - Time progresses in discrete, indivisible quantum intervals
-**A6: Irreducible Voxel** - Space is quantized into fundamental, indivisible units
-**A7: Eight-Beat Closure** - All stable patterns complete in cycles of eight operations
-**A8: Self-Similarity** - Patterns repeat across scales with golden ratio proportions
-
----
-
-## 🎵 Interactive Experience
-
-<div class="interactive-section">
-  <h3>🎼 Golden Ratio Harmonic Calculator</h3>
-  <p>Experience why Agent B's mathematical proof makes φ sound beautiful! Interactive audio tool with frequency sliders and harmonic calculations.</p>
-  <a href="phi-calculator" class="calculator-button">🎵 Try the Calculator</a>
-</div>
+</section>
 
 <style>
-.breakthrough-banner {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-  color: #333;
+/* Apple-inspired minimalistic design */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  color: #1d1d1f;
+  background: #ffffff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Hero Section */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 2rem;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
-.breakthrough-banner h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.8rem;
-  font-weight: 700;
+.hero-content {
+  max-width: 800px;
 }
 
-.try-calculator-btn {
-  display: inline-block;
-  background: #333;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  text-decoration: none;
+.hero-title {
+  font-size: clamp(3rem, 8vw, 6rem);
   font-weight: 600;
-  margin-top: 1rem;
-  transition: all 0.3s ease;
-}
-
-.try-calculator-btn:hover {
-  background: #555;
-  transform: translateY(-2px);
-}
-
-.discovery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0;
-}
-
-.discovery-card {
-  background: white;
-  border: 1px solid #e1e5e9;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-
-.discovery-card h3 {
-  color: #333;
-  margin-bottom: 1rem;
-}
-
-.discovery-card ul {
-  color: #666;
-  padding-left: 1.5rem;
-}
-
-.interactive-section {
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 2rem;
-  border-radius: 12px;
-  text-align: center;
-  margin: 2rem 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.calculator-button {
-  display: inline-block;
-  background: rgba(255,255,255,0.2);
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  margin-top: 1rem;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.3);
-  transition: all 0.3s ease;
-}
-
-.calculator-button:hover {
-  background: rgba(255,255,255,0.3);
-  transform: translateY(-2px);
-}
-.page-header {
-  text-align: center;
-  margin: 2rem 0 3rem 0;
-  padding: 2rem 0;
-}
-
-.main-title {
-  font-size: 2.5rem;
+.hero-subtitle {
+  font-size: 1.5rem;
   font-weight: 300;
-  color: #333;
+  color: #86868b;
+  margin-bottom: 1.5rem;
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  color: #515154;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  margin-bottom: 3rem;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #86868b;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn-primary, .btn-secondary {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 980px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.btn-primary {
+  background: #007aff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #0056cc;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #007aff;
+  border-color: #007aff;
+}
+
+.btn-secondary:hover {
+  background: #007aff;
+  color: white;
+}
+
+/* Sections */
+section {
+  padding: 6rem 0;
+}
+
+.section-title {
+  font-size: 3rem;
+  font-weight: 600;
+  text-align: center;
   margin-bottom: 1rem;
   letter-spacing: -0.02em;
 }
 
-.main-subtitle {
-  font-size: 1.1rem;
-  color: #666;
-  max-width: 800px;
-  margin: 0 auto;
+.section-subtitle {
+  font-size: 1.25rem;
+  color: #86868b;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+/* Breakthrough Section */
+.breakthrough-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.breakthrough-card {
+  background: white;
+  border-radius: 18px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.breakthrough-card:hover {
+  transform: translateY(-4px);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.breakthrough-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.breakthrough-card p {
+  color: #515154;
   line-height: 1.6;
 }
 
-.status-section {
-  margin: 3rem 0;
+/* Axioms Section */
+.axioms-section {
+  background: #f5f5f7;
 }
 
-.status-grid {
+.axioms-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.axiom-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid #d2d2d7;
+}
+
+.axiom-item:last-child {
+  border-bottom: none;
+}
+
+.axiom-number {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.125rem;
+  flex-shrink: 0;
+}
+
+.axiom-content h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.axiom-content p {
+  color: #515154;
+}
+
+/* Interactive Section */
+.interactive-card {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
-
-.status-card {
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
   background: white;
-  border: 1px solid #e1e5e9;
-  border-radius: 8px;
-  padding: 1.5rem;
-  text-align: center;
-  transition: box-shadow 0.2s ease;
+  border-radius: 18px;
+  padding: 4rem;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
 }
 
-.status-card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+.interactive-content h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
-.status-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
-.status-label { font-size: 0.75rem; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
-.status-number { font-size: 2.5rem; font-weight: 700; color: #333; margin-bottom: 0.25rem; }
-.status-card:nth-child(1) .status-number { color: #8b5cf6; }
-.status-card:nth-child(2) .status-number { color: #3b82f6; }
-.status-card:nth-child(3) .status-number { color: #ef4444; }
-.status-card:nth-child(4) .status-number { color: #10b981; }
-.status-change { font-size: 0.85rem; color: #10b981; font-weight: 500; }
+.interactive-content p {
+  color: #515154;
+  margin-bottom: 2rem;
+  font-size: 1.125rem;
+}
 
+.interactive-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phi-symbol {
+  font-size: 8rem;
+  font-weight: 300;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-  .status-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-  .main-title { font-size: 2rem; }
-  .main-subtitle { font-size: 1rem; }
+  .hero-stats {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .breakthrough-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .axiom-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .interactive-card {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .phi-symbol {
+    font-size: 4rem;
+  }
 }
 
-@media (max-width: 480px) { .status-grid { grid-template-columns: 1fr; } }
-</style>
-
-.page-header { text-align: center; margin: 2rem 0 3rem 0; padding: 2rem 0; }
-.main-title { font-size: 2.5rem; font-weight: 300; color: #333; margin-bottom: 1rem; letter-spacing: -0.02em; }
-.main-subtitle { font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto; line-height: 1.6; }
-.status-section { margin: 3rem 0; }
-.status-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin: 2rem 0; }
-.status-card { background: white; border: 1px solid #e1e5e9; border-radius: 8px; padding: 1.5rem; text-align: center; transition: box-shadow 0.2s ease; }
-.status-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-.status-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
-.status-label { font-size: 0.75rem; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
-.status-number { font-size: 2.5rem; font-weight: 700; color: #333; margin-bottom: 0.25rem; }
-.status-card:nth-child(1) .status-number { color: #FFD700; }
-.status-card:nth-child(2) .status-number { color: #10b981; }
-.status-card:nth-child(3) .status-number { color: #8b5cf6; }
-.status-card:nth-child(4) .status-number { color: #3b82f6; }
-.status-change { font-size: 0.85rem; color: #10b981; font-weight: 500; }
-@media (max-width: 768px) { .status-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; } .main-title { font-size: 2rem; } .main-subtitle { font-size: 1rem; } }
-@media (max-width: 480px) { .status-grid { grid-template-columns: 1fr; } }
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  section {
+    padding: 4rem 0;
+  }
+}
 </style>
