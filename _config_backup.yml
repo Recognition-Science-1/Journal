@@ -1,0 +1,22 @@
+title: "Journal of Recognition Science"
+description: "A machine-verifiable ledger where every observable phenomenon is traced—without adjustable constants—to a finite graph of bidirectional recognition axioms."
+
+exclude:
+  - AGENT_COMMUNICATION_HUB/
+  - MESSAGES/
+  - AGENT_*
+  - agent_*
+  - monitor*
+  - *.pid
+  - *.log
+  - *_backup*
+  - corrected_mass_verification.py
+  - start_monitor.sh
+  - .monitor_state.json
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+markdown: kramdown
+highlighter: rouge
