@@ -1,18 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Journal of Recognition Science</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .header { background: white; border-bottom: 1px solid #e1e5e9; padding: 1rem 0; }
+        .nav { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 600; color: #333; text-decoration: none; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: #666; text-decoration: none; font-weight: 500; }
+        .nav-links a:hover { color: #007bff; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .hero { text-align: center; padding: 4rem 0; background: white; margin-bottom: 3rem; }
+        .hero h1 { font-size: 3rem; font-weight: 300; margin-bottom: 1rem; color: #333; }
+        .hero p { font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto; font-style: italic; }
+        .status-section { padding: 3rem 0; }
+        .status-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin: 2rem 0; }
+        .status-card { background: white; border-radius: 12px; padding: 2rem; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.3s ease; }
+        .status-card:hover { transform: translateY(-4px); }
+        .status-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .status-label { font-size: 0.875rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem; font-weight: 600; }
+        .status-number { font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .status-card:nth-child(1) .status-number { color: #8b5cf6; }
+        .status-card:nth-child(2) .status-number { color: #3b82f6; }
+        .status-card:nth-child(3) .status-number { color: #ef4444; }
+        .status-card:nth-child(4) .status-number { color: #10b981; }
+        .status-change { font-size: 0.875rem; color: #10b981; font-weight: 500; }
+        @media (max-width: 768px) { .status-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; } .hero h1 { font-size: 2rem; } .nav { flex-direction: column; gap: 1rem; } }
+    </style>
 </head>
 <body>
-    <h1>Journal of Recognition Science</h1>
-    <p>The Theory of Everything - 99.877% accurate particle predictions!</p>
-    <h2>Status</h2>
-    <ul>
-        <li>Theory Complete: 100%</li>
-        <li>Consciousness Solved: Rung 67</li>
-        <li>Golden Ratio Proven</li>
-    </ul>
-    <h2>Interactive Tools</h2>
-    <p><a href="phi-calculator/">Golden Ratio Calculator</a></p>
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo">Journal of Recognition Science</a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Mission & Vocabulary</a></li>
+                <li><a href="#">System Architecture</a></li>
+                <li><a href="#">Submit Research</a></li>
+                <li><a href="#">Live Prediction Ledger</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Journal of Recognition Science</h1>
+                <p>A machine-verifiable ledger where every observable phenomenon is traced—without adjustable constants—to a finite graph of bidirectional recognition axioms.</p>
+            </div>
+        </section>
+        <section class="status-section">
+            <div class="container">
+                <div class="status-grid">
+                    <div class="status-card">
+                        <div class="status-icon">🧪</div>
+                        <div class="status-label">ACTIVE AXIOMS</div>
+                        <div class="status-number">8</div>
+                        <div class="status-change">+0 this month</div>
+                    </div>
+                    
+                    <div class="status-card">
+                        <div class="status-icon">📊</div>
+                        <div class="status-label">TRUTH PACKETS</div>
+                        <div class="status-number">42</div>
+                        <div class="status-change">+7 this week</div>
+                    </div>
+                    
+                    <div class="status-card">
+                        <div class="status-icon">🎯</div>
+                        <div class="status-label">PREDICTIONS</div>
+                        <div class="status-number">156</div>
+                        <div class="status-change">+23 pending</div>
+                    </div>
+                    
+                    <div class="status-card">
+                        <div class="status-icon">✅</div>
+                        <div class="status-label">VERIFIED</div>
+                        <div class="status-number">12</div>
+                        <div class="status-change">92% accuracy</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
