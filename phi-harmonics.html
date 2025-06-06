@@ -91,13 +91,6 @@
             margin-bottom: 0.5rem;
             font-size: 1.2rem;
         }
-        .context-box" style="background: #f0fff4; border-left-color: #10b981; margin-top: 1rem;">
-                <h4>🎵 Frequency Presets</h4>
-                <p>These presets combine Recognition Science φ-ratios with frequencies that have been 
-                associated with specific states of consciousness. Each preset uses different powers of φ 
-                to create unique harmonic patterns. While effects may vary by individual, the mathematical 
-                relationships remain constant—just like particle masses.</p>
-            </div>
         .controls-section {
             background: #f8f9fa;
             padding: 2rem;
@@ -277,80 +270,58 @@
                 <div class="phi-symbol">φ</div>
                 <h1>Phi Harmonic Generator</h1>
                 <p class="generator-description">
-                    Listen to mathematically perfect frequencies based on nature's golden ratio. 
-                    Choose what you'd like to experience below.
+                    Explore the golden ratio through sound. Listen to the same mathematical relationships 
+                    that determine particle masses in Recognition Science.
                 </p>
             </div>
 
             <div class="context-box">
-                <h4>🎵 How to Use</h4>
-                <p>Simply choose what you'd like to experience from the options below and press play. 
-                The frequencies are based on the golden ratio (φ = 1.618...), the same mathematical 
-                pattern found throughout nature - from seashells to galaxies.</p>
+                <h4>🔬 The Mathematics of Sound</h4>
+                <p>The golden ratio φ = 1.618... is the proven scaling factor that makes the cosmic ledger 
+                balance. This tool lets you hear these mathematical relationships as musical frequencies. 
+                The same φ ratios that determine electron, muon, and tau masses create mathematically 
+                harmonious intervals when applied to sound waves.</p>
             </div>
 
             <div class="controls-section">
                 <div class="control-group">
-                    <label for="experience-select" style="font-size: 1.3rem; font-weight: 600; color: #007bff;">
-                        What would you like to experience?
-                    </label>
-                    <select id="experience-select" class="mode-selector" onchange="selectExperience()" style="font-size: 1.1rem; padding: 1rem;">
-                        <option value="none">-- Select an Experience --</option>
-                        <option value="focus">🎯 Better Focus - Clear your mind and concentrate</option>
-                        <option value="relaxation">😌 Deep Relaxation - Release stress and tension</option>
-                        <option value="energy">⚡ More Energy - Feel refreshed and motivated</option>
-                        <option value="creativity">🎨 Creative Flow - Unlock new ideas</option>
-                        <option value="meditation">🧘 Meditation - Find inner peace</option>
-                        <option value="healing">💚 Healing & Recovery - Support your wellbeing</option>
-                        <option value="sleep">😴 Better Sleep - Prepare for deep rest</option>
-                        <option value="balance">⚖️ Balance - Feel centered and grounded</option>
+                    <label for="pattern-select">Choose a Mathematical Pattern</label>
+                    <select id="pattern-select" class="mode-selector" onchange="selectPattern()">
+                        <option value="none">-- Select a Pattern --</option>
+                        <option value="ascending">📈 Ascending φ Powers (φ⁰, φ¹, φ², φ³...)</option>
+                        <option value="descending">📉 Descending φ Powers (φ⁰, φ⁻¹, φ⁻², φ⁻³...)</option>
+                        <option value="fibonacci">🔢 Fibonacci Sequence in φ</option>
+                        <option value="particle">⚛️ Particle Mass Ratios</option>
+                        <option value="octave">🎹 φ-Based Octave Division</option>
+                        <option value="golden">🌀 Golden Spiral Frequencies</option>
+                        <option value="symmetric">⚖️ Symmetric φ Pattern (φ⁻², φ⁻¹, φ⁰, φ¹, φ²)</option>
                     </select>
                 </div>
 
-                <div id="experience-info" style="display: none; margin-top: 1.5rem; padding: 1.5rem; background: #f0f7ff; border-radius: 8px;">
-                    <h4 id="experience-title" style="color: #007bff; margin-bottom: 0.5rem;"></h4>
-                    <p id="experience-description" style="margin-bottom: 1rem;"></p>
-                    <p id="experience-duration" style="font-size: 0.9rem; color: #666;"></p>
+                <div id="pattern-info" style="display: none; margin-top: 1.5rem; padding: 1.5rem; background: #f0f7ff; border-radius: 8px;">
+                    <h4 id="pattern-title" style="color: #007bff; margin-bottom: 0.5rem;"></h4>
+                    <p id="pattern-description" style="margin-bottom: 1rem;"></p>
+                    <p id="pattern-math" style="font-family: monospace; background: #f8f9fa; padding: 0.5rem; border-radius: 4px;"></p>
                 </div>
 
-                <div class="button-group" id="main-buttons" style="display: none;">
-                    <button class="btn btn-primary" onclick="playExperience()" style="font-size: 1.2rem; padding: 1rem 3rem;">
-                        ▶ Start Experience
-                    </button>
-                    <button class="btn btn-danger" onclick="stopAudio()" style="font-size: 1.2rem; padding: 1rem 2rem;">
-                        ■ Stop
-                    </button>
+                <div class="control-group">
+                    <label for="base-frequency">Base Frequency (Hz)</label>
+                    <input type="range" id="base-frequency" class="frequency-slider" 
+                           min="220" max="880" value="440" step="5" oninput="updateFreqDisplay(this.value)">
+                    <div class="frequency-display" id="freq-display">440 Hz (A4)</div>
                 </div>
 
-                <div style="margin-top: 2rem; text-align: center;">
-                    <button class="btn btn-secondary" onclick="toggleAdvanced()" style="font-size: 0.9rem;">
-                        🔧 Advanced Options
-                    </button>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="playPattern()">▶ Play Pattern</button>
+                    <button class="btn btn-primary" onclick="playAsChord()">♫ Play as Chord</button>
+                    <button class="btn btn-danger" onclick="stopAudio()">■ Stop</button>
                 </div>
 
-                <div id="advanced-controls" style="display: none; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #ddd;">
-                    <div class="control-group">
-                        <label for="base-frequency">Base Frequency (Hz)</label>
-                        <input type="range" id="base-frequency" class="frequency-slider" 
-                               min="220" max="880" value="440" step="5">
-                        <div class="frequency-display" id="freq-display">440 Hz (A4)</div>
-                    </div>
-
-                    <div class="control-group">
-                        <label for="scale-mode">Technical Mode</label>
-                        <select id="scale-mode" class="mode-selector">
-                            <option value="intervals">Phi Intervals</option>
-                            <option value="pure">Pure Phi Powers</option>
-                            <option value="equal">Equal Temperament</option>
-                            <option value="particle">Particle Mass Mode</option>
-                        </select>
-                    </div>
-
-                    <div class="button-group">
-                        <button class="btn btn-primary" onclick="playPhiScale()">Play Scale</button>
-                        <button class="btn btn-primary" onclick="playPhiChord()">Play Chord</button>
-                        <button class="btn btn-secondary" onclick="playDiscoveryMode()">Discovery Mode</button>
-                    </div>
+                <div style="margin-top: 2rem;">
+                    <label>
+                        <input type="checkbox" id="show-math" onchange="toggleMathDisplay()">
+                        Show frequency calculations
+                    </label>
                 </div>
             </div>
 
@@ -375,227 +346,179 @@
 
     <script src="audio_engine.js"></script>
     <script>
-        let discoveryTimeout = null;
-        let currentPreset = null;
-        let currentExperience = null;
+        let audioEngine = null;
+        let currentPattern = null;
 
-        // User-friendly experience descriptions
-        const experiences = {
-            focus: {
-                title: '🎯 Better Focus',
-                description: 'This frequency pattern helps clear mental fog and improve concentration. Great for studying, working, or any task requiring mental clarity.',
-                duration: 'Listen for 10-20 minutes for best results',
-                preset: 'focus'
+        // Pattern definitions - pure mathematics only
+        const patterns = {
+            ascending: {
+                title: 'Ascending φ Powers',
+                description: 'Each frequency is the previous frequency multiplied by φ',
+                math: 'f(n) = base × φⁿ where n = 0, 1, 2, 3...',
+                calculate: (base) => [0, 1, 2, 3, 4, 5].map(n => base * Math.pow(1.618034, n))
             },
-            relaxation: {
-                title: '😌 Deep Relaxation',
-                description: 'Gentle descending tones that help release tension and stress. Perfect for unwinding after a long day.',
-                duration: 'Enjoy for 15-30 minutes in a comfortable position',
-                preset: 'relaxation'
+            descending: {
+                title: 'Descending φ Powers',
+                description: 'Each frequency is the previous frequency divided by φ',
+                math: 'f(n) = base × φ⁻ⁿ where n = 0, 1, 2, 3...',
+                calculate: (base) => [0, -1, -2, -3, -4, -5].map(n => base * Math.pow(1.618034, n))
             },
-            energy: {
-                title: '⚡ More Energy',
-                description: 'Ascending frequencies that help you feel more alert and motivated. Use when you need a natural energy boost.',
-                duration: 'Listen for 5-10 minutes to feel refreshed',
-                preset: 'energy'
+            fibonacci: {
+                title: 'Fibonacci Sequence',
+                description: 'Frequencies based on Fibonacci numbers as powers of φ',
+                math: 'f(n) = base × φ^(Fibonacci(n))',
+                calculate: (base) => [0, 1, 1, 2, 3, 5, 8].map(n => base * Math.pow(1.618034, n/5))
             },
-            creativity: {
-                title: '🎨 Creative Flow',
-                description: 'Complex harmonic patterns that stimulate creative thinking and help unlock new ideas.',
-                duration: 'Use during creative work or brainstorming sessions',
-                preset: 'creativity'
+            particle: {
+                title: 'Particle Mass Ratios',
+                description: 'The same φ relationships that determine particle masses',
+                math: 'Electron: φ⁰, Muon: φ⁴, Tau: φ⁶',
+                calculate: (base) => [0, 4, 6].map(n => base * Math.pow(1.618034, n))
             },
-            meditation: {
-                title: '🧘 Meditation',
-                description: 'A sustained tone that creates a peaceful backdrop for meditation or mindfulness practice.',
-                duration: 'Can be used for entire meditation session',
-                preset: 'meditation'
+            octave: {
+                title: 'φ-Based Octave Division',
+                description: 'Dividing an octave by powers of φ',
+                math: 'f(n) = base × 2^(n/φ)',
+                calculate: (base) => [0, 1, 2, 3, 4].map(n => base * Math.pow(2, n/1.618034))
             },
-            healing: {
-                title: '💚 Healing & Recovery',
-                description: 'Frequencies that support your body\'s natural healing processes and promote overall wellbeing.',
-                duration: 'Listen for 20-30 minutes while resting',
-                preset: 'healing'
+            golden: {
+                title: 'Golden Spiral',
+                description: 'Frequencies following the golden spiral expansion',
+                math: 'f(n) = base × φ^(n/2)',
+                calculate: (base) => [0, 0.5, 1, 1.5, 2, 2.5, 3].map(n => base * Math.pow(1.618034, n))
             },
-            sleep: {
-                title: '😴 Better Sleep',
-                description: 'Slowly descending tones that help prepare your mind and body for deep, restful sleep.',
-                duration: 'Start 30 minutes before bedtime',
-                preset: 'sleep'
-            },
-            balance: {
-                title: '⚖️ Balance',
-                description: 'Centered frequencies that help you feel grounded and emotionally balanced.',
-                duration: 'Use whenever you need to feel more centered',
-                preset: 'balance'
+            symmetric: {
+                title: 'Symmetric φ Pattern',
+                description: 'Balanced pattern around the base frequency',
+                math: 'f(n) = base × φⁿ where n = -2, -1, 0, 1, 2',
+                calculate: (base) => [-2, -1, 0, 1, 2].map(n => base * Math.pow(1.618034, n))
             }
         };
 
-        function selectExperience() {
-            const select = document.getElementById('experience-select');
-            const experienceKey = select.value;
+        async function initAudio() {
+            if (!audioEngine) {
+                audioEngine = new window.PhiHarmonics();
+                await audioEngine.initAudio();
+            }
+        }
+
+        function selectPattern() {
+            const select = document.getElementById('pattern-select');
+            const patternKey = select.value;
             
-            if (experienceKey === 'none') {
-                document.getElementById('experience-info').style.display = 'none';
-                document.getElementById('main-buttons').style.display = 'none';
+            if (patternKey === 'none') {
+                document.getElementById('pattern-info').style.display = 'none';
+                currentPattern = null;
                 return;
             }
             
-            currentExperience = experiences[experienceKey];
+            currentPattern = patterns[patternKey];
             
-            // Show experience info
-            document.getElementById('experience-title').textContent = currentExperience.title;
-            document.getElementById('experience-description').textContent = currentExperience.description;
-            document.getElementById('experience-duration').textContent = currentExperience.duration;
-            document.getElementById('experience-info').style.display = 'block';
-            document.getElementById('main-buttons').style.display = 'flex';
+            // Show pattern info
+            document.getElementById('pattern-title').textContent = currentPattern.title;
+            document.getElementById('pattern-description').textContent = currentPattern.description;
+            document.getElementById('pattern-math').textContent = currentPattern.math;
+            document.getElementById('pattern-info').style.display = 'block';
         }
 
-        async function playExperience() {
-            if (!currentExperience) return;
-            
-            // Use the existing preset system
-            currentPreset = presets[currentExperience.preset];
-            await playPresetPattern();
-        }
-
-        function toggleAdvanced() {
-            const advanced = document.getElementById('advanced-controls');
-            const button = event.target;
-            
-            if (advanced.style.display === 'none') {
-                advanced.style.display = 'block';
-                button.textContent = '🔧 Hide Advanced Options';
-            } else {
-                advanced.style.display = 'none';
-                button.textContent = '🔧 Advanced Options';
-            }
-        }
-
-        // Preset configurations based on φ relationships
-        const presets = {
-            focus: {
-                baseFreq: 528,  // Transformation frequency
-                mode: 'pure',
-                description: 'φ³ creates mental clarity through higher harmonic complexity',
-                pattern: [3, 4, 5, 6],  // Higher phi powers
-                tempo: 'fast'
-            },
-            relaxation: {
-                baseFreq: 396,  // Liberation frequency
-                mode: 'intervals',
-                description: '1/φ ratios induce calm through descending golden spirals',
-                pattern: [-3, -2, -1, 0],  // Inverse phi powers
-                tempo: 'slow'
-            },
-            balance: {
-                baseFreq: 440,  // Standard tuning
-                mode: 'intervals',
-                description: 'φ¹ represents perfect equilibrium - the golden mean itself',
-                pattern: [0, 1, -1, 2],  // Balanced around φ
-                tempo: 'medium'
-            },
-            energy: {
-                baseFreq: 639,  // Connection frequency
-                mode: 'pure',
-                description: 'Ascending φ sequence builds momentum and vitality',
-                pattern: [0, 1, 2, 3, 4, 5],  // Rising sequence
-                tempo: 'building'
-            },
-            meditation: {
-                baseFreq: 432,  // Natural frequency
-                mode: 'pure',
-                description: 'φ² drone creates stable field for deep contemplation',
-                pattern: [2],  // Single sustained tone
-                tempo: 'drone'
-            },
-            creativity: {
-                baseFreq: 741,  // Expression frequency
-                mode: 'particle',
-                description: 'φ⁵ complexity stimulates novel neural connections',
-                pattern: [5, 3, 8, 2, 13],  // Fibonacci sequence
-                tempo: 'varied'
-            },
-            healing: {
-                baseFreq: 528,  // DNA repair frequency
-                mode: 'intervals',
-                description: 'φ heart ratio (φ/2) resonates with biological rhythms',
-                pattern: [0.5, 1, 1.5, 2],  // Gentle progression
-                tempo: 'gentle'
-            },
-            sleep: {
-                baseFreq: 256,  // Root chakra C
-                mode: 'intervals',
-                description: 'Descending 1/φ sequence guides into deep rest',
-                pattern: [0, -1, -2, -3, -4],  // Descending
-                tempo: 'very-slow'
-            }
-        };
-
-        async function playPresetPattern() {
-            if (!window.phiHarmonics.isInitialized) {
-                await window.phiHarmonics.initAudio();
+        async function playPattern() {
+            if (!currentPattern) {
+                alert('Please select a pattern first');
+                return;
             }
             
-            if (!currentPreset) return;
+            await initAudio();
             
-            const baseFreq = currentPreset.baseFreq;
+            const baseFreq = parseFloat(document.getElementById('base-frequency').value);
+            const frequencies = currentPattern.calculate(baseFreq);
+            
             document.getElementById('spiral').classList.add('active');
             
-            // Play pattern based on preset type
-            if (currentPreset.tempo === 'drone') {
-                // Single sustained tone for meditation
-                const freq = baseFreq * Math.pow(1.618, currentPreset.pattern[0]);
-                window.phiHarmonics.playTone(freq, 10000, 'sine');
-            } else {
-                // Play sequence with appropriate timing
-                let delay = 0;
-                const noteDuration = currentPreset.tempo === 'fast' ? 500 : 
-                                    currentPreset.tempo === 'slow' ? 1500 : 
-                                    currentPreset.tempo === 'very-slow' ? 2000 : 1000;
-                
-                currentPreset.pattern.forEach((power, index) => {
-                    setTimeout(() => {
-                        const freq = baseFreq * Math.pow(1.618, power);
-                        window.phiHarmonics.playTone(freq, noteDuration * 0.9, 'sine');
-                    }, delay);
-                    delay += noteDuration;
-                });
-                
-                // Stop animation after pattern completes
+            // Play each frequency in sequence
+            let delay = 0;
+            frequencies.forEach((freq, index) => {
                 setTimeout(() => {
-                    document.getElementById('spiral').classList.remove('active');
+                    audioEngine.playTone(freq, 800, 'sine');
                 }, delay);
-            }
+                delay += 1000;
+            });
             
-            // Show frequency analysis
-            showPresetFrequencies();
+            // Stop animation after pattern completes
+            setTimeout(() => {
+                document.getElementById('spiral').classList.remove('active');
+            }, delay);
+            
+            // Show frequency analysis if enabled
+            if (document.getElementById('show-math').checked) {
+                showFrequencyAnalysis(frequencies);
+            }
         }
 
-        function showPresetFrequencies() {
-            if (!currentPreset) return;
+        async function playAsChord() {
+            if (!currentPattern) {
+                alert('Please select a pattern first');
+                return;
+            }
             
+            await initAudio();
+            
+            const baseFreq = parseFloat(document.getElementById('base-frequency').value);
+            const frequencies = currentPattern.calculate(baseFreq);
+            
+            document.getElementById('spiral').classList.add('active');
+            
+            // Play all frequencies simultaneously
+            frequencies.forEach(freq => {
+                audioEngine.playTone(freq, 3000, 'sine');
+            });
+            
+            // Stop animation after chord ends
+            setTimeout(() => {
+                document.getElementById('spiral').classList.remove('active');
+            }, 3000);
+            
+            // Show frequency analysis if enabled
+            if (document.getElementById('show-math').checked) {
+                showFrequencyAnalysis(frequencies);
+            }
+        }
+
+        function stopAudio() {
+            if (audioEngine) {
+                audioEngine.stopAll();
+            }
+            document.getElementById('spiral').classList.remove('active');
+        }
+
+        function showFrequencyAnalysis(frequencies) {
             const analysisDiv = document.getElementById('frequency-analysis');
             const freqList = document.getElementById('frequency-list');
             
-            const frequencies = currentPreset.pattern.map(power => 
-                currentPreset.baseFreq * Math.pow(1.618, power)
-            );
-            
-            const labels = currentPreset.pattern.map(power => {
-                if (power === 0) return 'Base (φ⁰)';
-                if (power > 0) return `φ^${power}`;
-                return `φ^(${power})`;
-            });
-            
             freqList.innerHTML = frequencies.map((freq, i) => `
                 <div class="frequency-item">
-                    <span>${labels[i]}</span>
+                    <span>Frequency ${i + 1}:</span>
                     <span>${freq.toFixed(2)} Hz</span>
                 </div>
             `).join('');
             
+            // Show particle connection for particle pattern
+            if (currentPattern === patterns.particle) {
+                document.getElementById('particle-mapping').style.display = 'block';
+                document.getElementById('particle-info').textContent = 
+                    'These frequency ratios mirror the mass ratios of fundamental particles: ' +
+                    'electron (φ⁰), muon (φ⁴), and tau (φ⁶).';
+            } else {
+                document.getElementById('particle-mapping').style.display = 'none';
+            }
+            
             analysisDiv.style.display = 'block';
+        }
+
+        function toggleMathDisplay() {
+            const checked = document.getElementById('show-math').checked;
+            if (!checked) {
+                document.getElementById('frequency-analysis').style.display = 'none';
+            }
         }
 
         function updateFreqDisplay(value) {
@@ -609,153 +532,6 @@
             document.getElementById('freq-display').textContent = 
                 `${value} Hz (${noteNames[noteIndex]}${octave})`;
         }
-
-        async function playPhiScale() {
-            if (!window.phiHarmonics.isInitialized) {
-                await window.phiHarmonics.initAudio();
-            }
-            
-            const baseFreq = parseFloat(document.getElementById('base-frequency').value);
-            const mode = document.getElementById('scale-mode').value;
-            
-            // Activate spiral animation
-            document.getElementById('spiral').classList.add('active');
-            
-            // Play the scale
-            window.phiHarmonics.playPhiScale(baseFreq, mode);
-            
-            // Show frequency analysis with meaning
-            showFrequencyAnalysis(baseFreq, mode);
-            
-            // Stop animation after scale completes
-            setTimeout(() => {
-                document.getElementById('spiral').classList.remove('active');
-            }, 8000);
-        }
-
-        async function playPhiChord() {
-            if (!window.phiHarmonics.isInitialized) {
-                await window.phiHarmonics.initAudio();
-            }
-            
-            const baseFreq = parseFloat(document.getElementById('base-frequency').value);
-            document.getElementById('spiral').classList.add('active');
-            
-            window.phiHarmonics.playPhiChord(baseFreq, [0, 2, 4, 6], 3000);
-            
-            setTimeout(() => {
-                document.getElementById('spiral').classList.remove('active');
-            }, 3000);
-        }
-
-        async function playDiscoveryMode() {
-            if (!window.phiHarmonics.isInitialized) {
-                await window.phiHarmonics.initAudio();
-            }
-            
-            const baseFreq = 440;
-            document.getElementById('spiral').classList.add('active');
-            
-            // Progressive revelation of phi relationships
-            const steps = [
-                { freq: baseFreq, text: "Starting with A440 - the reference" },
-                { freq: baseFreq * 1.618, text: "Multiply by φ - the golden ratio emerges" },
-                { freq: baseFreq * 2.618, text: "φ² - approaching the consciousness threshold" },
-                { freq: baseFreq * 4.236, text: "φ³ - complexity compounds" },
-                { freq: baseFreq * 1.618 * 0.618, text: "φ × (1/φ) - the reciprocal harmony" }
-            ];
-            
-            let delay = 0;
-            steps.forEach((step, index) => {
-                setTimeout(() => {
-                    window.phiHarmonics.playTone(step.freq, 1500);
-                    showDiscoveryText(step.text);
-                }, delay);
-                delay += 2000;
-            });
-            
-            // Final chord
-            setTimeout(() => {
-                window.phiHarmonics.playPhiChord(baseFreq, [0, 1, 2, 3], 3000);
-                showDiscoveryText("The complete φ harmony - this is why the universe works");
-            }, delay);
-            
-            discoveryTimeout = setTimeout(() => {
-                document.getElementById('spiral').classList.remove('active');
-                hideDiscoveryText();
-            }, delay + 3000);
-        }
-
-        function showFrequencyAnalysis(baseFreq, mode) {
-            const analysisDiv = document.getElementById('frequency-analysis');
-            const freqList = document.getElementById('frequency-list');
-            const particleMapping = document.getElementById('particle-mapping');
-            
-            let frequencies;
-            let labels = [];
-            
-            switch(mode) {
-                case 'pure':
-                    frequencies = window.phiHarmonics.calculatePurePhiRatios(baseFreq);
-                    labels = ['φ⁰ = 1', 'φ¹', 'φ²', 'φ³', 'φ⁴', 'φ⁵', 'φ⁶', 'φ⁷'];
-                    break;
-                case 'particle':
-                    // Map to actual particle mass ratios
-                    frequencies = [
-                        baseFreq,                    // Reference
-                        baseFreq * Math.pow(1.618, -8), // Electron
-                        baseFreq * Math.pow(1.618, -3), // Muon  
-                        baseFreq * Math.pow(1.618, 0),  // Tau
-                        baseFreq * Math.pow(1.618, 2),  // Up family
-                        baseFreq * Math.pow(1.618, 5),  // Top
-                    ];
-                    labels = ['Reference', 'Electron φ⁻⁸', 'Muon φ⁻³', 'Tau φ⁰', 'Up family φ²', 'Top φ⁵'];
-                    particleMapping.style.display = 'block';
-                    document.getElementById('particle-info').textContent = 
-                        'Each tone represents a particle mass relationship. The harmony you hear is the same mathematical structure that creates stable matter.';
-                    break;
-                default:
-                    frequencies = window.phiHarmonics.calculatePhiIntervals(baseFreq);
-                    labels = frequencies.map((_, i) => `Interval ${i + 1}`);
-            }
-            
-            freqList.innerHTML = frequencies.map((freq, i) => `
-                <div class="frequency-item">
-                    <span>${labels[i] || `Note ${i + 1}`}</span>
-                    <span>${freq.toFixed(2)} Hz</span>
-                </div>
-            `).join('');
-            
-            analysisDiv.style.display = 'block';
-        }
-
-        function showDiscoveryText(text) {
-            const info = document.getElementById('particle-info');
-            const mapping = document.getElementById('particle-mapping');
-            mapping.style.display = 'block';
-            info.textContent = text;
-        }
-
-        function hideDiscoveryText() {
-            document.getElementById('particle-mapping').style.display = 'none';
-        }
-
-        function stopAudio() {
-            window.phiHarmonics.stopAll();
-            document.getElementById('spiral').classList.remove('active');
-            if (discoveryTimeout) {
-                clearTimeout(discoveryTimeout);
-                hideDiscoveryText();
-            }
-        }
-
-        // Initialize frequency display
-        document.getElementById('base-frequency').addEventListener('input', function(e) {
-            updateFreqDisplay(e.target.value);
-        });
-
-        // Set initial display
-        updateFreqDisplay(440);
     </script>
 </body>
 </html> 
