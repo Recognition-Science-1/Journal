@@ -1117,7 +1117,7 @@ setInterval(() => {
   gap: 1rem;
   padding: 1rem;
   border-radius: 8px;
-  background: #f8f9fa;
+  background: white;
   border: 2px solid transparent;
   margin-bottom: 1rem;
 }
@@ -1181,7 +1181,7 @@ setInterval(() => {
 }
 
 .category-nav {
-  background: #f8f9fa;
+  background: white;
   padding: 1.5rem;
   border-radius: 8px;
   margin-bottom: 2rem;
@@ -1221,7 +1221,7 @@ setInterval(() => {
 }
 
 .hash-info {
-  background: #f8f9fa;
+  background: white;
   padding: 1.5rem;
   border-radius: 8px;
   margin: 1rem 0;
