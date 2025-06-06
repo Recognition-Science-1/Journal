@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particle Mass Calculator - Journal of Recognition Science</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            line-height: 1.6; 
+            color: #333; 
+            background: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .header { 
+            background: white; 
+            border-bottom: 1px solid #e1e5e9; 
+            padding: 1rem 0; 
+        }
+        .nav { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 2rem; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        .nav-links { 
+            display: flex; 
+            gap: 2rem; 
+            list-style: none; 
+        }
+        .nav-links a { 
+            color: #666; 
+            text-decoration: none; 
+            font-weight: 500; 
+        }
+        .nav-links a:hover, .nav-links a.active { 
+            color: #007bff; 
+        }
+        .main-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .calculator-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 100%;
+            padding: 3rem;
+        }
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .calculator-header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        .atom-symbol {
+            font-size: 4rem;
+            color: #007bff;
+            margin-bottom: 1rem;
+        }
+        .calculator-description {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        .formula-box {
+            background: #f0f7ff;
+            border-left: 4px solid #007bff;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            text-align: center;
+            color: #007bff;
+        }
+        .controls-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        .control-group {
+            margin-bottom: 2rem;
+        }
+        .control-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+            font-size: 1.1rem;
+        }
+        .particle-selector {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+        }
+        .particle-selector:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+        }
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+        .results-section {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            display: none;
+        }
+        .result-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #007bff;
+        }
+        .result-box h3 {
+            color: #007bff;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        .result-label {
+            font-weight: 500;
+            color: #555;
+        }
+        .result-value {
+            font-weight: bold;
+            color: #333;
+        }
+        .formula-breakdown {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #f0f7ff;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+        }
+        .accuracy-meter {
+            margin-top: 1rem;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        .accuracy-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        .particle-table {
+            margin-top: 2rem;
+            overflow-x: auto;
+        }
+        .particle-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .particle-table th {
+            background: #007bff;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 500;
+        }
+        .particle-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .particle-table tr:hover {
+            background: #f8f9fa;
+        }
+        .back-link {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            color: #666;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            color: #007bff;
+        }
+        @media (max-width: 768px) {
+            .calculator-container {
+                padding: 2rem 1.5rem;
+            }
+            .calculator-header h1 {
+                font-size: 2rem;
+            }
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mission.html">Mission & Vocabulary</a></li>
+                <li><a href="architecture.html">System Architecture</a></li>
+                <li><a href="ledger.html">Live Prediction Ledger</a></li>
+                <li><a href="submit.html">Submit Research</a></li>
+                <li><a href="interactive.html">Interactive Science</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <a href="interactive.html" class="back-link">← Back to Interactive Tools</a>
+
+    <div class="main-container">
+        <div class="calculator-container">
+            <div class="calculator-header">
+                <div class="atom-symbol">⚛️</div>
+                <h1>Particle Mass Calculator</h1>
+                <p class="calculator-description">
+                    Calculate particle masses using Recognition Science principles. Discover how the golden ratio φ 
+                    and the cosmic energy scale E_coh determine the masses of fundamental particles.
+                </p>
+            </div>
+
+            <div class="formula-box">
+                m = E_coh × φ^rung × (residue/9)
+            </div>
+
+            <div class="controls-section">
+                <div class="control-group">
+                    <label for="particle-select">Select a Particle:</label>
+                    <select id="particle-select" class="particle-selector">
+                        <optgroup label="Leptons">
+                            <option value="electron" selected>Electron</option>
+                            <option value="muon">Muon</option>
+                            <option value="tau">Tau</option>
+                        </optgroup>
+                        <optgroup label="Quarks">
+                            <option value="up">Up Quark</option>
+                            <option value="down">Down Quark</option>
+                            <option value="strange">Strange Quark</option>
+                            <option value="charm">Charm Quark</option>
+                            <option value="bottom">Bottom Quark</option>
+                            <option value="top">Top Quark</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="calculateMass()">Calculate Mass</button>
+                    <button class="btn btn-secondary" onclick="showAllParticles()">Show All Particles</button>
+                </div>
+            </div>
+
+            <div class="results-section" id="results">
+                <div class="result-box">
+                    <h3>Calculation Results</h3>
+                    <div id="result-content"></div>
+                    <div class="accuracy-meter">
+                        <div class="accuracy-fill" id="accuracy-bar"></div>
+                    </div>
+                    <div class="formula-breakdown" id="formula-breakdown"></div>
+                </div>
+            </div>
+
+            <div class="particle-table" id="particle-table" style="display: none;">
+                <h3 style="margin-bottom: 1rem;">All Particle Masses</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Particle</th>
+                            <th>Measured (MeV/c²)</th>
+                            <th>Calculated (MeV/c²)</th>
+                            <th>Rung</th>
+                            <th>Residue</th>
+                            <th>Accuracy</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phi = (1 + Math.sqrt(5)) / 2;
+        const E_coh = 0.09473154; // eV
+        const proton_mass = 938.272; // MeV/c²
+        
+        const particles = {
+            electron: { mass: 0.511, rung: -8, residue: 2, name: "Electron" },
+            muon: { mass: 105.658, rung: -3, residue: 7, name: "Muon" },
+            tau: { mass: 1776.86, rung: 0, residue: 2, name: "Tau" },
+            up: { mass: 2.2, rung: -6, residue: 4, name: "Up Quark" },
+            down: { mass: 4.7, rung: -5, residue: 2, name: "Down Quark" },
+            strange: { mass: 95, rung: -3, residue: 5, name: "Strange Quark" },
+            charm: { mass: 1275, rung: -1, residue: 6, name: "Charm Quark" },
+            bottom: { mass: 4180, rung: 1, residue: 1, name: "Bottom Quark" },
+            top: { mass: 173210, rung: 5, residue: 2, name: "Top Quark" }
+        };
+        
+        function calculateMass() {
+            const select = document.getElementById('particle-select');
+            const particleKey = select.value;
+            const particle = particles[particleKey];
+            
+            // Calculate mass using Recognition Science formula
+            const calculated = proton_mass * Math.pow(phi, particle.rung) * (particle.residue / 9);
+            const accuracy = 100 - Math.abs((calculated - particle.mass) / particle.mass * 100);
+            
+            // Update results
+            const resultContent = document.getElementById('result-content');
+            resultContent.innerHTML = `
+                <div class="result-item">
+                    <span class="result-label">Particle:</span>
+                    <span class="result-value">${particle.name}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Measured Mass:</span>
+                    <span class="result-value">${particle.mass} MeV/c²</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Calculated Mass:</span>
+                    <span class="result-value">${calculated.toFixed(3)} MeV/c²</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Rung Position:</span>
+                    <span class="result-value">${particle.rung}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Residue (mod 9):</span>
+                    <span class="result-value">${particle.residue}</span>
+                </div>
+            `;
+            
+            // Update accuracy bar
+            const accuracyBar = document.getElementById('accuracy-bar');
+            accuracyBar.style.width = accuracy + '%';
+            accuracyBar.textContent = accuracy.toFixed(2) + '%';
+            
+            // Update formula breakdown
+            const formulaBreakdown = document.getElementById('formula-breakdown');
+            formulaBreakdown.innerHTML = `
+                <strong>Formula Breakdown:</strong><br>
+                m = ${proton_mass} × φ^${particle.rung} × ${particle.residue}/9<br>
+                m = ${proton_mass} × ${Math.pow(phi, particle.rung).toFixed(6)} × ${(particle.residue/9).toFixed(3)}<br>
+                m = ${calculated.toFixed(3)} MeV/c²
+            `;
+            
+            // Show results
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('particle-table').style.display = 'none';
+        }
+        
+        function showAllParticles() {
+            const tableBody = document.getElementById('table-body');
+            tableBody.innerHTML = '';
+            
+            for (const [key, particle] of Object.entries(particles)) {
+                const calculated = proton_mass * Math.pow(phi, particle.rung) * (particle.residue / 9);
+                const accuracy = 100 - Math.abs((calculated - particle.mass) / particle.mass * 100);
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${particle.name}</strong></td>
+                    <td>${particle.mass}</td>
+                    <td>${calculated.toFixed(3)}</td>
+                    <td>${particle.rung}</td>
+                    <td>${particle.residue}</td>
+                    <td>${accuracy.toFixed(2)}%</td>
+                `;
+                tableBody.appendChild(row);
+            }
+            
+            document.getElementById('particle-table').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+        }
+        
+        // Initialize with electron calculation
+        window.addEventListener('load', function() {
+            calculateMass();
+        });
+    </script>
+</body>
+</html> 
