@@ -1261,7 +1261,7 @@ setInterval(() => {
 .stat-box {
   text-align: center;
   padding: 1.5rem;
-  background: #f8f9fa;
+  background: white;
   border-radius: 8px;
 }
 
