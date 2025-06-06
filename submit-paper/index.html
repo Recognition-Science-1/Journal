@@ -271,27 +271,26 @@
 
         // Simulate the submission process (for demo)
         async function simulateSubmission() {
+            // Store paper data for the review page
+            const paperTitle = document.getElementById('paper-title').value;
+            const authors = document.getElementById('authors').value;
+            const email = document.getElementById('email').value;
+            const abstract = document.getElementById('abstract').value;
+            
+            sessionStorage.setItem('paperTitle', paperTitle);
+            sessionStorage.setItem('authors', authors);
+            sessionStorage.setItem('email', email);
+            sessionStorage.setItem('abstract', abstract);
+            
             // Step 1: Complete
             await delay(1000);
             updateWorkflowStep(1, 'complete');
             updateWorkflowStep(2, 'active');
             showStatus('Paper submitted! Starting GPT 0.3 review...', 'info');
             
-            // Step 2: GPT Review (simulate success)
-            await delay(3000);
-            updateWorkflowStep(2, 'complete');
-            updateWorkflowStep(3, 'active');
-            showStatus('GPT 0.3 review passed! Starting Lean verification...', 'success');
-            
-            // Step 3: Lean Verification
-            await delay(4000);
-            updateWorkflowStep(3, 'complete');
-            updateWorkflowStep(4, 'complete');
-            showStatus('Congratulations! Your paper is Lean Certified! 🎉', 'success');
-            
-            // Redirect to certification page
+            // Redirect to review page after short delay
             await delay(2000);
-            window.location.href = 'certification.html';
+            window.location.href = 'review-feedback.html';
         }
 
         function delay(ms) {
