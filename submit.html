@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Research - Journal of Recognition Science</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .header { background: white; border-bottom: 1px solid #e1e5e9; padding: 1rem 0; }
+        .nav { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: center; align-items: center; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: #666; text-decoration: none; font-weight: 500; }
+        .nav-links a:hover, .nav-links a.active { color: #007bff; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .hero { text-align: center; padding: 4rem 0; background: white; margin-bottom: 3rem; }
+        .hero h1 { font-size: 3rem; font-weight: 300; margin-bottom: 1rem; color: #333; }
+        .hero p { font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto; }
+        .section { background: white; padding: 3rem; margin-bottom: 2rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .guidelines { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+        .guideline-card { background: #f8f9fa; padding: 2rem; border-radius: 8px; border: 1px solid #e1e5e9; }
+        .guideline-card h3 { color: #007bff; margin-bottom: 1rem; font-size: 1.3rem; }
+        .guideline-card ul { list-style: none; }
+        .guideline-card li { margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative; }
+        .guideline-card li:before { content: "✓"; position: absolute; left: 0; color: #28a745; }
+        .submission-form { max-width: 800px; margin: 0 auto; }
+        .form-section { margin-bottom: 2rem; }
+        .form-section h3 { color: #333; margin-bottom: 1rem; font-size: 1.5rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #555; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; }
+        .form-group textarea { min-height: 150px; resize: vertical; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #007bff; box-shadow: 0 0 0 3px rgba(0,123,255,0.1); }
+        .checkbox-label { display: flex; align-items: start; cursor: pointer; }
+        .checkbox-label input { margin-right: 0.5rem; margin-top: 0.25rem; }
+        .submit-btn { background: #007bff; color: white; padding: 1rem 3rem; border: none; border-radius: 4px; font-size: 1.1rem; font-weight: 500; cursor: pointer; transition: background 0.3s; }
+        .submit-btn:hover { background: #0056b3; }
+        .submit-btn:disabled { background: #6c757d; cursor: not-allowed; }
+        .process-timeline { margin: 3rem 0; padding: 2rem; background: #f8f9fa; border-radius: 8px; }
+        .timeline-item { display: flex; align-items: start; margin-bottom: 2rem; }
+        .timeline-step { width: 40px; height: 40px; background: #007bff; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 1.5rem; flex-shrink: 0; }
+        .timeline-content h4 { color: #333; margin-bottom: 0.5rem; }
+        .timeline-content p { color: #666; }
+        .alert { padding: 1rem 1.5rem; margin-bottom: 2rem; border-radius: 4px; }
+        .alert-info { background: #e3f2fd; color: #1565c0; border-left: 4px solid #1976d2; }
+        .required { color: #dc3545; }
+        @media (max-width: 768px) { .hero h1 { font-size: 2rem; } .guidelines { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="axioms.html">Axioms</a></li>
+                <li><a href="calculator.html">Golden Ratio Calculator</a></li>
+                <li><a href="hub.html">Communication Hub</a></li>
+                <li><a href="submit.html" class="active">Submit Research</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="hero">
+        <div class="container">
+            <h1>Submit Your Research</h1>
+            <p>Join the revolution in theoretical physics. Submit your groundbreaking work on Recognition Science, particle physics, and unified field theories for peer review and publication.</p>
+        </div>
+    </div>
+    <div class="container">
+        <section class="section">
+            <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; font-weight: 300;">Submission Guidelines</h2>
+            <div class="guidelines">
+                <div class="guideline-card">
+                    <h3>Scope & Topics</h3>
+                    <ul>
+                        <li>Recognition Science applications</li>
+                        <li>Particle mass predictions</li>
+                        <li>Golden ratio relationships</li>
+                        <li>Unified field theories</li>
+                        <li>Mathematical frameworks</li>
+                        <li>Computational models</li>
+                    </ul>
+                </div>
+                <div class="guideline-card">
+                    <h3>Manuscript Requirements</h3>
+                    <ul>
+                        <li>Original, unpublished work</li>
+                        <li>Clear methodology</li>
+                        <li>Reproducible results</li>
+                        <li>Mathematical rigor</li>
+                        <li>Proper citations</li>
+                        <li>LaTeX or Markdown format</li>
+                    </ul>
+                </div>
+                <div class="guideline-card">
+                    <h3>Review Process</h3>
+                    <ul>
+                        <li>Initial screening (1-2 weeks)</li>
+                        <li>Peer review (2-4 weeks)</li>
+                        <li>Author revision (as needed)</li>
+                        <li>Final decision</li>
+                        <li>Publication preparation</li>
+                        <li>Open access publication</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="submission-form">
+                <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; font-weight: 300;">Submit Your Paper</h2>
+                <div class="alert alert-info">
+                    <strong>Note:</strong> All submissions are reviewed for adherence to Recognition Science principles and mathematical rigor. We encourage innovative approaches and novel applications.
+                </div>
+                <form id="submissionForm">
+                    <div class="form-section">
+                        <h3>Author Information</h3>
+                        <div class="form-group">
+                            <label for="authorName">Lead Author Name <span class="required">*</span></label>
+                            <input type="text" id="authorName" name="authorName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="affiliation">Institutional Affiliation</label>
+                            <input type="text" id="affiliation" name="affiliation">
+                        </div>
+                        <div class="form-group">
+                            <label for="coauthors">Co-authors (comma separated)</label>
+                            <input type="text" id="coauthors" name="coauthors" placeholder="Name1 (Institution1), Name2 (Institution2)">
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <h3>Manuscript Details</h3>
+                        <div class="form-group">
+                            <label for="title">Paper Title <span class="required">*</span></label>
+                            <input type="text" id="title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Primary Category <span class="required">*</span></label>
+                            <select id="category" name="category" required>
+                                <option value="">Select a category...</option>
+                                <option value="recognition-theory">Recognition Theory</option>
+                                <option value="particle-physics">Particle Physics Predictions</option>
+                                <option value="golden-ratio">Golden Ratio Applications</option>
+                                <option value="unified-field">Unified Field Theory</option>
+                                <option value="mathematical-framework">Mathematical Framework</option>
+                                <option value="computational">Computational Models</option>
+                                <option value="experimental">Experimental Verification</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="keywords">Keywords (comma separated) <span class="required">*</span></label>
+                            <input type="text" id="keywords" name="keywords" placeholder="recognition science, particle mass, golden ratio" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="abstract">Abstract <span class="required">*</span></label>
+                            <textarea id="abstract" name="abstract" required placeholder="Provide a clear, concise summary of your research (250-500 words)"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <h3>Manuscript Upload</h3>
+                        <div class="form-group">
+                            <label for="manuscript">Manuscript File (PDF, LaTeX, or Markdown) <span class="required">*</span></label>
+                            <input type="file" id="manuscript" name="manuscript" accept=".pdf,.tex,.md" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplementary">Supplementary Materials (optional)</label>
+                            <input type="file" id="supplementary" name="supplementary" multiple>
+                            <small style="color: #666; display: block; margin-top: 0.5rem;">You can upload code, data files, or additional figures</small>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <h3>Author Agreement</h3>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="original" required>
+                                <span>I confirm this is original work that has not been published elsewhere <span class="required">*</span></span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="openaccess" required>
+                                <span>I agree to open access publication under CC BY 4.0 license <span class="required">*</span></span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="peerreview" required>
+                                <span>I understand and accept the peer review process <span class="required">*</span></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 3rem;">
+                        <button type="submit" class="submit-btn">Submit Paper for Review</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section class="section">
+            <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; font-weight: 300;">Review Process Timeline</h2>
+            <div class="process-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-step">1</div>
+                    <div class="timeline-content">
+                        <h4>Initial Screening</h4>
+                        <p>Your submission is reviewed for completeness and adherence to scope (1-2 weeks)</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-step">2</div>
+                    <div class="timeline-content">
+                        <h4>Peer Review</h4>
+                        <p>Expert reviewers evaluate your work for scientific merit and mathematical rigor (2-4 weeks)</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-step">3</div>
+                    <div class="timeline-content">
+                        <h4>Author Revision</h4>
+                        <p>Address reviewer comments and improve your manuscript (time varies)</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-step">4</div>
+                    <div class="timeline-content">
+                        <h4>Final Decision</h4>
+                        <p>Editorial board makes publication decision based on reviews and revisions</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-step">5</div>
+                    <div class="timeline-content">
+                        <h4>Publication</h4>
+                        <p>Accepted papers are prepared for open access publication with DOI assignment</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        document.getElementById("submissionForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            // Show success message
+            alert("Thank you for your submission! We will review your paper and contact you within 1-2 weeks.");
+            
+            // In a real implementation, this would send to a backend
+            console.log("Submission data:", data);
+            
+            // Log to console for demo
+            console.log("=== NEW SUBMISSION ===");
+            console.log("Title:", data.title);
+            console.log("Author:", data.authorName);
+            console.log("Email:", data.email);
+            console.log("Category:", data.category);
+            console.log("Abstract:", data.abstract);
+            console.log("Timestamp:", new Date().toISOString());
+            
+            // Reset form
+            this.reset();
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        });
+        
+        // Add file size validation
+        document.getElementById("manuscript").addEventListener("change", function() {
+            const file = this.files[0];
+            if (file && file.size > 10 * 1024 * 1024) { // 10MB limit
+                alert("File size must be less than 10MB");
+                this.value = "";
+            }
+        });
+    </script>
+</body>
+</html>
