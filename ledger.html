@@ -1,9 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Live Prediction Ledger - Journal of Recognition Science</title></head><body>
-
-# 📊 Live Prediction Ledger
-
-<div class="ledger-container">
-  
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Live Prediction Ledger - Journal of Recognition Science</title></head><body><header class="header"><nav class="nav"><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="mission.html">Mission & Vocabulary</a></li><li><a href="architecture.html">System Architecture</a></li><li><a href="ledger.html">Live Prediction Ledger</a></li><li><a href="submit.html">Submit Research</a></li><li><a href="interactive.html">Interactive Science</a></li></ul></nav></header><div class="container">
   <!-- System Status -->
   <div class="status-banner">
     <h2>🔴 LIVE System Verification</h2>
@@ -13,31 +8,16 @@
     </div>
   </div>
 
-  <!-- Prediction Summary -->
   <div class="summary-card">
-    <h2>📈 Prediction Summary</h2>
-    <div class="summary-stats">
-      <div class="stat-box">
-        <div class="stat-number" id="total-predictions">62</div>
-        <div class="stat-label">Total Predictions</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number pending-color" id="pending-predictions">60</div>
-        <div class="stat-label">Pending Verification</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number verified-color" id="verified-predictions">2</div>
-        <div class="stat-label">Verified</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number accuracy-color">100%</div>
-        <div class="stat-label">Accuracy Rate</div>
-      </div>
+  <!-- System Status -->
+  <div class="status-banner">
+    <h2>🔴 LIVE System Verification</h2>
+    <div class="status-indicator">
+      <span class="pulse"></span>
+      <span>All Systems Operational</span>
     </div>
-    <p class="summary-note">All predictions derived from first principles with zero free parameters</p>
   </div>
 
-  <!-- Core Verification Results -->
   <!-- Prediction Statistics -->
   <div class="stats-container">
     <div class="stat-card">
@@ -53,6 +33,11 @@
   </div>
 
   <style>
+    .header { background: white; border-bottom: 1px solid #e1e5e9; padding: 1rem 0; }
+    .nav { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: center; align-items: center; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0; }
+    .nav-links a { color: #666; text-decoration: none; font-weight: 500; }
+    .nav-links a:hover { color: #007bff; }
     .stats-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -107,6 +92,7 @@
     }
   </style>
 
+  <!-- Real-time Predictions -->
   <!-- Real-time Predictions -->
   <div class="predictions-card">
     <h2>🎯 Active Predictions</h2>
@@ -781,28 +767,6 @@
     
     <!-- Already Verified -->
     <div class="prediction-category">
-      <h3>✅ Recently Verified</h3>
-      
-      <div class="prediction-item verified">
-        <span class="prediction-status">✅</span>
-        <div class="prediction-content">
-          <h4>Muon g-2 Anomaly</h4>
-          <p>Predicted deviation matches experimental result</p>
-          <p class="prediction-date">Verified: April 2021</p>
-        </div>
-      </div>
-      
-      <div class="prediction-item verified">
-        <span class="prediction-status">✅</span>
-        <div class="prediction-content">
-          <h4>W Boson Mass Shift</h4>
-          <p>Predicted: 80.357 GeV (CDF measurement confirmed)</p>
-          <p class="prediction-date">Verified: April 2022</p>
-        </div>
-      </div>
-    </div>
-    
-  </div>
 
   <!-- Prediction Hash Verification -->
   <div class="hash-card">
