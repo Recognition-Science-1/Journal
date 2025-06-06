@@ -37,3 +37,23 @@
 - Core Proofs: 25% 🚧
 - Mass Calculations: 10% 🚧
 - Constants: 15% 🚧
+
+## 🔬 NEW: Electron Mass Formalization
+**Progress**: Created formal Lean framework for electron mass
+- Defined electron at rung 32
+- Implemented mass calculation: E = E_coh × φ^32
+- Current prediction: 0.438 MeV (vs 0.511 MeV experimental)
+- ~14% error suggests fine-tuning needed
+
+## 🤔 Active Investigation
+Working on reconciling the 14% mass discrepancy:
+- Option 1: Adjust rung assignment (32 → 33?)
+- Option 2: Refine coherence energy value
+- Option 3: Discover missing scaling factor
+
+## 📈 Updated Progress: 48% Complete
+- Axioms: 100% ✅
+- Golden Ratio Uniqueness: 90% ✅
+- Electron Mass: 70% 🚧 (framework done, calibration needed)
+- Core Proofs: 30% 🚧
+- Constants: 20% 🚧
