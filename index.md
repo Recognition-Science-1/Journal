@@ -50,30 +50,9 @@ A8: Self-Similarity
 </div>
 
 <style>
-.hero-section {
-  text-align: center;
-  padding: 3rem 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-}
 
-.hero-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
 
-.hero-subtitle {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  opacity: 0.9;
-}
 
-.hero-date {
-  opacity: 0.8;
-}
 
 .status-grid {
   display: grid;
@@ -130,27 +109,6 @@ A8: Self-Similarity
 .status-card:nth-child(3) .sub-metric { color: #ffc107; }
 
 @media (max-width: 768px) {
-  .hero-title {
-    font-size: 2rem;
-  }
-  
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-  
-  .metric {
-    font-size: 2.5rem;
-  }
-  
-  .status-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  
-  .status-card {
-    padding: 2rem 1.5rem;
-  }
-}
 
 @media (max-width: 480px) {
   .status-grid {
