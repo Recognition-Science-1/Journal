@@ -481,14 +481,6 @@ wscat -c wss://api.recognitionscience.org/v1/ledger/live
 }
 
 .search-controls {
-  display: flex;
-  gap: 1rem;
-  margin: 2rem 0;
-  flex-wrap: wrap;
-}
-
-.search-input,
-.filter-select,
 .status-filter {
   padding: 0.5rem;
   border: 1px solid #ddd;
