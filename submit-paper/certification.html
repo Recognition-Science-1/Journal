@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lean Certified - Recognition Science</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Celebration Animation */
+        @keyframes celebrate {
+            0% { transform: scale(0) rotate(0deg); opacity: 0; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+            100% { transform: scale(1) rotate(360deg); opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Header */
+        .header {
+            padding: 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1e);
+            border-bottom: 2px solid #FFD700;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: celebrate 1s ease-out;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #FFD700;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Certificate Container */
+        .certificate-container {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Success Banner */
+        .success-banner {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(255, 215, 0, 0.1));
+            border: 2px solid #4CAF50;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            border-radius: 12px;
+            animation: celebrate 1s ease-out;
+        }
+
+        .success-banner h2 {
+            color: #4CAF50;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-banner p {
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+
+        /* Certificate Badge */
+        .certificate-badge {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 3rem;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .badge-outer {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            padding: 5px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+        }
+
+        .badge-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #0a0a0a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .badge-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge-text {
+            color: #FFD700;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .badge-subtext {
+            color: #FFA500;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Sparkles */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #FFD700;
+            border-radius: 50%;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        .sparkle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 20%; right: 15%; animation-delay: 0.3s; }
+        .sparkle:nth-child(3) { bottom: 15%; left: 20%; animation-delay: 0.6s; }
+        .sparkle:nth-child(4) { bottom: 25%; right: 10%; animation-delay: 0.9s; }
+
+        /* Certificate Details */
+        .certificate-details {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 2.5rem;
+            border: 1px solid #333;
+            margin-bottom: 2rem;
+        }
+
+        .detail-section {
+            margin-bottom: 2rem;
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .detail-value {
+            color: #FFD700;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Verification Summary */
+        .verification-summary {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid #444;
+            margin-bottom: 2rem;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .summary-item {
+            text-align: center;
+        }
+
+        .summary-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-value {
+            color: #4CAF50;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .summary-label {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .button {
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #0a0a0a;
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: #FFD700;
+            border: 2px solid #FFD700;
+        }
+
+        .button-secondary:hover {
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        /* Share Section */
+        .share-section {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+        }
+
+        .share-title {
+            color: #FFD700;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .share-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #1a1a2e;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .share-button:hover {
+            border-color: #FFD700;
+            transform: translateY(-2px);
+        }
+
+        /* Certificate Hash */
+        .certificate-hash {
+            background: #0a0a0a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 2rem;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+            color: #888;
+        }
+
+        .hash-label {
+            color: #FFD700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .certificate-badge {
+                width: 250px;
+                height: 250px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Confetti Animation -->
+    <div id="confetti-container"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <h1>🎉 Congratulations! 🎉</h1>
+    </header>
+
+    <!-- Certificate Container -->
+    <div class="certificate-container">
+        <!-- Success Banner -->
+        <div class="success-banner">
+            <h2>Your Paper is Lean Certified!</h2>
+            <p>First paper to achieve 100% formal verification with zero sorry statements</p>
+        </div>
+
+        <!-- Certificate Badge -->
+        <div class="certificate-badge">
+            <div class="badge-outer">
+                <div class="badge-inner">
+                    <div class="badge-icon">🏆</div>
+                    <div class="badge-text">LEAN CERTIFIED</div>
+                    <div class="badge-subtext">Recognition Science</div>
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificate Details -->
+        <div class="certificate-details">
+            <div class="detail-section">
+                <div class="detail-label">Paper Title</div>
+                <div class="detail-value">Self-Similarity Forces the Golden Ratio: A Formal Proof</div>
+            </div>
+            <div class="detail-section">
+                <div class="detail-label">Authors</div>
+                <div class="detail-value">Agent A, Agent B, Agent C</div>
+            </div>
+            <div class="detail-section">
+                <div class="detail-label">Certification Date</div>
+                <div class="detail-value" id="cert-date">December 5, 2024</div>
+            </div>
+            <div class="detail-section">
+                <div class="detail-label">Certificate ID</div>
+                <div class="detail-value">LEAN-CERT-2024-001</div>
+            </div>
+        </div>
+
+        <!-- Verification Summary -->
+        <div class="verification-summary">
+            <h3 style="color: #FFD700; margin-bottom: 1rem;">Verification Summary</h3>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-icon">✅</div>
+                    <div class="summary-value">15</div>
+                    <div class="summary-label">Theorems Verified</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-icon">🚫</div>
+                    <div class="summary-value">0</div>
+                    <div class="summary-label">Sorry Statements</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-icon">⚡</div>
+                    <div class="summary-value">3:47</div>
+                    <div class="summary-label">Verification Time</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-icon">🎯</div>
+                    <div class="summary-value">100%</div>
+                    <div class="summary-label">Success Rate</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificate Hash -->
+        <div class="certificate-hash">
+            <div class="hash-label">Blockchain Verification Hash</div>
+            <div>0x7f3a9c2e5d8b1a4f6e9c7b2d8a3f5e1c9b4a7d2f8e3c6a9b5d2e7f1a4c8b9e3f</div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="#" class="button button-primary">
+                <span>📥</span>
+                Download Certificate
+            </a>
+            <a href="#" class="button button-secondary">
+                <span>📊</span>
+                View Full Report
+            </a>
+            <a href="#" class="button button-secondary">
+                <span>🔗</span>
+                Publish to Journal
+            </a>
+        </div>
+
+        <!-- Share Section -->
+        <div class="share-section">
+            <h3 class="share-title">Share Your Achievement</h3>
+            <div class="share-buttons">
+                <div class="share-button" title="Share on Twitter">𝕏</div>
+                <div class="share-button" title="Share on LinkedIn">in</div>
+                <div class="share-button" title="Share on Facebook">f</div>
+                <div class="share-button" title="Copy Link">🔗</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create confetti
+        function createConfetti() {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#FFD700', '#FFA500', '#4CAF50', '#2196F3', '#9C27B0'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                container.appendChild(confetti);
+            }
+        }
+
+        // Set current date
+        function setCurrentDate() {
+            const date = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('cert-date').textContent = date.toLocaleDateString('en-US', options);
+        }
+
+        // Share functionality
+        document.querySelectorAll('.share-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const platform = this.getAttribute('title');
+                if (platform === 'Copy Link') {
+                    navigator.clipboard.writeText(window.location.href);
+                    alert('Certificate link copied to clipboard!');
+                } else {
+                    alert(`Share on ${platform} functionality would open here`);
+                }
+            });
+        });
+
+        // Download certificate
+        document.querySelector('.button-primary').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Certificate PDF download would start here');
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createConfetti();
+            setCurrentDate();
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Paper - Recognition Science</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            padding: 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1e);
+            border-bottom: 2px solid #FFD700;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: #888;
+            font-size: 1.1rem;
+        }
+
+        /* Workflow Tracker */
+        .workflow-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .workflow-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 3rem;
+            color: #FFD700;
+        }
+
+        .workflow-tracker {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin-bottom: 4rem;
+        }
+
+        .workflow-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #333;
+            z-index: 0;
+        }
+
+        .workflow-step {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            flex: 1;
+        }
+
+        .step-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #1a1a2e;
+            border: 3px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .step-circle.active {
+            background: #FFD700;
+            border-color: #FFD700;
+            color: #0a0a0a;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .step-circle.complete {
+            background: #4CAF50;
+            border-color: #4CAF50;
+            color: white;
+        }
+
+        .step-circle.failed {
+            background: #f44336;
+            border-color: #f44336;
+            color: white;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #FFD700;
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: #888;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        /* Main Content Area */
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Submission Form */
+        .submission-form {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 2.5rem;
+            border: 1px solid #333;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #FFD700;
+            font-weight: 500;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: #0a0a0a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: white;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #FFD700;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* File Upload */
+        .file-upload-area {
+            border: 2px dashed #444;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #0a0a0a;
+        }
+
+        .file-upload-area:hover {
+            border-color: #FFD700;
+            background: #1a1a1a;
+        }
+
+        .file-upload-area.drag-over {
+            border-color: #FFD700;
+            background: #1a1a2e;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #FFD700;
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-button {
+            background: #FFD700;
+            color: #0a0a0a;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .upload-button:hover {
+            background: #FFA500;
+            transform: translateY(-2px);
+        }
+
+        /* Submit Button */
+        .submit-button {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #0a0a0a;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Status Messages */
+        .status-message {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .status-message.success {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid #4CAF50;
+            color: #4CAF50;
+        }
+
+        .status-message.error {
+            background: rgba(244, 67, 54, 0.1);
+            border: 1px solid #f44336;
+            color: #f44336;
+        }
+
+        .status-message.info {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid #FFD700;
+            color: #FFD700;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #FFD700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .workflow-tracker {
+                flex-direction: column;
+            }
+
+            .workflow-line {
+                width: 2px;
+                height: 100%;
+                top: 0;
+                left: 50%;
+            }
+
+            .workflow-step {
+                margin-bottom: 2rem;
+            }
+
+            .step-circle {
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>Submit Your Paper</h1>
+        <p>Recognition Science Paper Submission Portal - First Zero-Parameter Theory with Automated Verification</p>
+    </header>
+
+    <!-- Workflow Tracker -->
+    <div class="workflow-container">
+        <h2 class="workflow-title">Submission Workflow</h2>
+        <div class="workflow-tracker">
+            <div class="workflow-line"></div>
+            
+            <div class="workflow-step" id="step-1">
+                <div class="step-circle active" data-step="1">1</div>
+                <div class="step-title">Submit Paper</div>
+                <div class="step-description">Upload your paper and metadata</div>
+            </div>
+
+            <div class="workflow-step" id="step-2">
+                <div class="step-circle" data-step="2">2</div>
+                <div class="step-title">GPT 0.3 Review</div>
+                <div class="step-description">AI-powered initial review with feedback</div>
+            </div>
+
+            <div class="workflow-step" id="step-3">
+                <div class="step-circle" data-step="3">3</div>
+                <div class="step-title">Lean Verification</div>
+                <div class="step-description">Formal mathematical verification</div>
+            </div>
+
+            <div class="workflow-step" id="step-4">
+                <div class="step-circle" data-step="4">✓</div>
+                <div class="step-title">Certification</div>
+                <div class="step-description">Lean Certified badge awarded</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <!-- Status Messages -->
+        <div id="status-message" class="status-message"></div>
+
+        <!-- Submission Form -->
+        <form id="submission-form" class="submission-form">
+            <h3 style="margin-bottom: 2rem; text-align: center; color: #FFD700;">Paper Details</h3>
+            
+            <div class="form-group">
+                <label class="form-label" for="paper-title">Paper Title *</label>
+                <input type="text" id="paper-title" class="form-input" required placeholder="Enter your paper title">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="authors">Authors *</label>
+                <input type="text" id="authors" class="form-input" required placeholder="John Doe, Jane Smith">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="email">Contact Email *</label>
+                <input type="email" id="email" class="form-input" required placeholder="your@email.com">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="abstract">Abstract *</label>
+                <textarea id="abstract" class="form-textarea" required placeholder="Enter your paper abstract (max 500 words)"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Paper File * (PDF, LaTeX, or Markdown)</label>
+                <div class="file-upload-area" id="file-upload-area">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">Drag and drop your paper here</div>
+                    <div>or</div>
+                    <button type="button" class="upload-button" id="upload-button">Browse Files</button>
+                    <input type="file" id="file-input" accept=".pdf,.tex,.md" style="display: none;">
+                </div>
+                <div id="file-info" style="margin-top: 1rem; color: #4CAF50;"></div>
+            </div>
+
+            <div class="form-group">
+                <label style="display: flex; align-items: center; cursor: pointer;">
+                    <input type="checkbox" id="terms" required style="margin-right: 0.5rem;">
+                    <span style="color: #888;">I agree to the submission terms and automated review process</span>
+                </label>
+            </div>
+
+            <button type="submit" class="submit-button" id="submit-button">
+                Submit Paper for Review
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Workflow tracker
+        const workflowSteps = {
+            1: { id: 'step-1', name: 'Submit Paper', status: 'active' },
+            2: { id: 'step-2', name: 'GPT 0.3 Review', status: 'pending' },
+            3: { id: 'step-3', name: 'Lean Verification', status: 'pending' },
+            4: { id: 'step-4', name: 'Certification', status: 'pending' }
+        };
+
+        // File upload handling
+        const fileUploadArea = document.getElementById('file-upload-area');
+        const fileInput = document.getElementById('file-input');
+        const uploadButton = document.getElementById('upload-button');
+        const fileInfo = document.getElementById('file-info');
+
+        uploadButton.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                fileInfo.textContent = `Selected: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+            }
+        });
+
+        // Drag and drop
+        fileUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUploadArea.classList.add('drag-over');
+        });
+
+        fileUploadArea.addEventListener('dragleave', () => {
+            fileUploadArea.classList.remove('drag-over');
+        });
+
+        fileUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUploadArea.classList.remove('drag-over');
+            
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                fileInput.files = e.dataTransfer.files;
+                fileInfo.textContent = `Selected: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+            }
+        });
+
+        // Form submission
+        const form = document.getElementById('submission-form');
+        const statusMessage = document.getElementById('status-message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Show status
+            showStatus('Submitting your paper...', 'info');
+            
+            // Here we would normally submit to the backend
+            // For now, we'll simulate the process
+            simulateSubmission();
+        });
+
+        function showStatus(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message ${type}`;
+            statusMessage.style.display = 'block';
+        }
+
+        function updateWorkflowStep(step, status) {
+            const stepCircle = document.querySelector(`[data-step="${step}"]`);
+            stepCircle.classList.remove('active', 'complete', 'failed');
+            
+            if (status === 'active') {
+                stepCircle.classList.add('active');
+            } else if (status === 'complete') {
+                stepCircle.classList.add('complete');
+            } else if (status === 'failed') {
+                stepCircle.classList.add('failed');
+            }
+        }
+
+        // Simulate the submission process (for demo)
+        async function simulateSubmission() {
+            // Step 1: Complete
+            await delay(1000);
+            updateWorkflowStep(1, 'complete');
+            updateWorkflowStep(2, 'active');
+            showStatus('Paper submitted! Starting GPT 0.3 review...', 'info');
+            
+            // Step 2: GPT Review (simulate success)
+            await delay(3000);
+            updateWorkflowStep(2, 'complete');
+            updateWorkflowStep(3, 'active');
+            showStatus('GPT 0.3 review passed! Starting Lean verification...', 'success');
+            
+            // Step 3: Lean Verification
+            await delay(4000);
+            updateWorkflowStep(3, 'complete');
+            updateWorkflowStep(4, 'complete');
+            showStatus('Congratulations! Your paper is Lean Certified! 🎉', 'success');
+        }
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+    </script>
+</body>
+</html> 

@@ -10,12 +10,17 @@
     "A_TO_B/hello_agent_a.txt": "4fbd1371f47b9801885f45fa8990f9dd",
     "B_TO_C/monitoring_setup_request.txt": "7e96e88e6d36dc1d40ca149c97f14b68",
     "C_TO_B/monitoring_response.txt": "556e290a9ddd9d04d74cbdc885903bb7",
-    "A_TO_C/website_implementation_request.txt": "473b76d04fdb9843ea5b88b5ca959286"
+    "A_TO_C/website_implementation_request.txt": "473b76d04fdb9843ea5b88b5ca959286",
+    "B_TO_C/lean_proof_complete_coordination.txt": "ece4cc111b0d10c070c37bd429943200",
+    "B_TO_A/submit_paper_page_plan.txt": "38793a93b8f57fd351b297df5f1237fd",
+    "B_TO_A/submit_paper_implementation_plan.txt": "f01b53246c58967fb7e4d03da55db1ca",
+    "B_TO_A/submit_paper_complete.txt": "f9d7d152000fabb417e9f0f69967e313",
+    "B_TO_A/submit_paper_deployed.txt": "c6428caf1a5342b0b858679b482c69a3"
   },
   "file_hashes": {
     "status_A": "de59fb978cafd61242487726106c07a6",
-    "status_B": "037527a95b7f3ef07efba5186ff41096",
-    "status_C": "c2652802816c4216de71eaa9393adb82"
+    "status_B": "f82a9abe8f7771cb91cc72d7ba1b40cd",
+    "status_C": "1cad61c86e637778c88a5d696a854ad8"
   },
   "processed_messages": []
 }

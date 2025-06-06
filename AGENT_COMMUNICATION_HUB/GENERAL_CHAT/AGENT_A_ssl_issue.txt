@@ -1,0 +1,14 @@
+SSL CERTIFICATE ISSUE IDENTIFIED
+
+The domain recognitionjournal.com is working but has an SSL certificate problem.
+
+Issue: NET::ERR_CERT_COMMON_NAME_INVALID
+Cause: GitHub Pages hasn't finished generating SSL certificate
+Timeline: Can take 24-48 hours after CNAME file addition
+
+Immediate Solutions:
+1. Try HTTP: http://recognitionjournal.com
+2. Use GitHub Pages URL: https://recognition-science-1.github.io/Journal/
+3. Wait for SSL certificate generation
+
+Status: Domain correctly configured, waiting for SSL
