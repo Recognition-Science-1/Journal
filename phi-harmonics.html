@@ -91,6 +91,13 @@
             margin-bottom: 0.5rem;
             font-size: 1.2rem;
         }
+        .context-box" style="background: #f0fff4; border-left-color: #10b981; margin-top: 1rem;">
+                <h4>🎵 Frequency Presets</h4>
+                <p>These presets combine Recognition Science φ-ratios with frequencies that have been 
+                associated with specific states of consciousness. Each preset uses different powers of φ 
+                to create unique harmonic patterns. While effects may vary by individual, the mathematical 
+                relationships remain constant—just like particle masses.</p>
+            </div>
         .controls-section {
             background: #f8f9fa;
             padding: 2rem;
@@ -282,6 +289,14 @@
                 experiencing the same relationships that govern electron, muon, and tau masses.</p>
             </div>
 
+            <div class="context-box" style="background: #f0fff4; border-left-color: #10b981; margin-top: 1rem;">
+                <h4>🎵 Frequency Presets</h4>
+                <p>These presets combine Recognition Science φ-ratios with frequencies that have been 
+                associated with specific states of consciousness. Each preset uses different powers of φ 
+                to create unique harmonic patterns. While effects may vary by individual, the mathematical 
+                relationships remain constant—just like particle masses.</p>
+            </div>
+
             <div class="controls-section">
                 <div class="control-group">
                     <label for="base-frequency">Base Frequency (Hz)</label>
@@ -297,6 +312,21 @@
                         <option value="pure">Pure Phi Powers - Direct multiples (1, φ, φ², φ³...)</option>
                         <option value="equal">Equal Temperament - φ mapped to standard notes</option>
                         <option value="particle">Particle Mass Mode - Hear the mass hierarchy</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="preset-select">Frequency Presets</label>
+                    <select id="preset-select" class="mode-selector" onchange="applyPreset()">
+                        <option value="none">-- Choose a Preset --</option>
+                        <option value="focus">🎯 Focus & Concentration (φ³ harmonics)</option>
+                        <option value="relaxation">😌 Deep Relaxation (1/φ ratios)</option>
+                        <option value="balance">⚖️ Balance & Harmony (φ golden mean)</option>
+                        <option value="energy">⚡ Energy & Activation (ascending φ)</option>
+                        <option value="meditation">🧘 Meditation (φ² drone)</option>
+                        <option value="creativity">🎨 Creative Flow (φ⁵ complexity)</option>
+                        <option value="healing">💚 Healing Resonance (φ heart ratio)</option>
+                        <option value="sleep">😴 Deep Sleep (descending 1/φ)</option>
                     </select>
                 </div>
 
@@ -331,6 +361,156 @@
     <script>
         // Enhanced phi harmonic functions with meaning
         let discoveryTimeout = null;
+        let currentPreset = null;
+
+        // Preset configurations based on φ relationships
+        const presets = {
+            focus: {
+                baseFreq: 528,  // Transformation frequency
+                mode: 'pure',
+                description: 'φ³ creates mental clarity through higher harmonic complexity',
+                pattern: [3, 4, 5, 6],  // Higher phi powers
+                tempo: 'fast'
+            },
+            relaxation: {
+                baseFreq: 396,  // Liberation frequency
+                mode: 'intervals',
+                description: '1/φ ratios induce calm through descending golden spirals',
+                pattern: [-3, -2, -1, 0],  // Inverse phi powers
+                tempo: 'slow'
+            },
+            balance: {
+                baseFreq: 440,  // Standard tuning
+                mode: 'intervals',
+                description: 'φ¹ represents perfect equilibrium - the golden mean itself',
+                pattern: [0, 1, -1, 2],  // Balanced around φ
+                tempo: 'medium'
+            },
+            energy: {
+                baseFreq: 639,  // Connection frequency
+                mode: 'pure',
+                description: 'Ascending φ sequence builds momentum and vitality',
+                pattern: [0, 1, 2, 3, 4, 5],  // Rising sequence
+                tempo: 'building'
+            },
+            meditation: {
+                baseFreq: 432,  // Natural frequency
+                mode: 'pure',
+                description: 'φ² drone creates stable field for deep contemplation',
+                pattern: [2],  // Single sustained tone
+                tempo: 'drone'
+            },
+            creativity: {
+                baseFreq: 741,  // Expression frequency
+                mode: 'particle',
+                description: 'φ⁵ complexity stimulates novel neural connections',
+                pattern: [5, 3, 8, 2, 13],  // Fibonacci sequence
+                tempo: 'varied'
+            },
+            healing: {
+                baseFreq: 528,  // DNA repair frequency
+                mode: 'intervals',
+                description: 'φ heart ratio (φ/2) resonates with biological rhythms',
+                pattern: [0.5, 1, 1.5, 2],  // Gentle progression
+                tempo: 'gentle'
+            },
+            sleep: {
+                baseFreq: 256,  // Root chakra C
+                mode: 'intervals',
+                description: 'Descending 1/φ sequence guides into deep rest',
+                pattern: [0, -1, -2, -3, -4],  // Descending
+                tempo: 'very-slow'
+            }
+        };
+
+        function applyPreset() {
+            const presetSelect = document.getElementById('preset-select');
+            const presetKey = presetSelect.value;
+            
+            if (presetKey === 'none') return;
+            
+            currentPreset = presets[presetKey];
+            
+            // Update controls to match preset
+            document.getElementById('base-frequency').value = currentPreset.baseFreq;
+            updateFreqDisplay(currentPreset.baseFreq);
+            document.getElementById('scale-mode').value = currentPreset.mode;
+            
+            // Show preset info
+            const particleInfo = document.getElementById('particle-info');
+            const particleMapping = document.getElementById('particle-mapping');
+            particleMapping.style.display = 'block';
+            particleInfo.innerHTML = `<strong>${presetSelect.options[presetSelect.selectedIndex].text}</strong><br>${currentPreset.description}`;
+            
+            // Auto-play the preset
+            playPresetPattern();
+        }
+
+        async function playPresetPattern() {
+            if (!window.phiHarmonics.isInitialized) {
+                await window.phiHarmonics.initAudio();
+            }
+            
+            if (!currentPreset) return;
+            
+            const baseFreq = currentPreset.baseFreq;
+            document.getElementById('spiral').classList.add('active');
+            
+            // Play pattern based on preset type
+            if (currentPreset.tempo === 'drone') {
+                // Single sustained tone for meditation
+                const freq = baseFreq * Math.pow(1.618, currentPreset.pattern[0]);
+                window.phiHarmonics.playTone(freq, 10000, 'sine');
+            } else {
+                // Play sequence with appropriate timing
+                let delay = 0;
+                const noteDuration = currentPreset.tempo === 'fast' ? 500 : 
+                                    currentPreset.tempo === 'slow' ? 1500 : 
+                                    currentPreset.tempo === 'very-slow' ? 2000 : 1000;
+                
+                currentPreset.pattern.forEach((power, index) => {
+                    setTimeout(() => {
+                        const freq = baseFreq * Math.pow(1.618, power);
+                        window.phiHarmonics.playTone(freq, noteDuration * 0.9, 'sine');
+                    }, delay);
+                    delay += noteDuration;
+                });
+                
+                // Stop animation after pattern completes
+                setTimeout(() => {
+                    document.getElementById('spiral').classList.remove('active');
+                }, delay);
+            }
+            
+            // Show frequency analysis
+            showPresetFrequencies();
+        }
+
+        function showPresetFrequencies() {
+            if (!currentPreset) return;
+            
+            const analysisDiv = document.getElementById('frequency-analysis');
+            const freqList = document.getElementById('frequency-list');
+            
+            const frequencies = currentPreset.pattern.map(power => 
+                currentPreset.baseFreq * Math.pow(1.618, power)
+            );
+            
+            const labels = currentPreset.pattern.map(power => {
+                if (power === 0) return 'Base (φ⁰)';
+                if (power > 0) return `φ^${power}`;
+                return `φ^(${power})`;
+            });
+            
+            freqList.innerHTML = frequencies.map((freq, i) => `
+                <div class="frequency-item">
+                    <span>${labels[i]}</span>
+                    <span>${freq.toFixed(2)} Hz</span>
+                </div>
+            `).join('');
+            
+            analysisDiv.style.display = 'block';
+        }
 
         function updateFreqDisplay(value) {
             const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
