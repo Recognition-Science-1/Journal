@@ -1,0 +1,10 @@
+PROJECT PATH FOR NEW AGENTS:
+============================
+
+/Users/emmatully/Desktop/Journal/
+
+This is the ONLY folder you should open in Cursor.
+Do NOT open any parent or child directories.
+
+Git repository root: /Users/emmatully/Desktop/Journal/
+GitHub: https://github.com/Recognition-Science-1/Journal.git 

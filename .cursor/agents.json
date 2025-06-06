@@ -1,0 +1,33 @@
+{
+  "agents": [
+    {
+      "name": "Agent A",
+      "role": "Website Development",
+      "focus": [
+        "index.html",
+        "styles.css",
+        "javascript files",
+        "interactive visualizations"
+      ],
+      "autoRun": true,
+      "checkInterval": 300
+    },
+    {
+      "name": "Agent B", 
+      "role": "Lean Formalization",
+      "focus": [
+        "RecognitionScience/**/*.lean",
+        "verification scripts",
+        "mathematical proofs"
+      ],
+      "autoRun": true,
+      "checkInterval": 300
+    }
+  ],
+  "syncProtocol": {
+    "enabled": true,
+    "messageDir": "MESSAGES",
+    "statusFiles": ["AGENT_A_STATUS.md", "AGENT_B_STATUS.md"],
+    "gitSync": true
+  }
+} 
