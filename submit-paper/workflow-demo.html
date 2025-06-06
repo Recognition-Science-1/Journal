@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lean Verify - Journal of Recognition Science</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .header { background: white; border-bottom: 1px solid #e1e5e9; padding: 1rem 0; }
+        .nav { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: center; align-items: center; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: #666; text-decoration: none; font-weight: 500; }
+        .nav-links a:hover, .nav-links a.active { color: #007bff; }
+        .hero { text-align: center; padding: 4rem 0; background: white; margin-bottom: 3rem; }
+        .hero h1 { font-size: 3rem; font-weight: 300; margin-bottom: 1rem; color: #333; }
+        .hero p { font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .section { background: white; padding: 3rem; margin-bottom: 2rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .section-title { color: #007bff; font-size: 2rem; margin-bottom: 2rem; text-align: center; }
+        .workflow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .workflow-card { background: #f8f9fa; border: 1px solid #e1e5e9; border-radius: 8px; padding: 2rem; transition: all 0.3s ease; text-align: center; }
+        .workflow-card:hover { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .card-icon { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1.5rem; }
+        .icon-submit { background: #e3f2fd; color: #1976d2; }
+        .icon-review { background: #fff3e0; color: #f57c00; }
+        .icon-verify { background: #f3e5f5; color: #7b1fa2; }
+        .icon-success { background: #e8f5e9; color: #388e3c; }
+        .card-title { color: #333; font-size: 1.5rem; margin-bottom: 1rem; font-weight: 500; }
+        .card-description { color: #666; line-height: 1.6; margin-bottom: 1.5rem; }
+        .card-link { display: inline-block; padding: 0.75rem 2rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-weight: 500; transition: background 0.3s; }
+        .card-link:hover { background: #0056b3; }
+        .flow-diagram { background: #f8f9fa; border-radius: 8px; padding: 3rem; margin-top: 2rem; text-align: center; }
+        .flow-step { display: inline-block; padding: 0.75rem 1.5rem; background: white; border: 2px solid #007bff; border-radius: 4px; margin: 0.5rem; color: #007bff; font-weight: 600; }
+        .flow-arrow { color: #999; margin: 0 0.5rem; font-size: 1.5rem; }
+        .demo-note { background: #e3f2fd; border-left: 4px solid #1976d2; padding: 1.5rem; margin-top: 3rem; border-radius: 4px; }
+        .demo-note strong { color: #1565c0; }
+        .advantage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .advantage-card { background: #f8f9fa; padding: 2rem; border-radius: 8px; border: 1px solid #e1e5e9; }
+        .advantage-card h3 { color: #007bff; margin-bottom: 1rem; }
+        .advantage-card ul { list-style: none; }
+        .advantage-card li { padding-left: 1.5rem; position: relative; margin-bottom: 0.5rem; color: #666; }
+        .advantage-card li:before { content: "✓"; position: absolute; left: 0; color: #28a745; font-weight: bold; }
+        @media (max-width: 768px) { .hero h1 { font-size: 2rem; } .workflow-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../mission.html">Mission & Vocabulary</a></li>
+                <li><a href="../architecture.html">System Architecture</a></li>
+                <li><a href="../ledger.html">Live Prediction Ledger</a></li>
+                <li><a href="../submit.html">Submit Research</a></li>
+                <li><a href="../lean-papers.html">Lean Papers</a></li>
+                <li><a href="workflow-demo.html" class="active">Lean Verify</a></li>
+                <li><a href="../interactive.html">Interactive Science</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="container">
+            <h1>Lean Verify System</h1>
+            <p>Experience the world's first AI-powered paper review system with formal Lean 4 mathematical verification</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Main Pages -->
+        <section class="section">
+            <h2 class="section-title">📄 Workflow Pages</h2>
+            
+            <div class="workflow-grid">
+                <div class="workflow-card">
+                    <div class="card-icon icon-submit">📝</div>
+                    <h3 class="card-title">1. Submit Paper</h3>
+                    <p class="card-description">
+                        Start here! Upload your paper and enter metadata. The visual workflow tracker shows your progress through all steps.
+                    </p>
+                    <a href="index.html" class="card-link">Begin Submission</a>
+                </div>
+
+                <div class="workflow-card">
+                    <div class="card-icon icon-review">🤖</div>
+                    <h3 class="card-title">2. GPT Review</h3>
+                    <p class="card-description">
+                        See what happens when GPT 0.3 reviews your paper. Get detailed feedback with specific action items for improvement.
+                    </p>
+                    <a href="review-feedback.html" class="card-link">View Sample Feedback</a>
+                </div>
+
+                <div class="workflow-card">
+                    <div class="card-icon icon-verify">🔍</div>
+                    <h3 class="card-title">3. Lean Verification</h3>
+                    <p class="card-description">
+                        Watch Lean 4 verify theorems in real-time. See each proof being checked for mathematical correctness.
+                    </p>
+                    <a href="lean-verification.html" class="card-link">See Live Demo</a>
+                </div>
+
+                <div class="workflow-card">
+                    <div class="card-icon icon-success">🏆</div>
+                    <h3 class="card-title">4. Certification</h3>
+                    <p class="card-description">
+                        Papers that pass receive the prestigious Lean Certified badge with blockchain verification.
+                    </p>
+                    <a href="certification.html" class="card-link">View Certificate</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workflow Paths -->
+        <section class="section">
+            <h2 class="section-title">🔀 Submission Paths</h2>
+            
+            <div class="flow-diagram">
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="color: #28a745; margin-bottom: 1.5rem;">✅ Success Path</h3>
+                    <span class="flow-step">Submit Paper</span>
+                    <span class="flow-arrow">→</span>
+                    <span class="flow-step" style="border-color: #28a745; color: #28a745;">GPT Pass</span>
+                    <span class="flow-arrow">→</span>
+                    <span class="flow-step" style="border-color: #7b1fa2; color: #7b1fa2;">Lean Verify</span>
+                    <span class="flow-arrow">→</span>
+                    <span class="flow-step" style="border-color: #ffc107; color: #f57c00; background: #fff8e1;">Certified! 🏆</span>
+                </div>
+
+                <div>
+                    <h3 style="color: #dc3545; margin-bottom: 1.5rem;">❌ Revision Paths</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <span class="flow-step">Submit Paper</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step" style="border-color: #dc3545; color: #dc3545;">GPT Feedback</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step" style="border-color: #f57c00; color: #f57c00;">Revise</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-step">Resubmit</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recognition Science Advantage -->
+        <section class="section">
+            <h2 class="section-title">🚀 Recognition Science Advantage</h2>
+            
+            <div class="advantage-grid">
+                <div class="advantage-card">
+                    <h3>100% Verified Mathematics</h3>
+                    <p style="margin-bottom: 1rem; color: #666;">Our Recognition Science papers excel because:</p>
+                    <ul>
+                        <li>15 theorems fully proven in Lean 4</li>
+                        <li>Zero sorry statements</li>
+                        <li>Complete formal verification</li>
+                        <li>Zero free parameters</li>
+                        <li>Mathematical rigor equal to Pythagorean theorem</li>
+                    </ul>
+                </div>
+
+                <div class="advantage-card">
+                    <h3>Revolutionary System</h3>
+                    <p style="margin-bottom: 1rem; color: #666;">World's first submission system with:</p>
+                    <ul>
+                        <li>Automated AI pre-review</li>
+                        <li>Live Lean 4 verification</li>
+                        <li>Blockchain certification</li>
+                        <li>Zero-parameter theory validation</li>
+                        <li>Instant feedback system</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Note -->
+        <div class="demo-note">
+            <strong>🎯 Demo Mode:</strong> Click any workflow page above to experience the system. In production, papers automatically flow through each step based on review results. Our Recognition Science papers are designed to pass all verification steps due to their mathematical rigor and formal proofs.
+        </div>
+    </div>
+</body>
+</html> 
