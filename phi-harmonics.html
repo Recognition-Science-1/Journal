@@ -277,64 +277,80 @@
                 <div class="phi-symbol">φ</div>
                 <h1>Phi Harmonic Generator</h1>
                 <p class="generator-description">
-                    Experience the golden ratio through sound. These frequencies aren't arbitrary—they're 
-                    the same mathematical relationships that determine particle masses in Recognition Science.
+                    Listen to mathematically perfect frequencies based on nature's golden ratio. 
+                    Choose what you'd like to experience below.
                 </p>
             </div>
 
             <div class="context-box">
-                <h4>🌟 Why This Matters</h4>
-                <p>The golden ratio φ = 1.618... isn't just mathematically beautiful—it's the inevitable 
-                scaling factor that makes the cosmic ledger balance. When you hear these harmonics, you're 
-                experiencing the same relationships that govern electron, muon, and tau masses.</p>
-            </div>
-
-            <div class="context-box" style="background: #f0fff4; border-left-color: #10b981; margin-top: 1rem;">
-                <h4>🎵 Frequency Presets</h4>
-                <p>These presets combine Recognition Science φ-ratios with frequencies that have been 
-                associated with specific states of consciousness. Each preset uses different powers of φ 
-                to create unique harmonic patterns. While effects may vary by individual, the mathematical 
-                relationships remain constant—just like particle masses.</p>
+                <h4>🎵 How to Use</h4>
+                <p>Simply choose what you'd like to experience from the options below and press play. 
+                The frequencies are based on the golden ratio (φ = 1.618...), the same mathematical 
+                pattern found throughout nature - from seashells to galaxies.</p>
             </div>
 
             <div class="controls-section">
                 <div class="control-group">
-                    <label for="base-frequency">Base Frequency (Hz)</label>
-                    <input type="range" id="base-frequency" class="frequency-slider" 
-                           min="220" max="880" value="440" step="5">
-                    <div class="frequency-display" id="freq-display">440 Hz (A4)</div>
-                </div>
-
-                <div class="control-group">
-                    <label for="scale-mode">Scale Mode</label>
-                    <select id="scale-mode" class="mode-selector">
-                        <option value="intervals">Phi Intervals - Musical spacing by φ^(n/4)</option>
-                        <option value="pure">Pure Phi Powers - Direct multiples (1, φ, φ², φ³...)</option>
-                        <option value="equal">Equal Temperament - φ mapped to standard notes</option>
-                        <option value="particle">Particle Mass Mode - Hear the mass hierarchy</option>
+                    <label for="experience-select" style="font-size: 1.3rem; font-weight: 600; color: #007bff;">
+                        What would you like to experience?
+                    </label>
+                    <select id="experience-select" class="mode-selector" onchange="selectExperience()" style="font-size: 1.1rem; padding: 1rem;">
+                        <option value="none">-- Select an Experience --</option>
+                        <option value="focus">🎯 Better Focus - Clear your mind and concentrate</option>
+                        <option value="relaxation">😌 Deep Relaxation - Release stress and tension</option>
+                        <option value="energy">⚡ More Energy - Feel refreshed and motivated</option>
+                        <option value="creativity">🎨 Creative Flow - Unlock new ideas</option>
+                        <option value="meditation">🧘 Meditation - Find inner peace</option>
+                        <option value="healing">💚 Healing & Recovery - Support your wellbeing</option>
+                        <option value="sleep">😴 Better Sleep - Prepare for deep rest</option>
+                        <option value="balance">⚖️ Balance - Feel centered and grounded</option>
                     </select>
                 </div>
 
-                <div class="control-group">
-                    <label for="preset-select">Frequency Presets</label>
-                    <select id="preset-select" class="mode-selector" onchange="applyPreset()">
-                        <option value="none">-- Choose a Preset --</option>
-                        <option value="focus">🎯 Focus & Concentration (φ³ harmonics)</option>
-                        <option value="relaxation">😌 Deep Relaxation (1/φ ratios)</option>
-                        <option value="balance">⚖️ Balance & Harmony (φ golden mean)</option>
-                        <option value="energy">⚡ Energy & Activation (ascending φ)</option>
-                        <option value="meditation">🧘 Meditation (φ² drone)</option>
-                        <option value="creativity">🎨 Creative Flow (φ⁵ complexity)</option>
-                        <option value="healing">💚 Healing Resonance (φ heart ratio)</option>
-                        <option value="sleep">😴 Deep Sleep (descending 1/φ)</option>
-                    </select>
+                <div id="experience-info" style="display: none; margin-top: 1.5rem; padding: 1.5rem; background: #f0f7ff; border-radius: 8px;">
+                    <h4 id="experience-title" style="color: #007bff; margin-bottom: 0.5rem;"></h4>
+                    <p id="experience-description" style="margin-bottom: 1rem;"></p>
+                    <p id="experience-duration" style="font-size: 0.9rem; color: #666;"></p>
                 </div>
 
-                <div class="button-group">
-                    <button class="btn btn-primary" onclick="playPhiScale()">▶ Play Scale</button>
-                    <button class="btn btn-primary" onclick="playPhiChord()">♫ Play Phi Chord</button>
-                    <button class="btn btn-secondary" onclick="playDiscoveryMode()">🎧 Discovery Mode</button>
-                    <button class="btn btn-danger" onclick="stopAudio()">■ Stop</button>
+                <div class="button-group" id="main-buttons" style="display: none;">
+                    <button class="btn btn-primary" onclick="playExperience()" style="font-size: 1.2rem; padding: 1rem 3rem;">
+                        ▶ Start Experience
+                    </button>
+                    <button class="btn btn-danger" onclick="stopAudio()" style="font-size: 1.2rem; padding: 1rem 2rem;">
+                        ■ Stop
+                    </button>
+                </div>
+
+                <div style="margin-top: 2rem; text-align: center;">
+                    <button class="btn btn-secondary" onclick="toggleAdvanced()" style="font-size: 0.9rem;">
+                        🔧 Advanced Options
+                    </button>
+                </div>
+
+                <div id="advanced-controls" style="display: none; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #ddd;">
+                    <div class="control-group">
+                        <label for="base-frequency">Base Frequency (Hz)</label>
+                        <input type="range" id="base-frequency" class="frequency-slider" 
+                               min="220" max="880" value="440" step="5">
+                        <div class="frequency-display" id="freq-display">440 Hz (A4)</div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="scale-mode">Technical Mode</label>
+                        <select id="scale-mode" class="mode-selector">
+                            <option value="intervals">Phi Intervals</option>
+                            <option value="pure">Pure Phi Powers</option>
+                            <option value="equal">Equal Temperament</option>
+                            <option value="particle">Particle Mass Mode</option>
+                        </select>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn btn-primary" onclick="playPhiScale()">Play Scale</button>
+                        <button class="btn btn-primary" onclick="playPhiChord()">Play Chord</button>
+                        <button class="btn btn-secondary" onclick="playDiscoveryMode()">Discovery Mode</button>
+                    </div>
                 </div>
             </div>
 
@@ -359,9 +375,102 @@
 
     <script src="audio_engine.js"></script>
     <script>
-        // Enhanced phi harmonic functions with meaning
         let discoveryTimeout = null;
         let currentPreset = null;
+        let currentExperience = null;
+
+        // User-friendly experience descriptions
+        const experiences = {
+            focus: {
+                title: '🎯 Better Focus',
+                description: 'This frequency pattern helps clear mental fog and improve concentration. Great for studying, working, or any task requiring mental clarity.',
+                duration: 'Listen for 10-20 minutes for best results',
+                preset: 'focus'
+            },
+            relaxation: {
+                title: '😌 Deep Relaxation',
+                description: 'Gentle descending tones that help release tension and stress. Perfect for unwinding after a long day.',
+                duration: 'Enjoy for 15-30 minutes in a comfortable position',
+                preset: 'relaxation'
+            },
+            energy: {
+                title: '⚡ More Energy',
+                description: 'Ascending frequencies that help you feel more alert and motivated. Use when you need a natural energy boost.',
+                duration: 'Listen for 5-10 minutes to feel refreshed',
+                preset: 'energy'
+            },
+            creativity: {
+                title: '🎨 Creative Flow',
+                description: 'Complex harmonic patterns that stimulate creative thinking and help unlock new ideas.',
+                duration: 'Use during creative work or brainstorming sessions',
+                preset: 'creativity'
+            },
+            meditation: {
+                title: '🧘 Meditation',
+                description: 'A sustained tone that creates a peaceful backdrop for meditation or mindfulness practice.',
+                duration: 'Can be used for entire meditation session',
+                preset: 'meditation'
+            },
+            healing: {
+                title: '💚 Healing & Recovery',
+                description: 'Frequencies that support your body\'s natural healing processes and promote overall wellbeing.',
+                duration: 'Listen for 20-30 minutes while resting',
+                preset: 'healing'
+            },
+            sleep: {
+                title: '😴 Better Sleep',
+                description: 'Slowly descending tones that help prepare your mind and body for deep, restful sleep.',
+                duration: 'Start 30 minutes before bedtime',
+                preset: 'sleep'
+            },
+            balance: {
+                title: '⚖️ Balance',
+                description: 'Centered frequencies that help you feel grounded and emotionally balanced.',
+                duration: 'Use whenever you need to feel more centered',
+                preset: 'balance'
+            }
+        };
+
+        function selectExperience() {
+            const select = document.getElementById('experience-select');
+            const experienceKey = select.value;
+            
+            if (experienceKey === 'none') {
+                document.getElementById('experience-info').style.display = 'none';
+                document.getElementById('main-buttons').style.display = 'none';
+                return;
+            }
+            
+            currentExperience = experiences[experienceKey];
+            
+            // Show experience info
+            document.getElementById('experience-title').textContent = currentExperience.title;
+            document.getElementById('experience-description').textContent = currentExperience.description;
+            document.getElementById('experience-duration').textContent = currentExperience.duration;
+            document.getElementById('experience-info').style.display = 'block';
+            document.getElementById('main-buttons').style.display = 'flex';
+        }
+
+        async function playExperience() {
+            if (!currentExperience) return;
+            
+            // Use the existing preset system
+            currentPreset = presets[currentExperience.preset];
+            await playPresetPattern();
+        }
+
+        function toggleAdvanced() {
+            const advanced = document.getElementById('advanced-controls');
+            const button = event.target;
+            
+            if (advanced.style.display === 'none') {
+                advanced.style.display = 'block';
+                button.textContent = '🔧 Hide Advanced Options';
+            } else {
+                advanced.style.display = 'none';
+                button.textContent = '🔧 Advanced Options';
+            }
+        }
 
         // Preset configurations based on φ relationships
         const presets = {
@@ -422,29 +531,6 @@
                 tempo: 'very-slow'
             }
         };
-
-        function applyPreset() {
-            const presetSelect = document.getElementById('preset-select');
-            const presetKey = presetSelect.value;
-            
-            if (presetKey === 'none') return;
-            
-            currentPreset = presets[presetKey];
-            
-            // Update controls to match preset
-            document.getElementById('base-frequency').value = currentPreset.baseFreq;
-            updateFreqDisplay(currentPreset.baseFreq);
-            document.getElementById('scale-mode').value = currentPreset.mode;
-            
-            // Show preset info
-            const particleInfo = document.getElementById('particle-info');
-            const particleMapping = document.getElementById('particle-mapping');
-            particleMapping.style.display = 'block';
-            particleInfo.innerHTML = `<strong>${presetSelect.options[presetSelect.selectedIndex].text}</strong><br>${currentPreset.description}`;
-            
-            // Auto-play the preset
-            playPresetPattern();
-        }
 
         async function playPresetPattern() {
             if (!window.phiHarmonics.isInitialized) {
