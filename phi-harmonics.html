@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phi Harmonic Generator - Journal of Recognition Science</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            line-height: 1.6; 
+            color: #333; 
+            background: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .header { 
+            background: white; 
+            border-bottom: 1px solid #e1e5e9; 
+            padding: 1rem 0; 
+        }
+        .nav { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 2rem; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        .nav-links { 
+            display: flex; 
+            gap: 2rem; 
+            list-style: none; 
+        }
+        .nav-links a { 
+            color: #666; 
+            text-decoration: none; 
+            font-weight: 500; 
+        }
+        .nav-links a:hover, .nav-links a.active { 
+            color: #007bff; 
+        }
+        .main-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .phi-generator {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 100%;
+            padding: 3rem;
+        }
+        .generator-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .generator-header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        .phi-symbol {
+            font-size: 4rem;
+            color: #007bff;
+            margin-bottom: 1rem;
+            font-family: Georgia, serif;
+        }
+        .generator-description {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        .context-box {
+            background: #f0f7ff;
+            border-left: 4px solid #007bff;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+        .context-box h4 {
+            color: #007bff;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        .controls-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        .control-group {
+            margin-bottom: 2rem;
+        }
+        .control-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+        .frequency-slider {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+        .frequency-display {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #007bff;
+            font-weight: 500;
+        }
+        .mode-selector {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+        }
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        .visualization-area {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            min-height: 200px;
+            position: relative;
+        }
+        .frequency-analysis {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #007bff;
+        }
+        .frequency-analysis h3 {
+            color: #007bff;
+            margin-bottom: 1rem;
+        }
+        .frequency-list {
+            font-family: monospace;
+            line-height: 1.8;
+        }
+        .frequency-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        .frequency-item:last-child {
+            border-bottom: none;
+        }
+        .particle-mapping {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #fff9e6;
+            border-radius: 8px;
+            display: none;
+        }
+        .particle-mapping h4 {
+            color: #d4a000;
+            margin-bottom: 0.5rem;
+        }
+        .golden-spiral {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            opacity: 0.1;
+            transition: opacity 0.3s;
+        }
+        .golden-spiral.active {
+            opacity: 0.3;
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        .back-link {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            color: #666;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            color: #007bff;
+        }
+        @media (max-width: 768px) {
+            .phi-generator {
+                padding: 2rem 1.5rem;
+            }
+            .generator-header h1 {
+                font-size: 2rem;
+            }
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mission.html">Mission & Vocabulary</a></li>
+                <li><a href="architecture.html">System Architecture</a></li>
+                <li><a href="ledger.html">Live Prediction Ledger</a></li>
+                <li><a href="submit.html">Submit Research</a></li>
+                <li><a href="interactive.html">Interactive Science</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <a href="interactive.html" class="back-link">← Back to Interactive Tools</a>
+
+    <div class="main-container">
+        <div class="phi-generator">
+            <div class="generator-header">
+                <div class="phi-symbol">φ</div>
+                <h1>Phi Harmonic Generator</h1>
+                <p class="generator-description">
+                    Experience the golden ratio through sound. These frequencies aren't arbitrary—they're 
+                    the same mathematical relationships that determine particle masses in Recognition Science.
+                </p>
+            </div>
+
+            <div class="context-box">
+                <h4>🌟 Why This Matters</h4>
+                <p>The golden ratio φ = 1.618... isn't just mathematically beautiful—it's the inevitable 
+                scaling factor that makes the cosmic ledger balance. When you hear these harmonics, you're 
+                experiencing the same relationships that govern electron, muon, and tau masses.</p>
+            </div>
+
+            <div class="controls-section">
+                <div class="control-group">
+                    <label for="base-frequency">Base Frequency (Hz)</label>
+                    <input type="range" id="base-frequency" class="frequency-slider" 
+                           min="220" max="880" value="440" step="5">
+                    <div class="frequency-display" id="freq-display">440 Hz (A4)</div>
+                </div>
+
+                <div class="control-group">
+                    <label for="scale-mode">Scale Mode</label>
+                    <select id="scale-mode" class="mode-selector">
+                        <option value="intervals">Phi Intervals - Musical spacing by φ^(n/4)</option>
+                        <option value="pure">Pure Phi Powers - Direct multiples (1, φ, φ², φ³...)</option>
+                        <option value="equal">Equal Temperament - φ mapped to standard notes</option>
+                        <option value="particle">Particle Mass Mode - Hear the mass hierarchy</option>
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="playPhiScale()">▶ Play Scale</button>
+                    <button class="btn btn-primary" onclick="playPhiChord()">♫ Play Phi Chord</button>
+                    <button class="btn btn-secondary" onclick="playDiscoveryMode()">🎧 Discovery Mode</button>
+                    <button class="btn btn-danger" onclick="stopAudio()">■ Stop</button>
+                </div>
+            </div>
+
+            <div class="visualization-area">
+                <svg class="golden-spiral" id="spiral" viewBox="0 0 100 100">
+                    <path d="M50,50 Q50,30 30,30 Q30,50 50,50 Q50,70 70,70 Q70,50 50,50" 
+                          fill="none" stroke="#007bff" stroke-width="2" opacity="0.5"/>
+                </svg>
+                
+                <div class="frequency-analysis" id="frequency-analysis" style="display: none;">
+                    <h3>Frequency Analysis</h3>
+                    <div class="frequency-list" id="frequency-list"></div>
+                    
+                    <div class="particle-mapping" id="particle-mapping">
+                        <h4>🔬 Particle Connection</h4>
+                        <p id="particle-info"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="audio_engine.js"></script>
+    <script>
+        // Enhanced phi harmonic functions with meaning
+        let discoveryTimeout = null;
+
+        function updateFreqDisplay(value) {
+            const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+            const A4 = 440;
+            const semitonesFromA4 = 12 * Math.log2(value / A4);
+            const semitonesFromC = semitonesFromA4 + 9;
+            const octave = Math.floor(semitonesFromC / 12) + 4;
+            const noteIndex = Math.floor((semitonesFromC % 12 + 12) % 12);
+            
+            document.getElementById('freq-display').textContent = 
+                `${value} Hz (${noteNames[noteIndex]}${octave})`;
+        }
+
+        async function playPhiScale() {
+            if (!window.phiHarmonics.isInitialized) {
+                await window.phiHarmonics.initAudio();
+            }
+            
+            const baseFreq = parseFloat(document.getElementById('base-frequency').value);
+            const mode = document.getElementById('scale-mode').value;
+            
+            // Activate spiral animation
+            document.getElementById('spiral').classList.add('active');
+            
+            // Play the scale
+            window.phiHarmonics.playPhiScale(baseFreq, mode);
+            
+            // Show frequency analysis with meaning
+            showFrequencyAnalysis(baseFreq, mode);
+            
+            // Stop animation after scale completes
+            setTimeout(() => {
+                document.getElementById('spiral').classList.remove('active');
+            }, 8000);
+        }
+
+        async function playPhiChord() {
+            if (!window.phiHarmonics.isInitialized) {
+                await window.phiHarmonics.initAudio();
+            }
+            
+            const baseFreq = parseFloat(document.getElementById('base-frequency').value);
+            document.getElementById('spiral').classList.add('active');
+            
+            window.phiHarmonics.playPhiChord(baseFreq, [0, 2, 4, 6], 3000);
+            
+            setTimeout(() => {
+                document.getElementById('spiral').classList.remove('active');
+            }, 3000);
+        }
+
+        async function playDiscoveryMode() {
+            if (!window.phiHarmonics.isInitialized) {
+                await window.phiHarmonics.initAudio();
+            }
+            
+            const baseFreq = 440;
+            document.getElementById('spiral').classList.add('active');
+            
+            // Progressive revelation of phi relationships
+            const steps = [
+                { freq: baseFreq, text: "Starting with A440 - the reference" },
+                { freq: baseFreq * 1.618, text: "Multiply by φ - the golden ratio emerges" },
+                { freq: baseFreq * 2.618, text: "φ² - approaching the consciousness threshold" },
+                { freq: baseFreq * 4.236, text: "φ³ - complexity compounds" },
+                { freq: baseFreq * 1.618 * 0.618, text: "φ × (1/φ) - the reciprocal harmony" }
+            ];
+            
+            let delay = 0;
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    window.phiHarmonics.playTone(step.freq, 1500);
+                    showDiscoveryText(step.text);
+                }, delay);
+                delay += 2000;
+            });
+            
+            // Final chord
+            setTimeout(() => {
+                window.phiHarmonics.playPhiChord(baseFreq, [0, 1, 2, 3], 3000);
+                showDiscoveryText("The complete φ harmony - this is why the universe works");
+            }, delay);
+            
+            discoveryTimeout = setTimeout(() => {
+                document.getElementById('spiral').classList.remove('active');
+                hideDiscoveryText();
+            }, delay + 3000);
+        }
+
+        function showFrequencyAnalysis(baseFreq, mode) {
+            const analysisDiv = document.getElementById('frequency-analysis');
+            const freqList = document.getElementById('frequency-list');
+            const particleMapping = document.getElementById('particle-mapping');
+            
+            let frequencies;
+            let labels = [];
+            
+            switch(mode) {
+                case 'pure':
+                    frequencies = window.phiHarmonics.calculatePurePhiRatios(baseFreq);
+                    labels = ['φ⁰ = 1', 'φ¹', 'φ²', 'φ³', 'φ⁴', 'φ⁵', 'φ⁶', 'φ⁷'];
+                    break;
+                case 'particle':
+                    // Map to actual particle mass ratios
+                    frequencies = [
+                        baseFreq,                    // Reference
+                        baseFreq * Math.pow(1.618, -8), // Electron
+                        baseFreq * Math.pow(1.618, -3), // Muon  
+                        baseFreq * Math.pow(1.618, 0),  // Tau
+                        baseFreq * Math.pow(1.618, 2),  // Up family
+                        baseFreq * Math.pow(1.618, 5),  // Top
+                    ];
+                    labels = ['Reference', 'Electron φ⁻⁸', 'Muon φ⁻³', 'Tau φ⁰', 'Up family φ²', 'Top φ⁵'];
+                    particleMapping.style.display = 'block';
+                    document.getElementById('particle-info').textContent = 
+                        'Each tone represents a particle mass relationship. The harmony you hear is the same mathematical structure that creates stable matter.';
+                    break;
+                default:
+                    frequencies = window.phiHarmonics.calculatePhiIntervals(baseFreq);
+                    labels = frequencies.map((_, i) => `Interval ${i + 1}`);
+            }
+            
+            freqList.innerHTML = frequencies.map((freq, i) => `
+                <div class="frequency-item">
+                    <span>${labels[i] || `Note ${i + 1}`}</span>
+                    <span>${freq.toFixed(2)} Hz</span>
+                </div>
+            `).join('');
+            
+            analysisDiv.style.display = 'block';
+        }
+
+        function showDiscoveryText(text) {
+            const info = document.getElementById('particle-info');
+            const mapping = document.getElementById('particle-mapping');
+            mapping.style.display = 'block';
+            info.textContent = text;
+        }
+
+        function hideDiscoveryText() {
+            document.getElementById('particle-mapping').style.display = 'none';
+        }
+
+        function stopAudio() {
+            window.phiHarmonics.stopAll();
+            document.getElementById('spiral').classList.remove('active');
+            if (discoveryTimeout) {
+                clearTimeout(discoveryTimeout);
+                hideDiscoveryText();
+            }
+        }
+
+        // Initialize frequency display
+        document.getElementById('base-frequency').addEventListener('input', function(e) {
+            updateFreqDisplay(e.target.value);
+        });
+
+        // Set initial display
+        updateFreqDisplay(440);
+    </script>
+</body>
+</html> 

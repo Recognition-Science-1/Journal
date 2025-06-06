@@ -83,7 +83,7 @@
                     <p class="tool-description">Simulate quantum wave functions and observe how Recognition Science principles emerge from fundamental physics.</p>
                     <button class="tool-button">Start Simulation</button>
                 </div>
-                <div class="tool-card" onclick="scrollToCalculator('phi-harmonics')">
+                <div class="tool-card" onclick="window.location.href='phi-harmonics.html'">
                     <div class="tool-icon">🎼</div>
                     <h3 class="tool-title">Phi Harmonic Generator</h3>
                     <p class="tool-description">Generate and play musical scales based on the golden ratio. Hear the mathematical beauty of φ in sound.</p>
@@ -159,34 +159,6 @@
                     <h3>Residue Analysis</h3>
                     <p id="residue-output"></p>
                     <div id="residue-pattern" style="margin-top: 1rem;"></div>
-                </div>
-            </div>
-        </section>
-        <section class="section" id="phi-harmonics">
-            <h2 style="font-size: 2rem; margin-bottom: 2rem;">🎼 Phi Harmonic Generator</h2>
-            <div class="calculator-section">
-                <p style="margin-bottom: 2rem;">Create musical scales and chords based on the golden ratio φ = 1.618...</p>
-                <div class="input-group">
-                    <label for="base-frequency">Base Frequency (Hz):</label>
-                    <input type="range" id="base-frequency" min="220" max="880" value="440" oninput="updateFreqDisplay(this.value)">
-                    <span id="freq-display" style="margin-left: 1rem;">440 Hz (A4)</span>
-                </div>
-                <div class="input-group">
-                    <label for="scale-mode">Scale Mode:</label>
-                    <select id="scale-mode" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
-                        <option value="intervals">Phi Intervals</option>
-                        <option value="pure">Pure Phi Powers</option>
-                        <option value="equal">Equal Temperament Mapping</option>
-                    </select>
-                </div>
-                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                    <button onclick="playPhiScale()" class="tool-button">Play Scale</button>
-                    <button onclick="playPhiChord()" class="tool-button">Play Phi Chord</button>
-                    <button onclick="stopAudio()" class="tool-button" style="background: #dc3545;">Stop</button>
-                </div>
-                <div class="result-box" id="harmonic-result" style="display: none; margin-top: 2rem;">
-                    <h3>Frequency Analysis</h3>
-                    <div id="frequency-list"></div>
                 </div>
             </div>
         </section>
@@ -306,53 +278,6 @@
                 ctx.strokeRect(x, y, size, size/phi);
                 size = size/phi;
             }
-        }
-        
-        // Audio functions for sound tools
-        function updateFreqDisplay(value) {
-            document.getElementById("freq-display").textContent = value + " Hz";
-        }
-        
-        async function playPhiScale() {
-            if (!window.phiHarmonics.isInitialized) {
-                await window.phiHarmonics.initAudio();
-            }
-            const baseFreq = parseFloat(document.getElementById("base-frequency").value);
-            const mode = document.getElementById("scale-mode").value;
-            window.phiHarmonics.playPhiScale(baseFreq, mode);
-            
-            // Show frequency analysis
-            const frequencies = mode === "pure" ? window.phiHarmonics.calculatePurePhiRatios(baseFreq) : window.phiHarmonics.calculatePhiIntervals(baseFreq);
-            const resultDiv = document.getElementById("harmonic-result");
-            const freqList = document.getElementById("frequency-list");
-            freqList.innerHTML = frequencies.map((f, i) => `Note ${i+1}: ${f.toFixed(2)} Hz`).join("<br>");
-            resultDiv.style.display = "block";
-        }
-        
-        async function playPhiChord() {
-            if (!window.phiHarmonics.isInitialized) {
-                await window.phiHarmonics.initAudio();
-            }
-            const baseFreq = parseFloat(document.getElementById("base-frequency").value);
-            window.phiHarmonics.playPhiChord(baseFreq);
-        }
-        
-        function stopAudio() {
-            window.phiHarmonics.stopAll();
-        }
-        
-        async function playParticleSound(name, rung) {
-            if (!window.phiHarmonics.isInitialized) {
-                await window.phiHarmonics.initAudio();
-            }
-            const phi = 1.618034;
-            const frequency = 220 * Math.pow(2, ((rung - 32) / 12));
-            window.phiHarmonics.playTone(frequency, 2000, "sine");
-            
-            const resultDiv = document.getElementById("particle-sound-result");
-            const info = document.getElementById("particle-sound-info");
-            info.innerHTML = `${name.charAt(0).toUpperCase() + name.slice(1)} (Rung ${rung})<br>Frequency: ${frequency.toFixed(2)} Hz`;
-            resultDiv.style.display = "block";
         }
         
         // Initialize on load
