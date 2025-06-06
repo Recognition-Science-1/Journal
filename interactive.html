@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Science - Journal of Recognition Science</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .header { background: white; border-bottom: 1px solid #e1e5e9; padding: 1rem 0; }
+        .nav { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: center; align-items: center; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: #666; text-decoration: none; font-weight: 500; }
+        .nav-links a:hover, .nav-links a.active { color: #007bff; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .hero { text-align: center; padding: 4rem 0; background: white; margin-bottom: 3rem; }
+        .hero h1 { font-size: 3rem; font-weight: 300; margin-bottom: 1rem; color: #333; }
+        .hero p { font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto; }
+        .section { background: white; padding: 3rem; margin-bottom: 2rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin: 2rem 0; }
+        .tool-card { background: #f8f9fa; padding: 2rem; border-radius: 12px; border: 1px solid #e1e5e9; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
+        .tool-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .tool-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .tool-title { font-size: 1.5rem; color: #333; margin-bottom: 1rem; }
+        .tool-description { color: #666; margin-bottom: 1.5rem; }
+        .tool-button { background: #007bff; color: white; padding: 0.75rem 2rem; border: none; border-radius: 25px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: background 0.3s; text-decoration: none; display: inline-block; }
+        .tool-button:hover { background: #0056b3; }
+        .calculator-section { background: #f8f9fa; padding: 2rem; border-radius: 8px; margin: 2rem 0; }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        .input-group input { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; }
+        .result-box { background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; border: 2px solid #007bff; }
+        .result-box h3 { color: #007bff; margin-bottom: 0.5rem; }
+        .visualization { width: 100%; height: 400px; background: white; border: 1px solid #ddd; border-radius: 8px; margin: 2rem 0; position: relative; }
+        @media (max-width: 768px) { .hero h1 { font-size: 2rem; } .tools-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mission.html">Mission & Vocabulary</a></li>
+                <li><a href="architecture.html">System Architecture</a></li>
+                <li><a href="#">Live Prediction Ledger</a></li>
+                <li><a href="submit.html">Submit Research</a></li>
+                <li><a href="interactive.html" class="active">Interactive Science</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="hero">
+        <div class="container">
+            <h1>Interactive Science Tools</h1>
+            <p>Explore Recognition Science through hands-on calculators, visualizations, and simulations. Discover the mathematical beauty of particle physics and the golden ratio.</p>
+        </div>
+    </div>
+    <div class="container">
+        <section class="section">
+            <h2 style="text-align: center; font-size: 2.5rem; font-weight: 300; margin-bottom: 3rem;">Interactive Tools & Calculators</h2>
+            <div class="tools-grid">
+                <div class="tool-card" onclick="scrollToCalculator('particle')">
+                    <div class="tool-icon">⚛️</div>
+                    <h3 class="tool-title">Particle Mass Calculator</h3>
+                    <p class="tool-description">Calculate particle masses using Recognition Science principles. Explore how the golden ratio determines fundamental particle properties.</p>
+                    <button class="tool-button">Launch Calculator</button>
+                </div>
+                <div class="tool-card" onclick="scrollToCalculator('golden')">
+                    <div class="tool-icon">🌀</div>
+                    <h3 class="tool-title">Golden Ratio Explorer</h3>
+                    <p class="tool-description">Visualize and calculate golden ratio relationships in nature, physics, and mathematics. See the fundamental constant in action.</p>
+                    <button class="tool-button">Explore Phi</button>
+                </div>
+                <div class="tool-card" onclick="scrollToCalculator('residue')">
+                    <div class="tool-icon">📊</div>
+                    <h3 class="tool-title">Residue Pattern Analyzer</h3>
+                    <p class="tool-description">Analyze the mod 9 residue patterns that govern particle stability and quantum states. Discover hidden symmetries.</p>
+                    <button class="tool-button">Analyze Patterns</button>
+                </div>
+                <div class="tool-card" onclick="scrollToCalculator('wave')">
+                    <div class="tool-icon">〰️</div>
+                    <h3 class="tool-title">Wave Function Simulator</h3>
+                    <p class="tool-description">Simulate quantum wave functions and observe how Recognition Science principles emerge from fundamental physics.</p>
+                    <button class="tool-button">Start Simulation</button>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="particle">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem;">Particle Mass Calculator</h2>
+            <div class="calculator-section">
+                <p style="margin-bottom: 2rem;">Calculate particle masses using the Recognition Science formula: m = m₀ × φⁿ × (residue factor)</p>
+                <div class="input-group">
+                    <label for="particle-select">Select Particle:</label>
+                    <select id="particle-select" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+                        <option value="electron">Electron</option>
+                        <option value="muon">Muon</option>
+                        <option value="tau">Tau</option>
+                        <option value="up">Up Quark</option>
+                        <option value="down">Down Quark</option>
+                        <option value="strange">Strange Quark</option>
+                        <option value="charm">Charm Quark</option>
+                        <option value="bottom">Bottom Quark</option>
+                        <option value="top">Top Quark</option>
+                    </select>
+                </div>
+                <button onclick="calculateParticleMass()" class="tool-button">Calculate Mass</button>
+                <div class="result-box" id="particle-result" style="display: none;">
+                    <h3>Results</h3>
+                    <p id="mass-output"></p>
+                    <p id="formula-output" style="font-family: monospace; margin-top: 1rem;"></p>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="golden">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem;">Golden Ratio Explorer</h2>
+            <div class="calculator-section">
+                <p style="margin-bottom: 2rem;">Explore the golden ratio φ = (1 + √5) / 2 ≈ 1.618033988749...</p>
+                <div class="input-group">
+                    <label for="fibonacci-n">Calculate Fibonacci Number (n):</label>
+                    <input type="number" id="fibonacci-n" min="1" max="100" value="10">
+                </div>
+                <button onclick="calculateFibonacci()" class="tool-button">Calculate</button>
+                <div class="result-box" id="golden-result" style="display: none;">
+                    <h3>Results</h3>
+                    <p id="fibonacci-output"></p>
+                    <p id="ratio-output" style="margin-top: 1rem;"></p>
+                </div>
+                <canvas id="golden-spiral" class="visualization"></canvas>
+            </div>
+        </section>
+        <section class="section" id="residue">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem;">Residue Pattern Analyzer</h2>
+            <div class="calculator-section">
+                <p style="margin-bottom: 2rem;">Analyze mod 9 residue patterns and their significance in particle physics.</p>
+                <div class="input-group">
+                    <label for="residue-number">Enter Number:</label>
+                    <input type="number" id="residue-number" value="137">
+                </div>
+                <button onclick="analyzeResidue()" class="tool-button">Analyze Pattern</button>
+                <div class="result-box" id="residue-result" style="display: none;">
+                    <h3>Residue Analysis</h3>
+                    <p id="residue-output"></p>
+                    <div id="residue-pattern" style="margin-top: 1rem;"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        const phi = (1 + Math.sqrt(5)) / 2;
+        
+        function scrollToCalculator(id) {
+            document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        
+        function calculateParticleMass() {
+            const select = document.getElementById("particle-select");
+            const particle = select.value;
+            const resultDiv = document.getElementById("particle-result");
+            const massOutput = document.getElementById("mass-output");
+            const formulaOutput = document.getElementById("formula-output");
+            
+            const masses = {
+                electron: { mass: 0.511, n: -8, residue: 2 },
+                muon: { mass: 105.658, n: -3, residue: 7 },
+                tau: { mass: 1776.86, n: 0, residue: 2 },
+                up: { mass: 2.2, n: -6, residue: 4 },
+                down: { mass: 4.7, n: -5, residue: 2 },
+                strange: { mass: 95, n: -3, residue: 5 },
+                charm: { mass: 1275, n: -1, residue: 6 },
+                bottom: { mass: 4180, n: 1, residue: 1 },
+                top: { mass: 173210, n: 5, residue: 2 }
+            };
+            
+            const p = masses[particle];
+            const calculated = 938.272 * Math.pow(phi, p.n) * (p.residue / 9);
+            
+            massOutput.innerHTML = `<strong>${select.options[select.selectedIndex].text}:</strong><br>Measured: ${p.mass} MeV/c²<br>Calculated: ${calculated.toFixed(3)} MeV/c²<br>Accuracy: ${(100 - Math.abs((calculated - p.mass) / p.mass * 100)).toFixed(2)}%`;
+            formulaOutput.innerHTML = `Formula: 938.272 × φ^${p.n} × ${p.residue}/9`;
+            resultDiv.style.display = "block";
+        }
+        function calculateFibonacci() {
+            const n = parseInt(document.getElementById("fibonacci-n").value);
+            const resultDiv = document.getElementById("golden-result");
+            const fibOutput = document.getElementById("fibonacci-output");
+            const ratioOutput = document.getElementById("ratio-output");
+            
+            let a = 0, b = 1, fib = 1;
+            for (let i = 2; i <= n; i++) {
+                fib = a + b;
+                a = b;
+                b = fib;
+            }
+            
+            const prevFib = a;
+            const ratio = fib / prevFib;
+            
+            fibOutput.innerHTML = `<strong>F(${n}) = ${fib}</strong>`;
+            ratioOutput.innerHTML = `Ratio F(${n})/F(${n-1}) = ${ratio.toFixed(10)}<br>Difference from φ = ${Math.abs(ratio - phi).toExponential(3)}`;
+            resultDiv.style.display = "block";
+            
+            drawGoldenSpiral();
+        }
+        
+        function analyzeResidue() {
+            const num = parseInt(document.getElementById("residue-number").value);
+            const resultDiv = document.getElementById("residue-result");
+            const residueOutput = document.getElementById("residue-output");
+            const patternDiv = document.getElementById("residue-pattern");
+            
+            const mod9 = num % 9;
+            const binary = num.toString(2);
+            const hex = num.toString(16).toUpperCase();
+            
+            residueOutput.innerHTML = `<strong>Number: ${num}</strong><br>Mod 9 Residue: ${mod9}<br>Binary: ${binary}<br>Hexadecimal: 0x${hex}`;
+            
+            let pattern = "<div style='display: grid; grid-template-columns: repeat(9, 1fr); gap: 5px; margin-top: 1rem;'>";
+            for (let i = 0; i < 9; i++) {
+                const color = i === mod9 ? "#007bff" : "#e9ecef";
+                pattern += `<div style="width: 40px; height: 40px; background: ${color}; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: ${i === mod9 ? 'white' : '#666'};">${i}</div>`;
+            }
+            pattern += "</div>";
+            patternDiv.innerHTML = pattern;
+            resultDiv.style.display = "block";
+        }
+        function drawGoldenSpiral() {
+            const canvas = document.getElementById("golden-spiral");
+            const ctx = canvas.getContext("2d");
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = "#007bff";
+            ctx.lineWidth = 2;
+            
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const scale = 5;
+            
+            ctx.beginPath();
+            for (let t = 0; t < 6 * Math.PI; t += 0.01) {
+                const r = scale * Math.pow(phi, t / (2 * Math.PI));
+                const x = centerX + r * Math.cos(t);
+                const y = centerY + r * Math.sin(t);
+                if (t === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            
+            // Draw golden rectangles
+            ctx.strokeStyle = "#28a745";
+            ctx.lineWidth = 1;
+            let size = 100;
+            let x = centerX - size/2;
+            let y = centerY - size/2;
+            
+            for (let i = 0; i < 5; i++) {
+                ctx.strokeRect(x, y, size, size/phi);
+                size = size/phi;
+            }
+        }
+        
+        // Initialize on load
+        window.addEventListener("load", function() {
+            calculateFibonacci();
+        });
+    </script>
+</body>
+</html>
