@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truth Packets - Recognition Science</title>
+    <style>
+        body {
+            font-family: monospace;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: white;
+            color: black;
+        }
+        h1, h2, h3 {
+            margin-top: 2em;
+        }
+        .nav {
+            margin-bottom: 2em;
+        }
+        .nav a {
+            color: black;
+            text-decoration: none;
+            margin-right: 2em;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .stats-bar {
+            background: #f8f8f8;
+            padding: 1em;
+            margin: 1em 0;
+            border: 1px solid #ccc;
+        }
+        .packet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1em;
+            margin: 2em 0;
+        }
+        .packet {
+            border: 1px solid #000;
+            padding: 1em;
+            background: white;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .packet:hover {
+            background: #f9f9f9;
+        }
+        .packet-header {
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+        .packet-hash {
+            font-size: 0.8em;
+            color: #666;
+            margin-bottom: 0.5em;
+        }
+        .packet-status {
+            font-weight: bold;
+            padding: 2px 6px;
+            margin-bottom: 0.5em;
+            display: inline-block;
+        }
+        .canonical { background: #d1ecf1; color: #0c5460; }
+        .verified { background: #d4edda; color: #155724; }
+        .pending { background: #fff3cd; color: #856404; }
+        .validating { background: #f8d7da; color: #721c24; }
+        .packet-content {
+            margin-top: 1em;
+            font-size: 0.9em;
+        }
+        .packet-predictions {
+            margin-top: 0.5em;
+            font-size: 0.8em;
+            color: #555;
+        }
+        .filter-bar {
+            margin: 1em 0;
+            padding: 1em;
+            background: #f8f8f8;
+            border: 1px solid #ccc;
+        }
+        .filter-bar select, .filter-bar input {
+            font-family: monospace;
+            margin: 0 0.5em;
+            padding: 0.3em;
+        }
+        .refresh-btn {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            font-family: monospace;
+            cursor: pointer;
+            margin-left: 1em;
+        }
+        .refresh-btn:hover {
+            background: #333;
+        }
+        .layer-section {
+            margin: 2em 0;
+            border-left: 3px solid #000;
+            padding-left: 1em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav">
+    <a href="index.html">← Recognition Science</a>
+    <a href="journal.html">Journal</a>
+</div>
+
+<h1>TRUTH PACKETS LEDGER</h1>
+<p>Live view of all truth packets in the Recognition Science ledger</p>
+
+<div class="stats-bar">
+    <strong>LEDGER STATISTICS:</strong>
+    <span id="stats-display">Loading...</span>
+    <button class="refresh-btn" onclick="refreshLedger()">REFRESH</button>
+</div>
+
+<div class="filter-bar">
+    <strong>FILTER:</strong>
+    <select id="status-filter" onchange="filterPackets()">
+        <option value="all">All Status</option>
+        <option value="canonical">Canonical</option>
+        <option value="verified">Verified</option>
+        <option value="pending">Pending</option>
+        <option value="validating">Validating</option>
+    </select>
+    
+    <select id="type-filter" onchange="filterPackets()">
+        <option value="all">All Types</option>
+        <option value="axiom">Axioms</option>
+        <option value="proof">Proofs</option>
+        <option value="prediction">Predictions</option>
+    </select>
+    
+    <input type="text" id="search-filter" placeholder="Search..." onkeyup="filterPackets()">
+</div>
+
+<div class="layer-section">
+    <h2>AXIOMS (Layer 1)</h2>
+    <div id="axioms-grid" class="packet-grid">
+        <!-- Axioms will be loaded here -->
+    </div>
+</div>
+
+<div class="layer-section">
+    <h2>PROOFS (Layer 2)</h2>
+    <div id="proofs-grid" class="packet-grid">
+        <!-- Proofs will be loaded here -->
+    </div>
+</div>
+
+<div class="layer-section">
+    <h2>PREDICTIONS (Layer 3)</h2>
+    <div id="predictions-grid" class="packet-grid">
+        <!-- Predictions will be loaded here -->
+    </div>
+</div>
+
+<script src="truth-ledger.js"></script>
+<script>
+let allPackets = [];
+
+function loadPackets() {
+    allPackets = [];
+    
+    // Load axioms
+    const axioms = truthLedger.getAxioms().map(a => ({...a, type: 'axiom'}));
+    allPackets.push(...axioms);
+    
+    // Load proofs
+    const proofs = truthLedger.getProofs().map(p => ({...p, type: 'proof'}));
+    allPackets.push(...proofs);
+    
+    // Load predictions
+    const predictions = truthLedger.getPredictions().map(p => ({...p, type: 'prediction'}));
+    allPackets.push(...predictions);
+    
+    displayPackets();
+    updateStats();
+}
+
+function displayPackets() {
+    const axiomsGrid = document.getElementById('axioms-grid');
+    const proofsGrid = document.getElementById('proofs-grid');
+    const predictionsGrid = document.getElementById('predictions-grid');
+    
+    // Clear grids
+    axiomsGrid.innerHTML = '';
+    proofsGrid.innerHTML = '';
+    predictionsGrid.innerHTML = '';
+    
+    // Filter packets
+    const filteredPackets = getFilteredPackets();
+    
+    filteredPackets.forEach(packet => {
+        const packetElement = createPacketElement(packet);
+        
+        if (packet.type === 'axiom') {
+            axiomsGrid.appendChild(packetElement);
+        } else if (packet.type === 'proof') {
+            proofsGrid.appendChild(packetElement);
+        } else if (packet.type === 'prediction') {
+            predictionsGrid.appendChild(packetElement);
+        }
+    });
+}
+
+function createPacketElement(packet) {
+    const div = document.createElement('div');
+    div.className = 'packet';
+    div.onclick = () => expandPacket(packet);
+    
+    const title = packet.title || packet.content || 'Untitled';
+    const status = packet.status.toLowerCase();
+    
+    div.innerHTML = `
+        <div class="packet-header">${title}</div>
+        <div class="packet-hash">Hash: ${packet.hash}</div>
+        <div class="packet-status ${status}">${packet.status}</div>
+        <div class="packet-content">
+            ${packet.content || packet.proof || 'No content'}
+        </div>
+        ${packet.predictions ? `
+            <div class="packet-predictions">
+                <strong>Predictions:</strong> ${Array.isArray(packet.predictions) ? packet.predictions.join(', ') : packet.predictions}
+            </div>
+        ` : ''}
+        ${packet.verifications ? `
+            <div class="packet-predictions">
+                <strong>Verifications:</strong> ${packet.verifications}
+            </div>
+        ` : ''}
+        ${packet.dependencies ? `
+            <div class="packet-predictions">
+                <strong>Dependencies:</strong> ${packet.dependencies.join(', ')}
+            </div>
+        ` : ''}
+    `;
+    
+    return div;
+}
+
+function expandPacket(packet) {
+    const details = `
+TRUTH PACKET DETAILS
+
+Title: ${packet.title || packet.content || 'Untitled'}
+Hash: ${packet.hash}
+Status: ${packet.status}
+Type: ${packet.type.toUpperCase()}
+Timestamp: ${new Date(packet.timestamp).toLocaleString()}
+
+${packet.content ? `Content: ${packet.content}` : ''}
+${packet.proof ? `Proof: ${packet.proof}` : ''}
+${packet.predictions ? `Predictions: ${Array.isArray(packet.predictions) ? packet.predictions.join('\n') : packet.predictions}` : ''}
+${packet.dependencies ? `Dependencies: ${packet.dependencies.join(', ')}` : ''}
+${packet.verifications ? `Verifications: ${packet.verifications}` : ''}
+${packet.author ? `Author: ${packet.author}` : ''}
+    `;
+    
+    alert(details);
+}
+
+function getFilteredPackets() {
+    const statusFilter = document.getElementById('status-filter').value;
+    const typeFilter = document.getElementById('type-filter').value;
+    const searchFilter = document.getElementById('search-filter').value.toLowerCase();
+    
+    return allPackets.filter(packet => {
+        const statusMatch = statusFilter === 'all' || packet.status.toLowerCase() === statusFilter;
+        const typeMatch = typeFilter === 'all' || packet.type === typeFilter;
+        const searchMatch = searchFilter === '' || 
+            (packet.title && packet.title.toLowerCase().includes(searchFilter)) ||
+            (packet.content && packet.content.toLowerCase().includes(searchFilter)) ||
+            (packet.proof && packet.proof.toLowerCase().includes(searchFilter));
+        
+        return statusMatch && typeMatch && searchMatch;
+    });
+}
+
+function filterPackets() {
+    displayPackets();
+}
+
+function updateStats() {
+    const stats = truthLedger.getStats();
+    const statsDisplay = document.getElementById('stats-display');
+    
+    statsDisplay.innerHTML = `
+        Axioms: ${stats.totalAxioms} (${stats.canonicalAxioms} canonical) | 
+        Proofs: ${stats.totalProofs} (${stats.verifiedProofs} verified) | 
+        Predictions: ${stats.totalPredictions} (${stats.verifiedPredictions} verified, ${stats.pendingPredictions} pending)
+    `;
+}
+
+function refreshLedger() {
+    loadPackets();
+    console.log('Ledger refreshed');
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadPackets();
+    
+    // Auto-refresh every 10 seconds
+    setInterval(loadPackets, 10000);
+});
+
+// Add some example data for demonstration
+document.addEventListener('DOMContentLoaded', function() {
+    // Add example theorems
+    setTimeout(() => {
+        truthLedger.submitProof({
+            title: 'Golden Ratio Uniqueness',
+            dependencies: ['A3', 'A4'],
+            proof: 'theorem golden_ratio_unique : ∀ (x : ℝ), minimizes_cost_functional x → x = φ := by sorry',
+            predictions: ['φ appears in all natural scaling', 'Fibonacci sequences in nature'],
+            author: 'Recognition Science Institute'
+        });
+        
+        truthLedger.submitProof({
+            title: 'Consciousness Emergence',
+            dependencies: ['A6', 'A8'],
+            proof: 'theorem consciousness_emergence : ∀ (system : RecognitionSystem), self_referential system → conscious system := by sorry',
+            predictions: ['Self-awareness threshold', 'Qualia emergence'],
+            author: 'Recognition Science Institute'
+        });
+        
+        // Refresh display after adding examples
+        setTimeout(loadPackets, 1000);
+    }, 500);
+});
+</script>
+
+</body>
+</html> 

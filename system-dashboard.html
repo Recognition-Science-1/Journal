@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Dashboard - Recognition Science Journal</title>
+    <style>
+        body {
+            font-family: monospace;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: white;
+            color: black;
+        }
+        h1, h2, h3 {
+            margin-top: 2em;
+        }
+        .nav {
+            margin-bottom: 2em;
+        }
+        .nav a {
+            color: black;
+            text-decoration: none;
+            margin-right: 2em;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1em;
+            margin: 2em 0;
+        }
+        .layer-panel {
+            border: 2px solid #000;
+            padding: 1em;
+            background: #fafafa;
+            min-height: 300px;
+        }
+        .layer-header {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 1em;
+            padding-bottom: 0.5em;
+            border-bottom: 1px solid #ccc;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.5em;
+        }
+        .status-active { background: #28a745; }
+        .status-inactive { background: #dc3545; }
+        .status-pending { background: #ffc107; }
+        .metric {
+            margin: 0.5em 0;
+            padding: 0.3em;
+            background: white;
+            border: 1px solid #ddd;
+        }
+        .metric-label {
+            font-weight: bold;
+            display: inline-block;
+            width: 120px;
+        }
+        .metric-value {
+            color: #333;
+        }
+        .control-panel {
+            margin-top: 1em;
+            padding: 1em;
+            background: #f8f8f8;
+            border: 1px solid #ccc;
+        }
+        .control-button {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            font-family: monospace;
+            cursor: pointer;
+            margin: 0.2em;
+        }
+        .control-button:hover {
+            background: #333;
+        }
+        .control-button.stop {
+            background: #d32f2f;
+        }
+        .log-panel {
+            grid-column: 1 / -1;
+            border: 2px solid #000;
+            padding: 1em;
+            background: #f8f8f8;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .log-entry {
+            margin: 0.2em 0;
+            font-size: 0.9em;
+            padding: 0.2em;
+        }
+        .log-info { color: #0066cc; }
+        .log-success { color: #28a745; }
+        .log-warning { color: #ffc107; }
+        .log-error { color: #dc3545; }
+        .system-overview {
+            grid-column: 1 / -1;
+            border: 3px solid #000;
+            padding: 1.5em;
+            background: #f0f0f0;
+            margin-bottom: 2em;
+        }
+        .overview-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1em;
+            margin-top: 1em;
+        }
+        .overview-stat {
+            text-align: center;
+            padding: 1em;
+            background: white;
+            border: 1px solid #ccc;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+        }
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav">
+    <a href="index.html">← Recognition Science</a>
+    <a href="journal.html">Journal</a>
+    <a href="truth-packets.html">Truth Packets</a>
+</div>
+
+<h1>RECOGNITION SCIENCE JOURNAL - SYSTEM DASHBOARD</h1>
+<p>Real-time monitoring of all 6 layers of the machine-verifiable truth ledger</p>
+
+<div class="system-overview">
+    <h2>SYSTEM OVERVIEW</h2>
+    <p><strong>Status:</strong> <span id="system-status">INITIALIZING...</span></p>
+    <p><strong>Uptime:</strong> <span id="system-uptime">0 seconds</span></p>
+    
+    <div class="overview-stats">
+        <div class="overview-stat">
+            <div class="stat-number" id="total-axioms">8</div>
+            <div class="stat-label">Axioms</div>
+        </div>
+        <div class="overview-stat">
+            <div class="stat-number" id="total-proofs">0</div>
+            <div class="stat-label">Proofs</div>
+        </div>
+        <div class="overview-stat">
+            <div class="stat-number" id="total-predictions">0</div>
+            <div class="stat-label">Predictions</div>
+        </div>
+        <div class="overview-stat">
+            <div class="stat-number" id="verified-predictions">0</div>
+            <div class="stat-label">Verified</div>
+        </div>
+        <div class="overview-stat">
+            <div class="stat-number" id="contradictions-found">0</div>
+            <div class="stat-label">Contradictions</div>
+        </div>
+        <div class="overview-stat">
+            <div class="stat-number" id="accuracy-rate">0%</div>
+            <div class="stat-label">Accuracy</div>
+        </div>
+    </div>
+    
+    <div class="control-panel">
+        <h3>MASTER CONTROLS</h3>
+        <button class="control-button" onclick="startAllSystems()">START ALL SYSTEMS</button>
+        <button class="control-button stop" onclick="stopAllSystems()">STOP ALL SYSTEMS</button>
+        <button class="control-button" onclick="refreshDashboard()">REFRESH DASHBOARD</button>
+        <button class="control-button" onclick="exportSystemState()">EXPORT STATE</button>
+    </div>
+</div>
+
+<div class="dashboard-grid">
+    <!-- Layer 1: Axiom Store -->
+    <div class="layer-panel">
+        <div class="layer-header">
+            <span class="status-indicator status-active"></span>
+            LAYER 1: AXIOM STORE
+        </div>
+        <div class="metric">
+            <span class="metric-label">Total Axioms:</span>
+            <span class="metric-value" id="layer1-axioms">8</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Canonical:</span>
+            <span class="metric-value" id="layer1-canonical">2</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Verified:</span>
+            <span class="metric-value" id="layer1-verified">6</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Storage:</span>
+            <span class="metric-value">Immutable Hash Map</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Integrity:</span>
+            <span class="metric-value" id="layer1-integrity">100%</span>
+        </div>
+    </div>
+
+    <!-- Layer 2: Proof Engine -->
+    <div class="layer-panel">
+        <div class="layer-header">
+            <span class="status-indicator status-active"></span>
+            LAYER 2: PROOF ENGINE
+        </div>
+        <div class="metric">
+            <span class="metric-label">Total Proofs:</span>
+            <span class="metric-value" id="layer2-proofs">0</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Verified:</span>
+            <span class="metric-value" id="layer2-verified">0</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Validating:</span>
+            <span class="metric-value" id="layer2-validating">0</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Engine:</span>
+            <span class="metric-value">Lean 4 + Coq</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Queue:</span>
+            <span class="metric-value" id="layer2-queue">0 pending</span>
+        </div>
+    </div>
+
+    <!-- Layer 3: Prediction Ledger -->
+    <div class="layer-panel">
+        <div class="layer-header">
+            <span class="status-indicator status-active"></span>
+            LAYER 3: PREDICTION LEDGER
+        </div>
+        <div class="metric">
+            <span class="metric-label">Total Predictions:</span>
+            <span class="metric-value" id="layer3-predictions">0</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Verified:</span>
+            <span class="metric-value" id="layer3-verified">0</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Pending:</span>
+            <span class="metric-value" id="layer3-pending">0</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Refuted:</span>
+            <span class="metric-value" id="layer3-refuted">0</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Accuracy:</span>
+            <span class="metric-value" id="layer3-accuracy">0%</span>
+        </div>
+    </div>
+
+    <!-- Layer 4: Reality Crawler -->
+    <div class="layer-panel">
+        <div class="layer-header">
+            <span class="status-indicator" id="layer4-status-indicator">status-inactive</span>
+            LAYER 4: REALITY CRAWLER
+        </div>
+        <div class="metric">
+            <span class="metric-label">Status:</span>
+            <span class="metric-value" id="layer4-status">STOPPED</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Data Sources:</span>
+            <span class="metric-value" id="layer4-sources">5</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Last Crawl:</span>
+            <span class="metric-value" id="layer4-last-crawl">Never</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Validations:</span>
+            <span class="metric-value" id="layer4-validations">0</span>
+        </div>
+        <div class="control-panel">
+            <button class="control-button" id="layer4-toggle" onclick="toggleLayer4()">START CRAWLER</button>
+        </div>
+    </div>
+
+    <!-- Layer 5: Uncertainty Pruner -->
+    <div class="layer-panel">
+        <div class="layer-header">
+            <span class="status-indicator" id="layer5-status-indicator">status-inactive</span>
+            LAYER 5: UNCERTAINTY PRUNER
+        </div>
+        <div class="metric">
+            <span class="metric-label">Status:</span>
+            <span class="metric-value" id="layer5-status">STOPPED</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Contradictions:</span>
+            <span class="metric-value" id="layer5-contradictions">0</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Analysis Queue:</span>
+            <span class="metric-value" id="layer5-queue">0</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Community Reviews:</span>
+            <span class="metric-value" id="layer5-reviews">0</span>
+        </div>
+        <div class="control-panel">
+            <button class="control-button" id="layer5-toggle" onclick="toggleLayer5()">START PRUNER</button>
+        </div>
+    </div>
+
+    <!-- Layer 6: Policy Firewall -->
+    <div class="layer-panel">
+        <div class="layer-header">
+            <span class="status-indicator status-pending"></span>
+            LAYER 6: POLICY FIREWALL
+        </div>
+        <div class="metric">
+            <span class="metric-label">Status:</span>
+            <span class="metric-value">IMPLEMENTATION PENDING</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Ethics Sandbox:</span>
+            <span class="metric-value">Not Active</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Flagged Predictions:</span>
+            <span class="metric-value">0</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Risk Assessment:</span>
+            <span class="metric-value">N/A</span>
+        </div>
+        <div class="control-panel">
+            <button class="control-button" disabled>COMING SOON</button>
+        </div>
+    </div>
+</div>
+
+<!-- System Log -->
+<div class="log-panel">
+    <h3>SYSTEM LOG</h3>
+    <div id="system-log">
+        <div class="log-entry log-info">[SYSTEM] Dashboard initialized</div>
+    </div>
+</div>
+
+<script src="truth-ledger.js"></script>
+<script src="reality-crawler.js"></script>
+<script src="uncertainty-pruner.js"></script>
+<script>
+let systemStartTime = Date.now();
+let dashboardUpdateInterval;
+
+// Initialize system
+document.addEventListener('DOMContentLoaded', function() {
+    initializeSystem();
+    startDashboardUpdates();
+});
+
+function initializeSystem() {
+    logMessage('Initializing Recognition Science Journal...', 'info');
+    
+    // Initialize all components
+    setTimeout(() => {
+        const crawlerInit = truthLedger.initializeRealityCrawler();
+        const prunerInit = truthLedger.initializeUncertaintyPruner();
+        
+        if (crawlerInit) {
+            logMessage('Reality Crawler initialized successfully', 'success');
+        }
+        
+        if (prunerInit) {
+            logMessage('Uncertainty Pruner initialized successfully', 'success');
+        }
+        
+        // Load example data
+        loadExampleData();
+        
+        logMessage('System initialization complete', 'success');
+        updateSystemStatus();
+    }, 1000);
+}
+
+function loadExampleData() {
+    // Add some example proofs and predictions
+    const examples = [
+        {
+            title: 'Zero Free Parameters Theorem',
+            dependencies: ['A1', 'A2', 'A3'],
+            proof: 'theorem zero_parameters : ∀ (c : PhysicalConstant), ∃ (axioms : List Axiom), derives axioms c := by sorry',
+            predictions: ['All constants derivable from axioms', 'No adjustable parameters in final theory'],
+            author: 'Recognition Science Institute'
+        },
+        {
+            title: 'Particle Mass Formula',
+            dependencies: ['A3', 'A5'],
+            proof: 'theorem mass_formula : ∀ (n : ℕ), particle_mass n = coherence_energy * φ^n := by sorry',
+            predictions: ['Higgs mass = 125.1 GeV', 'Top quark mass = 173.2 GeV', 'Electron mass = 0.511 MeV'],
+            author: 'Recognition Science Institute'
+        },
+        {
+            title: 'Consciousness Emergence',
+            dependencies: ['A6', 'A8'],
+            proof: 'theorem consciousness_emergence : ∀ (system : RecognitionSystem), self_referential system → conscious system := by sorry',
+            predictions: ['Self-awareness threshold at φ^42 connections', 'Qualia emergence from recognition loops'],
+            author: 'Recognition Science Institute'
+        }
+    ];
+    
+    examples.forEach(example => {
+        truthLedger.submitProof(example);
+    });
+    
+    logMessage(`Loaded ${examples.length} example proofs`, 'info');
+}
+
+function startDashboardUpdates() {
+    // Update dashboard every 2 seconds
+    dashboardUpdateInterval = setInterval(updateDashboard, 2000);
+    updateDashboard(); // Initial update
+}
+
+function updateDashboard() {
+    updateSystemOverview();
+    updateLayerMetrics();
+    updateSystemUptime();
+}
+
+function updateSystemOverview() {
+    const stats = truthLedger.getStats();
+    
+    document.getElementById('total-axioms').textContent = stats.totalAxioms;
+    document.getElementById('total-proofs').textContent = stats.totalProofs;
+    document.getElementById('total-predictions').textContent = stats.totalPredictions;
+    document.getElementById('verified-predictions').textContent = stats.verifiedPredictions;
+    
+    // Calculate accuracy rate
+    const accuracyRate = stats.totalPredictions > 0 ? 
+        Math.round((stats.verifiedPredictions / stats.totalPredictions) * 100) : 0;
+    document.getElementById('accuracy-rate').textContent = accuracyRate + '%';
+    
+    // Update contradictions
+    const prunerStatus = truthLedger.getUncertaintyPrunerStatus();
+    document.getElementById('contradictions-found').textContent = 
+        prunerStatus.contradictionsDetected || 0;
+}
+
+function updateLayerMetrics() {
+    const stats = truthLedger.getStats();
+    
+    // Layer 1: Axiom Store
+    document.getElementById('layer1-axioms').textContent = stats.totalAxioms;
+    document.getElementById('layer1-canonical').textContent = stats.canonicalAxioms;
+    document.getElementById('layer1-verified').textContent = stats.totalAxioms - stats.canonicalAxioms;
+    
+    // Layer 2: Proof Engine
+    document.getElementById('layer2-proofs').textContent = stats.totalProofs;
+    document.getElementById('layer2-verified').textContent = stats.verifiedProofs;
+    document.getElementById('layer2-validating').textContent = stats.totalProofs - stats.verifiedProofs;
+    
+    // Layer 3: Prediction Ledger
+    document.getElementById('layer3-predictions').textContent = stats.totalPredictions;
+    document.getElementById('layer3-verified').textContent = stats.verifiedPredictions;
+    document.getElementById('layer3-pending').textContent = stats.pendingPredictions;
+    document.getElementById('layer3-refuted').textContent = 
+        stats.totalPredictions - stats.verifiedPredictions - stats.pendingPredictions;
+    
+    const accuracy = stats.totalPredictions > 0 ? 
+        Math.round((stats.verifiedPredictions / stats.totalPredictions) * 100) : 0;
+    document.getElementById('layer3-accuracy').textContent = accuracy + '%';
+    
+    // Layer 4: Reality Crawler
+    const crawlerStatus = truthLedger.getRealityCrawlerStatus();
+    updateLayer4Status(crawlerStatus);
+    
+    // Layer 5: Uncertainty Pruner
+    const prunerStatus = truthLedger.getUncertaintyPrunerStatus();
+    updateLayer5Status(prunerStatus);
+}
+
+function updateLayer4Status(status) {
+    const statusElement = document.getElementById('layer4-status');
+    const indicatorElement = document.getElementById('layer4-status-indicator');
+    const toggleButton = document.getElementById('layer4-toggle');
+    
+    if (status.isRunning) {
+        statusElement.textContent = 'ACTIVE - Monitoring Reality';
+        indicatorElement.className = 'status-indicator status-active';
+        toggleButton.textContent = 'STOP CRAWLER';
+        toggleButton.className = 'control-button stop';
+    } else {
+        statusElement.textContent = 'STOPPED';
+        indicatorElement.className = 'status-indicator status-inactive';
+        toggleButton.textContent = 'START CRAWLER';
+        toggleButton.className = 'control-button';
+    }
+    
+    if (status.dataSources) {
+        document.getElementById('layer4-sources').textContent = status.dataSources.length;
+    }
+    
+    if (status.lastCrawlTime) {
+        const timeDiff = Math.floor((Date.now() - status.lastCrawlTime) / 1000);
+        document.getElementById('layer4-last-crawl').textContent = `${timeDiff}s ago`;
+    }
+    
+    if (status.totalValidations) {
+        const total = status.totalValidations.verified + status.totalValidations.refuted;
+        document.getElementById('layer4-validations').textContent = total;
+    }
+}
+
+function updateLayer5Status(status) {
+    const statusElement = document.getElementById('layer5-status');
+    const indicatorElement = document.getElementById('layer5-status-indicator');
+    const toggleButton = document.getElementById('layer5-toggle');
+    
+    if (status.isRunning) {
+        statusElement.textContent = 'ACTIVE - Monitoring Contradictions';
+        indicatorElement.className = 'status-indicator status-active';
+        toggleButton.textContent = 'STOP PRUNER';
+        toggleButton.className = 'control-button stop';
+    } else {
+        statusElement.textContent = 'STOPPED';
+        indicatorElement.className = 'status-indicator status-inactive';
+        toggleButton.textContent = 'START PRUNER';
+        toggleButton.className = 'control-button';
+    }
+    
+    document.getElementById('layer5-contradictions').textContent = status.contradictionsDetected || 0;
+    document.getElementById('layer5-queue').textContent = status.queueLength || 0;
+    
+    if (status.recentContradictions) {
+        const reviews = status.recentContradictions.filter(c => c.status === 'COMMUNITY_REVIEW').length;
+        document.getElementById('layer5-reviews').textContent = reviews;
+    }
+}
+
+function updateSystemUptime() {
+    const uptime = Math.floor((Date.now() - systemStartTime) / 1000);
+    const hours = Math.floor(uptime / 3600);
+    const minutes = Math.floor((uptime % 3600) / 60);
+    const seconds = uptime % 60;
+    
+    let uptimeStr = '';
+    if (hours > 0) uptimeStr += `${hours}h `;
+    if (minutes > 0) uptimeStr += `${minutes}m `;
+    uptimeStr += `${seconds}s`;
+    
+    document.getElementById('system-uptime').textContent = uptimeStr;
+}
+
+function updateSystemStatus() {
+    const crawlerStatus = truthLedger.getRealityCrawlerStatus();
+    const prunerStatus = truthLedger.getUncertaintyPrunerStatus();
+    
+    let status = 'OPERATIONAL';
+    if (crawlerStatus.isRunning && prunerStatus.isRunning) {
+        status = 'FULLY ACTIVE - All Systems Running';
+    } else if (crawlerStatus.isRunning || prunerStatus.isRunning) {
+        status = 'PARTIALLY ACTIVE';
+    } else {
+        status = 'STANDBY - Ready for Activation';
+    }
+    
+    document.getElementById('system-status').textContent = status;
+}
+
+// Control functions
+function toggleLayer4() {
+    const status = truthLedger.getRealityCrawlerStatus();
+    if (status.isRunning) {
+        truthLedger.stopRealityMonitoring();
+        logMessage('Reality Crawler stopped', 'warning');
+    } else {
+        truthLedger.startRealityMonitoring();
+        logMessage('Reality Crawler started', 'success');
+    }
+    updateSystemStatus();
+}
+
+function toggleLayer5() {
+    const status = truthLedger.getUncertaintyPrunerStatus();
+    if (status.isRunning) {
+        truthLedger.stopUncertaintyMonitoring();
+        logMessage('Uncertainty Pruner stopped', 'warning');
+    } else {
+        truthLedger.startUncertaintyMonitoring();
+        logMessage('Uncertainty Pruner started', 'success');
+    }
+    updateSystemStatus();
+}
+
+function startAllSystems() {
+    truthLedger.startRealityMonitoring();
+    truthLedger.startUncertaintyMonitoring();
+    logMessage('All systems started', 'success');
+    updateSystemStatus();
+}
+
+function stopAllSystems() {
+    truthLedger.stopRealityMonitoring();
+    truthLedger.stopUncertaintyMonitoring();
+    logMessage('All systems stopped', 'warning');
+    updateSystemStatus();
+}
+
+function refreshDashboard() {
+    logMessage('Dashboard refreshed', 'info');
+    updateDashboard();
+}
+
+function exportSystemState() {
+    const state = truthLedger.exportLedger();
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `recognition-science-ledger-${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    logMessage('System state exported', 'success');
+}
+
+function logMessage(message, type = 'info') {
+    const logContainer = document.getElementById('system-log');
+    const timestamp = new Date().toLocaleTimeString();
+    const logEntry = document.createElement('div');
+    logEntry.className = `log-entry log-${type}`;
+    logEntry.textContent = `[${timestamp}] ${message}`;
+    
+    logContainer.appendChild(logEntry);
+    
+    // Keep only last 50 log entries
+    while (logContainer.children.length > 50) {
+        logContainer.removeChild(logContainer.firstChild);
+    }
+    
+    // Scroll to bottom
+    logContainer.scrollTop = logContainer.scrollHeight;
+}
+</script>
+
+</body>
+</html> 

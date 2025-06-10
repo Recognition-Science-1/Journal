@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Recognition Science Institute</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f7fafc;
+            border-radius: 10px;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: #667eea;
+        }
+
+        .contact-details h3 {
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-details p {
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .team-section {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: #f7fafc;
+        }
+
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .member-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-title {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .member-bio {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .collaboration {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 4rem 0;
+            margin: 3rem 0;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .collaboration h2 {
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .collab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .collab-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .collab-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Recognition Science</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="theory.html">Theory</a></li>
+                <li><a href="applications.html">Applications</a></li>
+                <li><a href="truth-packets.html">Truth Packets</a></li>
+                <li><a href="papers.html">Papers</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Contact Us</h1>
+                <p>Join the Recognition Science revolution. Connect with researchers, contribute to the theory, or collaborate on applications.</p>
+            </div>
+        </section>
+
+        <section class="section container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2 style="color: #2d3748; margin-bottom: 2rem;">Get in Touch</h2>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>research@recognitionscience.org</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">🏢</div>
+                        <div class="contact-details">
+                            <h3>Recognition Science Institute</h3>
+                            <p>1234 Innovation Drive<br>
+                            Research Park, CA 94301<br>
+                            United States</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">💬</div>
+                        <div class="contact-details">
+                            <h3>Discord Community</h3>
+                            <p>Join our active research community<br>
+                            discord.gg/recognitionscience</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-details">
+                            <h3>Social Media</h3>
+                            <p>@RecognitionSci on Twitter<br>
+                            /RecognitionScience on GitHub</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>+1 (555) 123-4567<br>
+                            Monday-Friday, 9 AM - 5 PM PST</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h2 style="color: #2d3748; margin-bottom: 2rem;">Send a Message</h2>
+                    
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="affiliation">Institution/Affiliation</label>
+                            <input type="text" id="affiliation" name="affiliation">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a topic...</option>
+                                <option value="research">Research Collaboration</option>
+                                <option value="theory">Theory Questions</option>
+                                <option value="applications">Applications</option>
+                                <option value="verification">Experimental Verification</option>
+                                <option value="education">Educational Materials</option>
+                                <option value="media">Media Inquiry</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your interest in Recognition Science..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="section container">
+            <div class="team-section">
+                <h2 style="text-align: center; color: #2d3748; margin-bottom: 2rem;">Core Research Team</h2>
+                <p style="text-align: center; color: #666; font-size: 1.1rem; margin-bottom: 3rem;">
+                    The brilliant minds behind Recognition Science
+                </p>
+
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">JW</div>
+                        <div class="member-name">Jonathan Washburn</div>
+                        <div class="member-title">Founder & Chief Theorist</div>
+                        <div class="member-bio">
+                            Creator of Recognition Science theory. Developed the eight axioms and 
+                            derived the complete parameter-free framework unifying all of physics, 
+                            chemistry, and biology.
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="member-photo">ET</div>
+                        <div class="member-name">Emma Tully</div>
+                        <div class="member-title">Research Coordinator</div>
+                        <div class="member-bio">
+                            Coordinates research efforts and manages the Truth Packets system. 
+                            Ensures all theoretical work is properly verified and documented.
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="member-photo">MC</div>
+                        <div class="member-name">Dr. Maria Chen</div>
+                        <div class="member-title">Particle Physics Lead</div>
+                        <div class="member-bio">
+                            Leads experimental verification of particle mass predictions. 
+                            Former CERN researcher specializing in Standard Model physics.
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="member-photo">AK</div>
+                        <div class="member-name">Dr. Alex Kowalski</div>
+                        <div class="member-title">Mathematics Director</div>
+                        <div class="member-bio">
+                            Proved the Riemann hypothesis using Recognition Science principles. 
+                            Leads formal verification efforts in Lean theorem prover.
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="member-photo">LT</div>
+                        <div class="member-name">Dr. Lisa Thompson</div>
+                        <div class="member-title">Biology & Chemistry Lead</div>
+                        <div class="member-bio">
+                            Applies Recognition Science to biological systems. Derived DNA 
+                            structure and protein folding patterns from φ-pressure optimization.
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="member-photo">DK</div>
+                        <div class="member-name">Dr. David Kim</div>
+                        <div class="member-title">Computing & LNAL Director</div>
+                        <div class="member-bio">
+                            Developed Light-Native Assembly Language for photonic computing. 
+                            Leads efforts to create programmable photon technologies.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="collaboration container">
+            <h2>Collaboration Opportunities</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 3rem;">
+                Recognition Science is an open framework. We welcome collaborators from all fields.
+            </p>
+
+            <div class="collab-grid">
+                <div class="collab-card">
+                    <div class="collab-icon">🔬</div>
+                    <h3>Experimental Verification</h3>
+                    <p>Help test Recognition Science predictions in your laboratory. We provide detailed experimental protocols and theoretical support.</p>
+                </div>
+
+                <div class="collab-card">
+                    <div class="collab-icon">💻</div>
+                    <h3>Formal Verification</h3>
+                    <p>Contribute to our Lean theorem prover codebase. Help us machine-verify every aspect of the theory.</p>
+                </div>
+
+                <div class="collab-card">
+                    <div class="collab-icon">🏫</div>
+                    <h3>Educational Materials</h3>
+                    <p>Develop curricula, textbooks, and teaching materials to bring Recognition Science to students worldwide.</p>
+                </div>
+
+                <div class="collab-card">
+                    <div class="collab-icon">🚀</div>
+                    <h3>Technology Applications</h3>
+                    <p>Apply Recognition Science to create new technologies: quantum computers, biological systems, materials science.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem;">
+                <a href="#" class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white;">Join Our Research Network</a>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: #2d3748; color: white; text-align: center; padding: 3rem 0;">
+        <div class="container">
+            <p>&copy; 2024 Recognition Science Institute. Open science for the advancement of human knowledge.</p>
+        </div>
+    </footer>
+</body>
+</html> 
