@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expandable Prediction Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .prediction-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 2px solid #ffc107;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .prediction-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .prediction-header:hover {
+            background: #fffbf0;
+        }
+        
+        .prediction-status {
+            font-size: 2rem;
+        }
+        
+        .prediction-content h4 {
+            margin: 0;
+            color: #333;
+            font-size: 1.2rem;
+        }
+        
+        .prediction-content p {
+            margin: 0.5rem 0;
+            color: #666;
+        }
+        
+        .expand-arrow {
+            margin-left: auto;
+            transition: transform 0.3s;
+            font-size: 1.5rem;
+            color: #007bff;
+        }
+        
+        .expanded .expand-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .prediction-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: #f8f9fa;
+        }
+        
+        .expanded .prediction-details {
+            max-height: 2000px;
+        }
+        
+        .details-content {
+            padding: 2rem;
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .detail-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .detail-section h3 {
+            color: #007bff;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            color: #0ff;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .action-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .action-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        
+        .action-link:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+        }
+        
+        .timeline-item {
+            padding: 0.5rem 0;
+            border-left: 3px solid #007bff;
+            padding-left: 1rem;
+            margin-left: 0.5rem;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .comparison-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <h1>Click the prediction below to see what happens:</h1>
+    
+    <div class="prediction-item" id="luminon-prediction">
+        <div class="prediction-header" onclick="togglePrediction('luminon-prediction')">
+            <span class="prediction-status">⏳</span>
+            <div class="prediction-content">
+                <h4>Luminon Threshold Discovery</h4>
+                <p>Predicted: First bound state at 492.16 ± 0.03 nm</p>
+                <p>Recognition light carrier wave - lowest cost resonant mode</p>
+                <p style="font-size: 0.85rem; color: #999;">Submitted: May 11, 2025</p>
+            </div>
+            <span class="expand-arrow">⌄</span>
+        </div>
+        
+        <div class="prediction-details">
+            <div class="details-content">
+                <!-- Precise Values Section -->
+                <div class="detail-section">
+                    <h3>📊 Precise Numerical Values</h3>
+                    <div class="code-block">
+Primary Prediction: 492.16 ± 0.03 nm
+Frequency: 609.77 ± 0.04 THz
+Energy: 2.521 ± 0.0002 eV
+Recognition Rung: r = 8 (fundamental octave)
+Coherence Temperature: 29,211 K
+Phase Coherence Length: > 5000 km</div>
+                </div>
+                
+                <!-- Derivation Section -->
+                <div class="detail-section">
+                    <h3>📐 How We Calculated This</h3>
+                    <div class="code-block">
+Step 1: Start with coherence energy
+E_coh = 0.09 eV (base recognition quantum)
+
+Step 2: Apply eight-tick octave principle
+E_luminon = E_coh × φ^8 × (8/π)
+E_luminon = 0.09 × 46.978 × 2.546 = 2.521 eV
+
+Step 3: Convert to wavelength
+λ = hc/E = 492.16 nm</div>
+                    <div class="action-links">
+                        <a href="#" class="action-link">
+                            📓 View Full Calculation Notebook
+                        </a>
+                        <a href="#" class="action-link">
+                            🔐 View Lean 4 Proof
+                        </a>
+                        <a href="#" class="action-link">
+                            🌳 Recognition Tree Diagram
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Comparison Section -->
+                <div class="detail-section">
+                    <h3>⚖️ How This Differs from Standard Physics</h3>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Standard Model</th>
+                            <th>Recognition Science</th>
+                        </tr>
+                        <tr>
+                            <td>Light Quantization</td>
+                            <td>Continuous spectrum</td>
+                            <td>Discrete at 492.16 nm</td>
+                        </tr>
+                        <tr>
+                            <td>Derivation</td>
+                            <td>No prediction</td>
+                            <td>From first principles</td>
+                        </tr>
+                        <tr>
+                            <td>Free Parameters</td>
+                            <td>Not applicable</td>
+                            <td>Zero</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <!-- Timeline Section -->
+                <div class="detail-section">
+                    <h3>🔬 When & How This Will Be Tested</h3>
+                    <div class="timeline-item">
+                        <strong>2025 Q3:</strong> Stanford Cavity QED Lab<br>
+                        <span style="color: #666;">Ultra-high finesse optical cavity (F > 10⁶)</span>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>2026 Q1:</strong> NIST Optical Clock Network<br>
+                        <span style="color: #666;">Precision wavelength measurement (Δλ < 0.01 nm)</span>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>2027:</strong> Ledger-Light Space Mission<br>
+                        <span style="color: #666;">Global coherence test across 5000 km baseline</span>
+                    </div>
+                    <div class="action-links">
+                        <a href="#" class="action-link">
+                            📧 Get Notified When Tested
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePrediction(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('expanded');
+        }
+    </script>
+</body>
+</html> 

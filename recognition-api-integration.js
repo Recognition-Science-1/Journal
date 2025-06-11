@@ -168,6 +168,88 @@ class RecognitionAPI {
         return null;
     }
 
+    // Get breakthrough data from new completion files
+    async getBreakthroughData() {
+        const cacheKey = 'breakthroughs';
+        if (this.cache.has(cacheKey)) {
+            return this.cache.get(cacheKey);
+        }
+
+        const breakthroughs = {};
+        
+        // Fetch all the breakthrough status files
+        const files = [
+            'PROOF_AUTOMATION_COMPLETE.md',
+            'SCAFFOLDING_COMPLETE.md', 
+            'SETUP_COMPLETE.md',
+            'READY_FOR_SOLVERS.md'
+        ];
+
+        for (const file of files) {
+            const content = await this.fetchFromRepo(file);
+            if (content) {
+                breakthroughs[file.replace('.md', '')] = content;
+            }
+        }
+
+        this.cache.set(cacheKey, breakthroughs);
+        return breakthroughs;
+    }
+
+    // Get solver status and progress
+    async getSolverStatus() {
+        const cacheKey = 'solver_status';
+        if (this.cache.has(cacheKey)) {
+            return this.cache.get(cacheKey);
+        }
+
+        try {
+            // Try to get recognition progress JSON
+            const progressData = await this.fetchJSON('formal/recognition_progress.json');
+            if (progressData) {
+                this.cache.set(cacheKey, progressData);
+                return progressData;
+            }
+        } catch (error) {
+            console.log('No solver progress data yet:', error);
+        }
+
+        return null;
+    }
+
+    // Get formal proofs (updated to handle new structure)
+    async getFormalProofs() {
+        const cacheKey = 'formal_proofs';
+        if (this.cache.has(cacheKey)) {
+            return this.cache.get(cacheKey);
+        }
+
+        try {
+            const response = await fetch(`${this.baseURL}/formal/proofs`);
+            const files = await response.json();
+            
+            const proofs = [];
+            for (const file of files) {
+                if (file.name.endsWith('.lean')) {
+                    const proofData = await this.fetchFromRepo(`formal/proofs/${file.name}`);
+                    if (proofData) {
+                        proofs.push({
+                            name: file.name,
+                            content: proofData,
+                            lastModified: file.sha
+                        });
+                    }
+                }
+            }
+            
+            this.cache.set(cacheKey, proofs);
+            return proofs;
+        } catch (error) {
+            console.error('Error fetching formal proofs:', error);
+            return [];
+        }
+    }
+
     // Update website elements with latest data
     async updateWebsite() {
         console.log('🔄 Updating website with latest Recognition Science data...');
@@ -202,6 +284,18 @@ class RecognitionAPI {
             this.updateStatusSection(status);
         }
 
+        // Update breakthrough section
+        const breakthroughs = await this.getBreakthroughData();
+        if (Object.keys(breakthroughs).length > 0) {
+            this.updateBreakthroughSection(breakthroughs);
+        }
+
+        // Update solver section
+        const solverStatus = await this.getSolverStatus();
+        if (solverStatus) {
+            this.updateSolverSection(solverStatus);
+        }
+
         console.log('✅ Website updated successfully!');
     }
 
@@ -215,19 +309,27 @@ class RecognitionAPI {
         }
     }
 
-    // Update predictions section
+    // Update predictions section with new data structure
     updatePredictionsSection(predictions) {
         const predictionsContainer = document.getElementById('live-predictions');
         if (predictionsContainer) {
-            let html = '<h3>Latest Verified Predictions</h3>';
+            let html = `
+                <h3>🎯 VERIFIED PREDICTIONS</h3>
+                <p><strong>Total Verified:</strong> ${predictions.length}</p>
+            `;
+            
             predictions.forEach(prediction => {
+                const verification = prediction.verification || {};
+                const pred = prediction.prediction || {};
+                
                 html += `
-                    <div class="prediction-item">
-                        <h4>${prediction.name || 'Prediction'}</h4>
-                        <p><strong>Status:</strong> ${prediction.status || 'Unknown'}</p>
-                        <p><strong>Value:</strong> ${prediction.predicted_value || 'N/A'}</p>
-                        <p><strong>Measured:</strong> ${prediction.measured_value || 'N/A'}</p>
-                        <p><strong>Accuracy:</strong> ${prediction.accuracy || 'N/A'}</p>
+                    <div class="prediction-item" style="border: 2px solid #00ff00; margin: 10px 0; padding: 10px; background: #001a00;">
+                        <h4>${pred.observable || prediction.name || 'Prediction'}</h4>
+                        <p><strong>Predicted:</strong> ${pred.value || 'N/A'} ${pred.unit || ''}</p>
+                        <p><strong>Measured:</strong> ${verification.measurement?.value || 'N/A'} ± ${verification.measurement?.uncertainty || 'N/A'}</p>
+                        <p><strong>Accuracy:</strong> ${verification.deviation_percent ? (100 - Math.abs(verification.deviation_percent)).toFixed(4) + '%' : 'N/A'}</p>
+                        <p><strong>Status:</strong> <span style="color: #00ff00;">${verification.status || 'Pending'}</span></p>
+                        <p><strong>Source:</strong> ${verification.measurement?.source || 'Unknown'}</p>
                     </div>
                 `;
             });
@@ -276,6 +378,50 @@ class RecognitionAPI {
         const statusContainer = document.getElementById('live-status');
         if (statusContainer) {
             statusContainer.innerHTML = this.markdownToHTML(status);
+        }
+    }
+
+    // Update breakthrough section
+    updateBreakthroughSection(breakthroughs) {
+        const breakthroughContainer = document.getElementById('live-breakthroughs');
+        if (breakthroughContainer) {
+            let html = '<h3>🚀 MAJOR BREAKTHROUGHS</h3>';
+            
+            Object.entries(breakthroughs).forEach(([key, content]) => {
+                const title = key.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, l => l.toUpperCase());
+                html += `
+                    <div class="breakthrough-item" style="border: 2px solid #ffff00; margin: 10px 0; padding: 10px; background: #1a1a00;">
+                        <h4>✅ ${title}</h4>
+                        <div style="max-height: 200px; overflow-y: auto;">
+                            ${this.markdownToHTML(content.substring(0, 500))}...
+                        </div>
+                    </div>
+                `;
+            });
+            
+            breakthroughContainer.innerHTML = html;
+        }
+    }
+
+    // Update solver section  
+    updateSolverSection(solverStatus) {
+        const solverContainer = document.getElementById('live-solver');
+        if (solverContainer) {
+            let html = '<h3>🤖 AUTONOMOUS SOLVERS</h3>';
+            
+            if (solverStatus.theorems_proven) {
+                html += `
+                    <div style="border: 2px solid #ff00ff; margin: 10px 0; padding: 10px; background: #1a001a;">
+                        <p><strong>Theorems Proven:</strong> ${solverStatus.theorems_proven}</p>
+                        <p><strong>Success Rate:</strong> ${solverStatus.success_rate || 'N/A'}</p>
+                        <p><strong>Last Update:</strong> ${solverStatus.last_updated || 'Unknown'}</p>
+                    </div>
+                `;
+            } else {
+                html += '<p>Solver initialization in progress...</p>';
+            }
+            
+            solverContainer.innerHTML = html;
         }
     }
 

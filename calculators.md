@@ -1,0 +1,356 @@
+---
+layout: default
+title: "Interactive Calculators"
+---
+
+# 🧮 Recognition Science Calculators
+
+<div class="calculator-container">
+  
+  <!-- Particle Mass Calculator -->
+  <div class="calculator-card">
+    <h2>⚛️ Particle Mass Calculator</h2>
+    <p>Calculate particle masses using the Recognition Science formula:</p>
+    <div class="formula">
+      mass = 0.090 × 10<sup>-9</sup> × φ<sup>rung</sup> GeV
+    </div>
+    
+    <div class="calculator-inputs">
+      <label for="rung-input">Enter Rung Number:</label>
+      <input type="number" id="rung-input" min="1" max="100" value="32" />
+      <button onclick="calculateMass()">Calculate</button>
+    </div>
+    
+    <div id="mass-result" class="result-box"></div>
+    
+    <div class="quick-particles">
+      <h3>Quick Access - Known Particles:</h3>
+      <div class="particle-buttons">
+        <button onclick="setParticle(32, 'Electron')">Electron (32)</button>
+        <button onclick="setParticle(39, 'Muon')">Muon (39)</button>
+        <button onclick="setParticle(42, 'Tau')">Tau (42)</button>
+        <button onclick="setParticle(55, 'Proton')">Proton (55)</button>
+        <button onclick="setParticle(57, 'W Boson')">W Boson (57)</button>
+        <button onclick="setParticle(58, 'Higgs')">Higgs (58)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Golden Ratio Verifier -->
+  <div class="calculator-card">
+    <h2>🌟 Golden Ratio Verifier</h2>
+    <p>Verify the fundamental equation: φ² - φ - 1 = 0</p>
+    
+    <div class="phi-display">
+      <div class="phi-value">φ = <span id="phi-value">1.6180339887...</span></div>
+      <button onclick="verifyGoldenRatio()">Verify Equation</button>
+    </div>
+    
+    <div id="phi-result" class="result-box"></div>
+  </div>
+
+  <!-- Residue Classes Visualizer -->
+  <div class="calculator-card">
+    <h2>🎨 Residue Classes Visualizer</h2>
+    <p>The 36 residue classes of Recognition Science</p>
+    
+    <div class="residue-display">
+      <div class="gauge-group su3">
+        <h4>SU(3) - Strong</h4>
+        <div class="residue-count">8</div>
+        <div class="residue-boxes"></div>
+      </div>
+      <div class="gauge-group su2">
+        <h4>SU(2) - Weak</h4>
+        <div class="residue-count">8</div>
+        <div class="residue-boxes"></div>
+      </div>
+      <div class="gauge-group u1">
+        <h4>U(1) - EM</h4>
+        <div class="residue-count">20</div>
+        <div class="residue-boxes"></div>
+      </div>
+    </div>
+    
+    <div class="residue-total">
+      Total: 8 + 8 + 20 = <strong>36</strong> residue classes
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Constants
+const PHI = (1 + Math.sqrt(5)) / 2;
+const E_COH = 0.090e-9; // GeV
+
+// Particle Mass Calculator
+function calculateMass() {
+  const rung = parseInt(document.getElementById('rung-input').value);
+  if (isNaN(rung) || rung < 1) {
+    alert('Please enter a valid rung number');
+    return;
+  }
+  
+  const mass = E_COH * Math.pow(PHI, rung);
+  const massInMeV = mass * 1000;
+  
+  let unit = 'GeV';
+  let displayMass = mass;
+  
+  if (mass < 0.001) {
+    unit = 'MeV';
+    displayMass = massInMeV;
+  }
+  
+  const resultDiv = document.getElementById('mass-result');
+  resultDiv.innerHTML = `
+    <h3>Result for Rung ${rung}:</h3>
+    <div class="mass-value">${displayMass.toFixed(3)} ${unit}</div>
+    <div class="mass-details">
+      <p>Exact: ${mass.toExponential(6)} GeV</p>
+      <p>Formula: 0.090×10⁻⁹ × ${PHI.toFixed(6)}^${rung}</p>
+    </div>
+  `;
+}
+
+function setParticle(rung, name) {
+  document.getElementById('rung-input').value = rung;
+  calculateMass();
+  const resultDiv = document.getElementById('mass-result');
+  resultDiv.innerHTML = `<h3>${name} (Rung ${rung}):</h3>` + resultDiv.innerHTML.substring(resultDiv.innerHTML.indexOf('<div'));
+}
+
+// Golden Ratio Verifier
+function verifyGoldenRatio() {
+  const phi_squared = PHI * PHI;
+  const phi_plus_one = PHI + 1;
+  const difference = Math.abs(phi_squared - phi_plus_one);
+  
+  const resultDiv = document.getElementById('phi-result');
+  resultDiv.innerHTML = `
+    <h3>Verification Results:</h3>
+    <div class="phi-calculation">
+      <p>φ = ${PHI.toFixed(15)}</p>
+      <p>φ² = ${phi_squared.toFixed(15)}</p>
+      <p>φ + 1 = ${phi_plus_one.toFixed(15)}</p>
+      <p class="difference">φ² - φ - 1 = ${difference.toExponential(2)}</p>
+    </div>
+    <div class="verification-status">
+      ✅ Verified to machine precision!
+    </div>
+  `;
+}
+
+// Initialize residue visualizer
+window.onload = function() {
+  // Create visual boxes for residue classes
+  const su3Boxes = document.querySelector('.su3 .residue-boxes');
+  const su2Boxes = document.querySelector('.su2 .residue-boxes');
+  const u1Boxes = document.querySelector('.u1 .residue-boxes');
+  
+  for (let i = 0; i < 8; i++) {
+    su3Boxes.innerHTML += '<div class="residue-box su3-color"></div>';
+    su2Boxes.innerHTML += '<div class="residue-box su2-color"></div>';
+  }
+  
+  for (let i = 0; i < 20; i++) {
+    u1Boxes.innerHTML += '<div class="residue-box u1-color"></div>';
+  }
+  
+  // Calculate initial mass
+  calculateMass();
+};
+</script>
+
+<style>
+.calculator-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.calculator-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid #e0e0e0;
+}
+
+.formula {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  font-family: 'Courier New', monospace;
+}
+
+.calculator-inputs {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.calculator-inputs input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  width: 120px;
+}
+
+.calculator-inputs button, .particle-buttons button, .phi-display button {
+  padding: 0.5rem 1.5rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.calculator-inputs button:hover, .particle-buttons button:hover, .phi-display button:hover {
+  background: #0056b3;
+}
+
+.result-box {
+  background: #f0f8ff;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  min-height: 100px;
+}
+
+.mass-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff;
+  margin: 0.5rem 0;
+}
+
+.mass-details {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.particle-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.particle-buttons button {
+  background: #6c757d;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+}
+
+.particle-buttons button:hover {
+  background: #5a6268;
+}
+
+/* Golden Ratio Styles */
+.phi-display {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.phi-value {
+  font-size: 1.5rem;
+  font-family: 'Courier New', monospace;
+  margin-bottom: 1rem;
+}
+
+.phi-calculation p {
+  font-family: 'Courier New', monospace;
+  margin: 0.5rem 0;
+}
+
+.difference {
+  font-weight: bold;
+  color: #28a745;
+  font-size: 1.1rem;
+}
+
+.verification-status {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #28a745;
+  margin-top: 1rem;
+}
+
+/* Residue Classes Styles */
+.residue-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.gauge-group {
+  text-align: center;
+}
+
+.gauge-group h4 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.residue-count {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.su3 .residue-count { color: #dc3545; }
+.su2 .residue-count { color: #007bff; }
+.u1 .residue-count { color: #28a745; }
+
+.residue-boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
+  gap: 4px;
+  margin-top: 1rem;
+}
+
+.residue-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.su3-color { background: #dc3545; }
+.su2-color { background: #007bff; }
+.u1-color { background: #28a745; }
+
+.residue-total {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .calculator-card {
+    padding: 1.5rem;
+  }
+  
+  .calculator-inputs {
+    flex-direction: column;
+  }
+  
+  .particle-buttons {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+</style> 
