@@ -317,14 +317,14 @@ class RecognitionAPI {
         if (predictionsContainer) {
             if (!predictions || predictions.length === 0) {
                 predictionsContainer.innerHTML = `
-                    <h3>🎯 VERIFIED PREDICTIONS</h3>
-                    <div class="prediction-item" style="border: 2px solid #00ff00; margin: 10px 0; padding: 10px; background: #001a00; color: white;">
+                    <h3>VERIFIED PREDICTIONS</h3>
+                    <div class="prediction-item" style="border: 2px solid black; margin: 15px 0; padding: 15px; background: white;">
                         <h4>Fine Structure Constant (α⁻¹)</h4>
                         <p><strong>Status:</strong> Fetching from repository...</p>
                         <p><strong>Expected:</strong> 137.036 (dimensionless)</p>
-                        <p><strong>Repository:</strong> <a href="https://github.com/jonwashburn/recognition-ledger/tree/main/predictions" target="_blank" style="color: #00ff00;">predictions/*.json</a></p>
+                        <p><strong>Repository:</strong> <a href="https://github.com/jonwashburn/recognition-ledger/tree/main/predictions" target="_blank" style="color: black; text-decoration: underline;">predictions/*.json</a></p>
                     </div>
-                    <div class="prediction-item" style="border: 2px solid #00ff00; margin: 10px 0; padding: 10px; background: #001a00; color: white;">
+                    <div class="prediction-item" style="border: 2px solid black; margin: 15px 0; padding: 15px; background: white;">
                         <h4>Dark Energy Density</h4>
                         <p><strong>Status:</strong> Loading verification data...</p>
                         <p><strong>Expected:</strong> 2.26 meV</p>
@@ -334,8 +334,8 @@ class RecognitionAPI {
             }
 
             let html = `
-                <h3>🎯 VERIFIED PREDICTIONS</h3>
-                <p style="color: white;"><strong>Total Verified:</strong> ${predictions.length}</p>
+                <h3>VERIFIED PREDICTIONS</h3>
+                <p><strong>Total Verified:</strong> ${predictions.length}</p>
             `;
             
             predictions.forEach(prediction => {
@@ -343,12 +343,12 @@ class RecognitionAPI {
                 const pred = prediction.prediction || {};
                 
                 html += `
-                    <div class="prediction-item" style="border: 2px solid #00ff00; margin: 10px 0; padding: 10px; background: #001a00; color: white;">
+                    <div class="prediction-item" style="border: 2px solid black; margin: 15px 0; padding: 15px; background: white;">
                         <h4>${pred.observable || prediction.name || 'Prediction'}</h4>
                         <p><strong>Predicted:</strong> ${pred.value || 'N/A'} ${pred.unit || ''}</p>
                         <p><strong>Measured:</strong> ${verification.measurement?.value || 'N/A'} ± ${verification.measurement?.uncertainty || 'N/A'}</p>
                         <p><strong>Accuracy:</strong> ${verification.deviation_percent ? (100 - Math.abs(verification.deviation_percent)).toFixed(4) + '%' : 'N/A'}</p>
-                        <p><strong>Status:</strong> <span style="color: #00ff00;">${verification.status || 'Pending'}</span></p>
+                        <p><strong>Status:</strong> <strong>${verification.status || 'Pending'}</strong></p>
                         <p><strong>Source:</strong> ${verification.measurement?.source || 'Unknown'}</p>
                     </div>
                 `;
@@ -407,24 +407,24 @@ class RecognitionAPI {
         if (breakthroughContainer) {
             if (!breakthroughs || Object.keys(breakthroughs).length === 0) {
                 breakthroughContainer.innerHTML = `
-                    <h3>🚀 MAJOR BREAKTHROUGHS</h3>
-                    <div class="breakthrough-item" style="border: 2px solid #ffff00; margin: 10px 0; padding: 10px; background: #1a1a00; color: white;">
-                        <h4>✅ Recognition Science Achievements</h4>
+                    <h3>MAJOR BREAKTHROUGHS</h3>
+                    <div class="breakthrough-item" style="border: 2px solid black; margin: 15px 0; padding: 15px; background: white;">
+                        <h4>Recognition Science Achievements</h4>
                         <p><strong>Status:</strong> Loading breakthrough data...</p>
-                        <p><strong>Repository:</strong> <a href="https://github.com/jonwashburn/recognition-ledger" target="_blank" style="color: #ffff00;">Jonathan's recognition-ledger</a></p>
+                        <p><strong>Repository:</strong> <a href="https://github.com/jonwashburn/recognition-ledger" target="_blank" style="color: black; text-decoration: underline;">Jonathan's recognition-ledger</a></p>
                         <p>Checking for: PROOF_AUTOMATION_COMPLETE.md, SCAFFOLDING_COMPLETE.md, READY_FOR_SOLVERS.md</p>
                     </div>
                 `;
                 return;
             }
 
-            let html = '<h3>🚀 MAJOR BREAKTHROUGHS</h3>';
+            let html = '<h3>MAJOR BREAKTHROUGHS</h3>';
             
             Object.entries(breakthroughs).forEach(([key, content]) => {
                 const title = key.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, l => l.toUpperCase());
                 html += `
-                    <div class="breakthrough-item" style="border: 2px solid #ffff00; margin: 10px 0; padding: 10px; background: #1a1a00; color: white;">
-                        <h4>✅ ${title}</h4>
+                    <div class="breakthrough-item" style="border: 2px solid black; margin: 15px 0; padding: 15px; background: white;">
+                        <h4>${title}</h4>
                         <div style="max-height: 200px; overflow-y: auto;">
                             ${this.markdownToHTML(content.substring(0, 500))}...
                         </div>
@@ -440,11 +440,11 @@ class RecognitionAPI {
     updateSolverSection(solverStatus) {
         const solverContainer = document.getElementById('live-solver');
         if (solverContainer) {
-            let html = '<h3>🤖 AUTONOMOUS SOLVERS</h3>';
+            let html = '<h3>AUTONOMOUS SOLVERS</h3>';
             
             if (solverStatus && solverStatus.theorems_proven) {
                 html += `
-                    <div style="border: 2px solid #ff00ff; margin: 10px 0; padding: 10px; background: #1a001a; color: white;">
+                    <div style="border: 2px solid black; margin: 15px 0; padding: 15px; background: white;">
                         <p><strong>Theorems Proven:</strong> ${solverStatus.theorems_proven}</p>
                         <p><strong>Success Rate:</strong> ${solverStatus.success_rate || 'N/A'}</p>
                         <p><strong>Last Update:</strong> ${solverStatus.last_updated || 'Unknown'}</p>
@@ -452,9 +452,9 @@ class RecognitionAPI {
                 `;
             } else {
                 html += `
-                    <div style="border: 2px solid #ff00ff; margin: 10px 0; padding: 10px; background: #1a001a; color: white;">
-                        <h4>🔍 Solver Status</h4>
-                        <p><strong>Repository:</strong> <a href="https://github.com/jonwashburn/recognition-ledger/tree/main/formal" target="_blank" style="color: #ff00ff;">formal/*.py</a></p>
+                    <div style="border: 2px solid black; margin: 15px 0; padding: 15px; background: white;">
+                        <h4>Solver Status</h4>
+                        <p><strong>Repository:</strong> <a href="https://github.com/jonwashburn/recognition-ledger/tree/main/formal" target="_blank" style="color: black; text-decoration: underline;">formal/*.py</a></p>
                         <p><strong>Available Solvers:</strong></p>
                         <ul style="margin: 5px 0; padding-left: 20px;">
                             <li>autonomous_recognition_solver.py</li>
