@@ -255,31 +255,55 @@
 
 <!-- LIVE API DATA SECTION -->
 <div class="layer">
-    <h3>LIVE RECOGNITION SCIENCE DATA</h3>
+    <h3>🔄 LIVE RECOGNITION SCIENCE DATA</h3>
     <p>Real-time updates from <a href="https://github.com/jonwashburn/recognition-ledger" target="_blank" style="color: black; text-decoration: underline;">Jonathan's recognition-ledger repository</a></p>
     
-    <div id="live-predictions-display" style="margin: 20px 0; padding: 15px; background: #f5f5f5; border: 2px solid black;">
-        <div id="live-predictions">Loading latest predictions from repository...</div>
+    <div class="truth-packet" onclick="expandPacket(this)">
+        <strong>🔮 VERIFIED PREDICTIONS</strong>
+        <span class="status verified">LIVE</span>
+        <div class="packet-details" style="display:none;">
+            <div id="live-predictions">🔄 Loading latest predictions from repository...</div>
+        </div>
     </div>
 
-    <div id="live-theorems-display" style="margin: 20px 0; padding: 15px; background: #f5f5f5; border: 2px solid black;">
-        <div id="live-theorems">Loading theorem proofs status...</div>
+    <div class="truth-packet" onclick="expandPacket(this)">
+        <strong>📜 THEOREM PROOFS STATUS</strong>
+        <span class="status canonical">LIVE</span>
+        <div class="packet-details" style="display:none;">
+            <div id="live-theorems">🔄 Loading theorem proofs status...</div>
+        </div>
     </div>
 
-    <div id="live-status-display" style="margin: 20px 0; padding: 15px; background: #f5f5f5; border: 2px solid black;">
-        <div id="live-status">Loading project status...</div>
+    <div class="truth-packet" onclick="expandPacket(this)">
+        <strong>📊 PROJECT STATUS</strong>
+        <span class="status verified">LIVE</span>
+        <div class="packet-details" style="display:none;">
+            <div id="live-status">🔄 Loading project status...</div>
+        </div>
     </div>
 
-    <div id="live-breakthroughs-display" style="margin: 20px 0; padding: 15px; background: #f5f5f5; border: 2px solid black;">
-        <div id="live-breakthroughs">Loading breakthrough status...</div>
+    <div class="truth-packet" onclick="expandPacket(this)">
+        <strong>🚀 BREAKTHROUGH STATUS</strong>
+        <span class="status canonical">LIVE</span>
+        <div class="packet-details" style="display:none;">
+            <div id="live-breakthroughs">🔄 Loading breakthrough status...</div>
+        </div>
     </div>
 
-    <div id="live-solver-display" style="margin: 20px 0; padding: 15px; background: #f5f5f5; border: 2px solid black;">
-        <div id="live-solver">Loading autonomous solver status...</div>
+    <div class="truth-packet" onclick="expandPacket(this)">
+        <strong>🤖 AUTONOMOUS SOLVER STATUS</strong>
+        <span class="status verified">LIVE</span>
+        <div class="packet-details" style="display:none;">
+            <div id="live-solver">🔄 Loading autonomous solver status...</div>
+        </div>
     </div>
 
-    <div id="live-validation-display" style="margin: 20px 0; padding: 15px; background: #f5f5f5; border: 2px solid black;">
-        <div id="live-validation">Loading reality crawler results...</div>
+    <div class="truth-packet" onclick="expandPacket(this)">
+        <strong>🌐 REALITY CRAWLER RESULTS</strong>
+        <span class="status pending">LIVE</span>
+        <div class="packet-details" style="display:none;">
+            <div id="live-validation">🔄 Loading reality crawler results...</div>
+        </div>
     </div>
 </div>
 
