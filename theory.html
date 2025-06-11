@@ -5,373 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recognition Science Theory - The Eight Axioms</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f8f9fa;
-        }
-
-        .container {
+            font-family: monospace;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
+            padding: 20px;
+            line-height: 1.6;
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            color: black;
         }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
+        h1, h2, h3 {
+            margin-top: 2em;
         }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #667eea;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #4a5568;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #667eea;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 4rem 0;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .section {
-            padding: 4rem 0;
-        }
-
-        .section h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #2d3748;
-        }
-
-        .axioms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
         .axiom-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-left: 5px solid #667eea;
-            transition: transform 0.3s;
+            border: 1px solid #ccc;
+            margin: 1em 0;
+            padding: 1em;
+            background: #fafafa;
         }
-
-        .axiom-card:hover {
-            transform: translateY(-5px);
-        }
-
         .axiom-number {
-            background: #667eea;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-weight: bold;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5em;
         }
-
         .axiom-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 1rem;
+            font-weight: bold;
+            margin-bottom: 0.5em;
         }
-
         .axiom-statement {
-            font-size: 1.1rem;
-            color: #4a5568;
             font-style: italic;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background: #f7fafc;
-            border-radius: 8px;
+            margin: 1em 0;
+            padding: 1em;
+            background: #f0f0f0;
+            border-left: 3px solid #666;
         }
-
-        .axiom-explanation {
-            color: #666;
-            line-height: 1.7;
-        }
-
-        .ledger-visual {
-            background: white;
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin: 3rem 0;
-        }
-
-        .ledger-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-        }
-
-        .ledger-table th,
-        .ledger-table td {
-            padding: 1rem;
-            text-align: center;
-            border: 2px solid #e2e8f0;
-        }
-
-        .ledger-table th {
-            background: #667eea;
-            color: white;
-            font-weight: 600;
-        }
-
-        .ledger-table .flow-column {
-            background: #e6fffa;
-        }
-
-        .ledger-table .stock-column {
-            background: #fef5e7;
-        }
-
-        .math-section {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            padding: 4rem 0;
-            margin: 3rem 0;
-            border-radius: 20px;
-        }
-
-        .math-section h2 {
-            color: #744210;
-        }
-
         .equation {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            margin: 2rem 0;
-            text-align: center;
-            font-size: 1.5rem;
-            font-family: 'Times New Roman', serif;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .golden-ratio-section {
-            background: white;
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin: 3rem 0;
-            text-align: center;
-        }
-
-        .phi-display {
-            font-size: 4rem;
-            color: #d69e2e;
-            font-weight: bold;
-            margin: 2rem 0;
-        }
-
-        .applications-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .application-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .application-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .application-card h3 {
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-
-        .chronon-section {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-            padding: 4rem 0;
-            margin: 3rem 0;
-            border-radius: 20px;
-            text-align: center;
-        }
-
-        .chronon-section h2 {
-            color: white;
-        }
-
-        .time-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-
-        .tick {
-            width: 60px;
-            height: 60px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .tick.active {
-            background: #ff6b6b;
-        }
-
-        .implications {
-            background: #2d3748;
-            color: white;
-            padding: 4rem 0;
-            margin: 3rem 0;
-            border-radius: 20px;
-        }
-
-        .implications h2 {
-            color: white;
-        }
-
-        .implication-list {
-            list-style: none;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .implication-list li {
-            padding: 1rem 0;
-            border-bottom: 1px solid #4a5568;
-            font-size: 1.1rem;
-        }
-
-        .implication-list li:before {
-            content: "→";
-            color: #667eea;
-            font-weight: bold;
-            margin-right: 1rem;
-        }
-
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #4a5568;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .axioms-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .mobile-menu-toggle {
-                display: block;
-            }
-            
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 1rem;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .nav-links li {
-                margin: 0.5rem 0;
-            }
-            
-            .time-visual {
-                gap: 0.5rem;
-            }
-            
-            .tick {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
+            font-family: monospace;
+            background: #f8f8f8;
+            padding: 10px;
+            margin: 10px 0;
         }
     </style>
 </head>
 <body>
-    <p style="margin: 20px 0; padding: 10px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;">
-    <strong>Navigation:</strong>
+
+<h1>RECOGNITION SCIENCE</h1>
+<p>A parameter-free theory of everything by Jonathan Washburn</p>
+
+<p style="margin: 20px 0; padding: 10px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;">
+<strong>Navigation:</strong>
     <a href="index.html" style="color: black; margin: 0 10px;">Home</a> |
     <a href="journal.html" style="color: black; margin: 0 10px;">Live Journal</a> |
     <a href="widget-demo.html" style="color: black; margin: 0 10px;">Widget Demo</a> |
