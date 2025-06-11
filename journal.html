@@ -253,6 +253,28 @@
     <p><strong>Flagged Predictions:</strong> 3 under review</p>
 </div>
 
+<!-- LIVE API DATA SECTION -->
+<div class="layer" style="background: #001a00; border: 2px solid #00ff00;">
+    <h3>🔄 LIVE RECOGNITION SCIENCE DATA</h3>
+    <p>Real-time updates from <a href="https://github.com/jonwashburn/recognition-ledger" target="_blank" style="color: #00ff00;">Jonathan's recognition-ledger repository</a></p>
+    
+    <div id="live-predictions-display" style="margin: 15px 0; padding: 10px; background: #000; border: 1px solid #333;">
+        <div id="live-predictions">🔄 Loading latest predictions from repository...</div>
+    </div>
+
+    <div id="live-theorems-display" style="margin: 15px 0; padding: 10px; background: #000; border: 1px solid #333;">
+        <div id="live-theorems">🔄 Loading theorem proofs status...</div>
+    </div>
+
+    <div id="live-status-display" style="margin: 15px 0; padding: 10px; background: #000; border: 1px solid #333;">
+        <div id="live-status">🔄 Loading project status...</div>
+    </div>
+
+    <div id="live-validation-display" style="margin: 15px 0; padding: 10px; background: #000; border: 1px solid #333;">
+        <div id="live-validation">🔄 Loading reality crawler results...</div>
+    </div>
+</div>
+
 <h2>SUBMIT TRUTH PACKET</h2>
 
 <div class="submit-form">
@@ -298,6 +320,7 @@
 <script src="truth-ledger.js"></script>
 <script src="reality-crawler.js"></script>
 <script src="uncertainty-pruner.js"></script>
+<script src="recognition-api-integration.js"></script>
 <script>
 function expandPacket(element) {
     const details = element.querySelector('.packet-details');

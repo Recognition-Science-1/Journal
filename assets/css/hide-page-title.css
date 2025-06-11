@@ -1,0 +1,37 @@
+/* Hide any auto-generated page title from Jekyll theme */
+.page-content h1:first-child,
+.post-title,
+.page-title,
+.page-heading,
+article.page h1:first-child,
+main h1:first-child,
+.wrapper > h1:first-child,
+#main-content > h1:first-child,
+.home h1:first-child {
+  display: none !important;
+}
+
+/* Specific targeting for minima theme */
+.page-content > .wrapper > h1:first-child,
+.home .page-content > .wrapper > h1:first-child,
+body.home .page-content h1:first-child {
+  display: none !important;
+}
+
+/* Hide any h1 that contains exactly "Home" */
+h1:contains("Home") {
+  display: none !important;
+}
+
+/* Ensure our hero section is the first visible element */
+.hero-section {
+  margin-top: 0 !important;
+}
+
+/* Additional targeting for common Jekyll layouts */
+.post-header h1,
+.page-header h1,
+header.post-header h1.post-title,
+header.page-header h1.page-title {
+  display: none !important;
+} 
