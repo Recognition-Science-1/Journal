@@ -416,21 +416,21 @@ function loadExampleData() {
     const examples = [
         {
             title: 'Zero Free Parameters Theorem',
-            dependencies: ['A1', 'A2', 'A3'],
+            dependencies: ['T1', 'T2', 'T3'],
             proof: 'theorem zero_parameters : ∀ (c : PhysicalConstant), ∃ (axioms : List Axiom), derives axioms c := by sorry',
             predictions: ['All constants derivable from axioms', 'No adjustable parameters in final theory'],
             author: 'Recognition Science Institute'
         },
         {
             title: 'Particle Mass Formula',
-            dependencies: ['A3', 'A5'],
+            dependencies: ['T3', 'T5'],
             proof: 'theorem mass_formula : ∀ (n : ℕ), particle_mass n = coherence_energy * φ^n := by sorry',
             predictions: ['Higgs mass = 125.1 GeV', 'Top quark mass = 173.2 GeV', 'Electron mass = 0.511 MeV'],
             author: 'Recognition Science Institute'
         },
         {
             title: 'Consciousness Emergence',
-            dependencies: ['A6', 'A8'],
+            dependencies: ['T6', 'T8'],
             proof: 'theorem consciousness_emergence : ∀ (system : RecognitionSystem), self_referential system → conscious system := by sorry',
             predictions: ['Self-awareness threshold at φ^42 connections', 'Qualia emergence from recognition loops'],
             author: 'Recognition Science Institute'
