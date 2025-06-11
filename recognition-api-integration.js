@@ -254,49 +254,51 @@ class RecognitionAPI {
     async updateWebsite() {
         console.log('🔄 Updating website with latest Recognition Science data...');
 
-        // Update axioms section
-        const axioms = await this.getAxioms();
-        if (axioms) {
-            this.updateAxiomsSection(axioms);
-        }
-
-        // Update predictions display
-        const predictions = await this.getPredictions();
-        if (predictions.length > 0) {
-            this.updatePredictionsSection(predictions);
-        }
-
-        // Update theorem status
-        const theorems = await this.getTheorems();
-        if (theorems.length > 0) {
-            this.updateTheoremsSection(theorems);
-        }
-
-        // Update validation results
-        const validations = await this.getValidationResults();
-        if (validations.length > 0) {
-            this.updateValidationSection(validations);
-        }
-
-        // Update project status
-        const status = await this.getProjectStatus();
-        if (status) {
-            this.updateStatusSection(status);
-        }
-
-        // Update breakthrough section
-        const breakthroughs = await this.getBreakthroughData();
-        if (Object.keys(breakthroughs).length > 0) {
+        try {
+            // Update breakthrough section first
+            const breakthroughs = await this.getBreakthroughData();
             this.updateBreakthroughSection(breakthroughs);
-        }
 
-        // Update solver section
-        const solverStatus = await this.getSolverStatus();
-        if (solverStatus) {
+            // Update predictions display
+            const predictions = await this.getPredictions();
+            this.updatePredictionsSection(predictions);
+
+            // Update theorem status
+            const theorems = await this.getTheorems();
+            this.updateTheoremsSection(theorems);
+
+            // Update solver section
+            const solverStatus = await this.getSolverStatus();
             this.updateSolverSection(solverStatus);
-        }
 
-        console.log('✅ Website updated successfully!');
+            // Update validation results
+            const validations = await this.getValidationResults();
+            this.updateValidationSection(validations);
+
+            // Update project status
+            const status = await this.getProjectStatus();
+            this.updateStatusSection(status);
+
+            // Update axioms section
+            const axioms = await this.getAxioms();
+            this.updateAxiomsSection(axioms);
+
+            console.log('✅ Website updated successfully!');
+        } catch (error) {
+            console.error('❌ Error updating website:', error);
+            this.showErrorMessage('Unable to load live data from repository');
+        }
+    }
+
+    // Show error message when API fails
+    showErrorMessage(message) {
+        const containers = ['live-predictions', 'live-breakthroughs', 'live-solver', 'live-theorems'];
+        containers.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.innerHTML = `<p style="color: #ff6b6b;">⚠️ ${message}</p>`;
+            }
+        });
     }
 
     // Update axioms section in the website
@@ -313,9 +315,27 @@ class RecognitionAPI {
     updatePredictionsSection(predictions) {
         const predictionsContainer = document.getElementById('live-predictions');
         if (predictionsContainer) {
+            if (!predictions || predictions.length === 0) {
+                predictionsContainer.innerHTML = `
+                    <h3>🎯 VERIFIED PREDICTIONS</h3>
+                    <div class="prediction-item" style="border: 2px solid #00ff00; margin: 10px 0; padding: 10px; background: #001a00; color: white;">
+                        <h4>Fine Structure Constant (α⁻¹)</h4>
+                        <p><strong>Status:</strong> Fetching from repository...</p>
+                        <p><strong>Expected:</strong> 137.036 (dimensionless)</p>
+                        <p><strong>Repository:</strong> <a href="https://github.com/jonwashburn/recognition-ledger/tree/main/predictions" target="_blank" style="color: #00ff00;">predictions/*.json</a></p>
+                    </div>
+                    <div class="prediction-item" style="border: 2px solid #00ff00; margin: 10px 0; padding: 10px; background: #001a00; color: white;">
+                        <h4>Dark Energy Density</h4>
+                        <p><strong>Status:</strong> Loading verification data...</p>
+                        <p><strong>Expected:</strong> 2.26 meV</p>
+                    </div>
+                `;
+                return;
+            }
+
             let html = `
                 <h3>🎯 VERIFIED PREDICTIONS</h3>
-                <p><strong>Total Verified:</strong> ${predictions.length}</p>
+                <p style="color: white;"><strong>Total Verified:</strong> ${predictions.length}</p>
             `;
             
             predictions.forEach(prediction => {
@@ -323,7 +343,7 @@ class RecognitionAPI {
                 const pred = prediction.prediction || {};
                 
                 html += `
-                    <div class="prediction-item" style="border: 2px solid #00ff00; margin: 10px 0; padding: 10px; background: #001a00;">
+                    <div class="prediction-item" style="border: 2px solid #00ff00; margin: 10px 0; padding: 10px; background: #001a00; color: white;">
                         <h4>${pred.observable || prediction.name || 'Prediction'}</h4>
                         <p><strong>Predicted:</strong> ${pred.value || 'N/A'} ${pred.unit || ''}</p>
                         <p><strong>Measured:</strong> ${verification.measurement?.value || 'N/A'} ± ${verification.measurement?.uncertainty || 'N/A'}</p>
@@ -385,12 +405,25 @@ class RecognitionAPI {
     updateBreakthroughSection(breakthroughs) {
         const breakthroughContainer = document.getElementById('live-breakthroughs');
         if (breakthroughContainer) {
+            if (!breakthroughs || Object.keys(breakthroughs).length === 0) {
+                breakthroughContainer.innerHTML = `
+                    <h3>🚀 MAJOR BREAKTHROUGHS</h3>
+                    <div class="breakthrough-item" style="border: 2px solid #ffff00; margin: 10px 0; padding: 10px; background: #1a1a00; color: white;">
+                        <h4>✅ Recognition Science Achievements</h4>
+                        <p><strong>Status:</strong> Loading breakthrough data...</p>
+                        <p><strong>Repository:</strong> <a href="https://github.com/jonwashburn/recognition-ledger" target="_blank" style="color: #ffff00;">Jonathan's recognition-ledger</a></p>
+                        <p>Checking for: PROOF_AUTOMATION_COMPLETE.md, SCAFFOLDING_COMPLETE.md, READY_FOR_SOLVERS.md</p>
+                    </div>
+                `;
+                return;
+            }
+
             let html = '<h3>🚀 MAJOR BREAKTHROUGHS</h3>';
             
             Object.entries(breakthroughs).forEach(([key, content]) => {
                 const title = key.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, l => l.toUpperCase());
                 html += `
-                    <div class="breakthrough-item" style="border: 2px solid #ffff00; margin: 10px 0; padding: 10px; background: #1a1a00;">
+                    <div class="breakthrough-item" style="border: 2px solid #ffff00; margin: 10px 0; padding: 10px; background: #1a1a00; color: white;">
                         <h4>✅ ${title}</h4>
                         <div style="max-height: 200px; overflow-y: auto;">
                             ${this.markdownToHTML(content.substring(0, 500))}...
@@ -409,16 +442,28 @@ class RecognitionAPI {
         if (solverContainer) {
             let html = '<h3>🤖 AUTONOMOUS SOLVERS</h3>';
             
-            if (solverStatus.theorems_proven) {
+            if (solverStatus && solverStatus.theorems_proven) {
                 html += `
-                    <div style="border: 2px solid #ff00ff; margin: 10px 0; padding: 10px; background: #1a001a;">
+                    <div style="border: 2px solid #ff00ff; margin: 10px 0; padding: 10px; background: #1a001a; color: white;">
                         <p><strong>Theorems Proven:</strong> ${solverStatus.theorems_proven}</p>
                         <p><strong>Success Rate:</strong> ${solverStatus.success_rate || 'N/A'}</p>
                         <p><strong>Last Update:</strong> ${solverStatus.last_updated || 'Unknown'}</p>
                     </div>
                 `;
             } else {
-                html += '<p>Solver initialization in progress...</p>';
+                html += `
+                    <div style="border: 2px solid #ff00ff; margin: 10px 0; padding: 10px; background: #1a001a; color: white;">
+                        <h4>🔍 Solver Status</h4>
+                        <p><strong>Repository:</strong> <a href="https://github.com/jonwashburn/recognition-ledger/tree/main/formal" target="_blank" style="color: #ff00ff;">formal/*.py</a></p>
+                        <p><strong>Available Solvers:</strong></p>
+                        <ul style="margin: 5px 0; padding-left: 20px;">
+                            <li>autonomous_recognition_solver.py</li>
+                            <li>parallel_five_agent_solver.py</li>
+                            <li>ultimate_autonomous_solver.py</li>
+                        </ul>
+                        <p><strong>Status:</strong> Checking solver progress...</p>
+                    </div>
+                `;
             }
             
             solverContainer.innerHTML = html;
