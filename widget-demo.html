@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recognition Science Widget Demo - Recognition Journal</title>
+    <style>
+        body {
+            font-family: monospace;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            color: black;
+        }
+        h1, h2 {
+            font-weight: normal;
+            text-transform: uppercase;
+        }
+        .demo-section {
+            margin: 40px 0;
+            padding: 20px;
+            border: 2px solid black;
+            background: #f9f9f9;
+        }
+        code {
+            background: #000;
+            color: #0f0;
+            padding: 2px 5px;
+            font-family: monospace;
+        }
+        pre {
+            background: #000;
+            color: #0f0;
+            padding: 15px;
+            overflow-x: auto;
+        }
+        .back-link {
+            color: black;
+            text-decoration: none;
+            border-bottom: 1px solid black;
+        }
+        .back-link:hover {
+            border-bottom: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recognition Science Widget Integration</h1>
+    
+    <p><a href="index.html" class="back-link">← Back to Home</a> | <a href="journal.html" class="back-link">View Journal</a></p>
+
+    <h2>Jonathan's Official Widget</h2>
+    
+    <p>Jonathan Washburn has created an official widget for displaying Recognition Science predictions. 
+    It automatically updates with the latest verified predictions from the recognition-ledger repository.</p>
+
+    <div class="demo-section">
+        <h3>Live Widget Demo (Default Theme)</h3>
+        <div id="recognition-ledger"></div>
+    </div>
+
+    <h2>Integration Instructions</h2>
+    
+    <p>To add this widget to any page, simply include these two lines:</p>
+    
+    <pre><code>&lt;div id="recognition-ledger"&gt;&lt;/div&gt;
+&lt;script src="https://cdn.jsdelivr.net/gh/jonwashburn/recognition-ledger@main/widget.js"&gt;&lt;/script&gt;</code></pre>
+
+    <h2>Customization Options</h2>
+    
+    <div class="demo-section">
+        <h3>Dark Theme Example</h3>
+        <div id="recognition-ledger-dark"></div>
+    </div>
+
+    <div class="demo-section">
+        <h3>Minimal Theme Example</h3>
+        <div id="recognition-ledger-minimal"></div>
+    </div>
+
+    <h2>Available Themes</h2>
+    <ul>
+        <li><code>light</code> - Default light theme</li>
+        <li><code>dark</code> - Dark mode</li>
+        <li><code>minimal</code> - Clean, minimal design</li>
+        <li><code>scientific</code> - Academic paper style</li>
+    </ul>
+
+    <h2>Configuration Code</h2>
+    
+    <pre><code>// Custom configuration example
+new RecognitionLedgerWidget({
+    containerId: 'my-container',
+    theme: 'dark',
+    maxPredictions: 5,
+    autoUpdate: true,
+    updateInterval: 3600000 // 1 hour
+});</code></pre>
+
+    <h2>Latest Predictions Available</h2>
+    
+    <p>The widget automatically displays all verified predictions from Jonathan's repository:</p>
+    
+    <ul>
+        <li>✅ Electron Mass - 0.511 MeV</li>
+        <li>✅ Muon Mass - 105.658 MeV</li>
+        <li>✅ Fine Structure Constant - α⁻¹ = 137.036</li>
+        <li>✅ Dark Energy Density - 2.26 meV</li>
+        <li>🆕 Gravitational Constant - 6.6743 × 10⁻¹¹ m³/kg·s²</li>
+    </ul>
+
+    <h2>Direct API Access</h2>
+    
+    <p>For custom implementations, you can fetch predictions directly:</p>
+    
+    <pre><code>fetch('https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/predictions/electron_mass.json')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.prediction.value); // 0.511
+        console.log(data.verification.status); // "verified"
+    });</code></pre>
+
+    <h2>Repository Links</h2>
+    
+    <ul>
+        <li><a href="https://github.com/jonwashburn/recognition-ledger" target="_blank" class="back-link">Recognition Ledger Repository</a></li>
+        <li><a href="https://github.com/jonwashburn/recognition-ledger/blob/main/API_INTEGRATION.md" target="_blank" class="back-link">Full API Documentation</a></li>
+        <li><a href="https://github.com/jonwashburn/recognition-ledger/blob/main/widget.js" target="_blank" class="back-link">Widget Source Code</a></li>
+    </ul>
+
+    <!-- Load the widget -->
+    <script src="https://cdn.jsdelivr.net/gh/jonwashburn/recognition-ledger@main/widget.js"></script>
+    
+    <!-- Initialize custom themed widgets -->
+    <script>
+        // Wait for widget script to load
+        setTimeout(() => {
+            // Dark theme widget
+            new RecognitionLedgerWidget({
+                containerId: 'recognition-ledger-dark',
+                theme: 'dark',
+                maxPredictions: 3
+            });
+
+            // Minimal theme widget  
+            new RecognitionLedgerWidget({
+                containerId: 'recognition-ledger-minimal',
+                theme: 'minimal',
+                maxPredictions: 3
+            });
+        }, 1000);
+    </script>
+</body>
+</html> 

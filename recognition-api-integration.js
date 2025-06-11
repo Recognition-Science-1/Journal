@@ -70,27 +70,30 @@ class RecognitionAPI {
             return this.cache.get(cacheKey);
         }
 
-        // Try to fetch predictions directory listing
-        try {
-            const response = await fetch(`${this.baseURL}/predictions`);
-            const files = await response.json();
-            
-            const predictions = [];
-            for (const file of files) {
-                if (file.name.endsWith('.json')) {
-                    const predictionData = await this.fetchJSON(`predictions/${file.name}`);
-                    if (predictionData) {
-                        predictions.push(predictionData);
-                    }
+        // List of all prediction files
+        const predictionFiles = [
+            'electron_mass.json',
+            'muon_mass.json', 
+            'fine_structure.json',
+            'dark_energy.json',
+            'P4_GravitationalConstant.json' // NEW!
+        ];
+
+        const predictions = [];
+        
+        for (const file of predictionFiles) {
+            try {
+                const predictionData = await this.fetchJSON(`predictions/${file}`);
+                if (predictionData) {
+                    predictions.push(predictionData);
                 }
+            } catch (error) {
+                console.error(`Error fetching ${file}:`, error);
             }
-            
-            this.cache.set(cacheKey, predictions);
-            return predictions;
-        } catch (error) {
-            console.error('Error fetching predictions:', error);
-            return [];
         }
+        
+        this.cache.set(cacheKey, predictions);
+        return predictions;
     }
 
     // Get theorem proofs status
