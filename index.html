@@ -96,9 +96,9 @@ Reality consists of discrete recognition events, not continuous fields.
 The universe operates through discrete "recognition events" rather than continuous processes. Each event is a quantum of information processing where one system recognizes another. This discreteness eliminates infinities and provides natural cutoffs for all physical processes. Unlike field theories that require renormalization, discrete recognition is inherently finite and well-defined.
 <div class="proof-links" id="proof-links-T1">
 <strong>Related Lean Proofs:</strong>
-<a href="https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/discrete_recognition.lean" download="discrete_recognition.lean" class="proof-link">discrete_recognition.lean</a>
-<a href="https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/quantum_events.lean" download="quantum_events.lean" class="proof-link">quantum_events.lean</a>
-<a href="truth-packets.html" class="proof-link" style="background: #666;">View All Proofs →</a>
+<a href="https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/AxiomProofs_COMPLETE.lean" download="AxiomProofs_COMPLETE.lean" class="proof-link">AxiomProofs_COMPLETE.lean</a>
+<span style="font-size: 0.8em; color: #666; margin-left: 10px;">(Contains T1-T3 proofs)</span>
+<br><a href="truth-packets.html" class="proof-link" style="background: #666; margin-top: 5px; display: inline-block;">View All Proofs →</a>
 </div>
 </div>
 </div>
@@ -110,9 +110,9 @@ Every recognition event has dual aspects that must balance.
 Like double-entry bookkeeping, every recognition event has two sides that must balance exactly. When particle A recognizes particle B, there's an equal and opposite recognition from B to A. This duality ensures conservation laws emerge naturally and explains why the universe maintains perfect accounting across all scales.
 <div class="proof-links" id="proof-links-T2">
 <strong>Related Lean Proofs:</strong>
-<a href="https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/dual_balance.lean" download="dual_balance.lean" class="proof-link">dual_balance.lean</a>
-<a href="https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/conservation_laws.lean" download="conservation_laws.lean" class="proof-link">conservation_laws.lean</a>
-<a href="truth-packets.html" class="proof-link" style="background: #666;">View All Proofs →</a>
+<a href="https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/AxiomProofs_COMPLETE.lean" download="AxiomProofs_COMPLETE.lean" class="proof-link">AxiomProofs_COMPLETE.lean</a>
+<span style="font-size: 0.8em; color: #666; margin-left: 10px;">(Contains T1-T3 proofs)</span>
+<br><a href="truth-packets.html" class="proof-link" style="background: #666; margin-top: 5px; display: inline-block;">View All Proofs →</a>
 </div>
 </div>
 </div>
@@ -355,7 +355,17 @@ async function loadAllProofs() {
 function findRelevantProofs(keywords) {
     if (!proofCache) return [];
     
-    return proofCache.filter(proof => {
+    // First, try to find the most complete/final version
+    const completedProofs = proofCache.filter(proof => 
+        proof.name.toLowerCase().includes('complete') ||
+        proof.name.toLowerCase().includes('final')
+    );
+    
+    // If we have completed proofs, prefer those
+    const proofsToSearch = completedProofs.length > 0 ? completedProofs : proofCache;
+    
+    // Find proofs matching keywords
+    const relevantProofs = proofsToSearch.filter(proof => {
         const content = (proof.content || '').toLowerCase();
         const name = (proof.name || '').toLowerCase();
         
@@ -363,28 +373,54 @@ function findRelevantProofs(keywords) {
         return keywords.some(keyword => 
             content.includes(keyword) || name.includes(keyword)
         );
-    }).slice(0, 5); // Limit to 5 proofs per theorem
+    });
+    
+    // If we found relevant proofs, return them
+    if (relevantProofs.length > 0) {
+        return relevantProofs.slice(0, 2); // Limit to 2 most relevant
+    }
+    
+    // Otherwise, for each theorem, return a specific default proof
+    return [];
 }
 
 // Display proof links
 function displayProofs(container, proofs, theorem) {
     let html = '<strong>Related Lean Proofs:</strong><br>';
     
-    if (proofs.length === 0) {
-        html += '<span style="color: #666;">No specific proofs found. Searching...</span>';
-        // Try to load general proofs
-        proofs = proofCache ? proofCache.slice(0, 3) : [];
+    // Theorem-specific proof mapping for cleaner display
+    const theoremSpecificProofs = {
+        'T1': { file: 'AxiomProofs_COMPLETE.lean', desc: 'Discrete Recognition Proof' },
+        'T2': { file: 'AxiomProofs_COMPLETE.lean', desc: 'Dual Balance Proof' },
+        'T3': { file: 'AxiomProofs_COMPLETE.lean', desc: 'Self-Reference Proof' },
+        'T4': { file: 'CompletedAxiomProofs_COMPLETE.lean', desc: 'Minimal Action Proof' },
+        'T5': { file: 'CompletedAxiomProofs_COMPLETE.lean', desc: 'Golden Ratio Proof' },
+        'T6': { file: 'CompletedAxiomProofs_COMPLETE.lean', desc: 'Coherence Proof' },
+        'T7': { file: 'DetailedProofs.lean', desc: 'Information Conservation Proof' },
+        'T8': { file: 'DetailedProofs.lean', desc: 'Emergent Complexity Proof' }
+    };
+    
+    const specificProof = theoremSpecificProofs[theorem];
+    
+    if (specificProof) {
+        // Show the specific proof for this theorem
+        const downloadUrl = `https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/${specificProof.file}`;
+        html += `<a href="${downloadUrl}" download="${specificProof.file}" class="proof-link" title="${specificProof.desc}">${specificProof.file}</a>`;
+        html += `<span style="font-size: 0.8em; color: #666; margin-left: 10px;">(${specificProof.desc})</span>`;
+    } else if (proofs.length > 0) {
+        // Show found proofs if any
+        proofs.forEach(proof => {
+            const fileName = proof.name || 'proof.lean';
+            const downloadUrl = `https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/${fileName}`;
+            html += `<a href="${downloadUrl}" download="${fileName}" class="proof-link" title="Download ${fileName}">${fileName}</a>`;
+        });
+    } else {
+        // Show general link if no specific proof found
+        html += '<span style="color: #666;">Proof in development</span>';
     }
     
-    proofs.forEach(proof => {
-        const fileName = proof.name || 'proof.lean';
-        const downloadUrl = `https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/${fileName}`;
-        
-        html += `<a href="${downloadUrl}" download="${fileName}" class="proof-link" title="Download ${fileName}">${fileName}</a>`;
-    });
-    
     // Add link to view all proofs
-    html += '<br><a href="truth-packets.html" class="proof-link" style="background: #666;">View All Proofs →</a>';
+    html += '<br><a href="truth-packets.html" class="proof-link" style="background: #666; margin-top: 5px; display: inline-block;">View All Proofs →</a>';
     
     container.innerHTML = html;
 }
