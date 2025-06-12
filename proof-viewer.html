@@ -99,7 +99,7 @@
     <button id="download-button" class="download-link" style="display: none;" onclick="downloadProof()">Download Full Lean File</button>
     
     <div id="paper-downloads" class="paper-downloads" style="display: none;">
-        <div class="download-section-title">📚 T1 Explanation Papers:</div>
+        <div class="download-section-title">📚 <span id="theorem-name"></span> Explanation Papers:</div>
         <button class="download-link" onclick="downloadExplanationPaper('tex')">Download LaTeX Paper (.tex)</button>
         <button class="download-link" onclick="downloadExplanationPaper('md')">Download Markdown Paper (.md)</button>
     </div>
@@ -332,16 +332,29 @@ async function downloadProof() {
     }
 }
 
-// Function to download T1 explanation papers
+// Function to download explanation papers for any theorem
 async function downloadExplanationPaper(format) {
     let filename, url;
     
-    if (format === 'tex') {
-        filename = 'T1_Discrete_Recognition_Paper.tex';
-        url = 'T1_Discrete_Recognition_Paper.tex';
-    } else if (format === 'md') {
-        filename = 'T1_Discrete_Recognition_Explained.md';
-        url = 'T1_Discrete_Recognition_Explained.md';
+    // Map theorem to paper filenames
+    const paperMap = {
+        'T1': {
+            tex: 'T1_Discrete_Recognition_Paper.tex',
+            md: 'T1_Discrete_Recognition_Explained.md'
+        },
+        'T2': {
+            tex: 'T2_Dual_Balance_Paper.tex',
+            md: 'T2_Dual_Balance_Explained.md'
+        }
+        // T3-T8 will be added as we create them
+    };
+    
+    if (paperMap[theorem] && paperMap[theorem][format]) {
+        filename = paperMap[theorem][format];
+        url = filename;
+    } else {
+        alert('Paper not available for this theorem yet.');
+        return;
     }
     
     try {
@@ -388,9 +401,11 @@ function displayProof() {
     downloadButton.style.display = 'inline-block';
     downloadButton.textContent = `Download Full ${proofData.file}`;
     
-    // Show T1 explanation papers if this is T1
-    if (theorem === 'T1') {
+    // Show explanation papers if available for this theorem
+    const availablePapers = ['T1', 'T2']; // Add more as we create them
+    if (availablePapers.includes(theorem)) {
         document.getElementById('paper-downloads').style.display = 'block';
+        document.getElementById('theorem-name').textContent = theorem;
     }
 }
 
