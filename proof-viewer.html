@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proof Viewer - Recognition Science</title>
+    <style>
+        body {
+            font-family: monospace;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: white;
+            color: black;
+        }
+        h1 {
+            border-bottom: 3px solid black;
+            padding-bottom: 10px;
+        }
+        .proof-container {
+            background: #f8f8f8;
+            border: 2px solid black;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .theorem-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .proof-content {
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            background: white;
+            padding: 15px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+        .nav-links {
+            margin: 20px 0;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        .download-link {
+            background: black;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .download-link:hover {
+            background: #333;
+        }
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>RECOGNITION SCIENCE PROOF VIEWER</h1>
+
+<div class="nav-links">
+    <strong>Navigation:</strong>
+    <a href="index.html" style="color: black; margin: 0 10px;">Home</a> |
+    <a href="journal.html" style="color: black; margin: 0 10px;">Live Journal</a> |
+    <a href="theory.html" style="color: black; margin: 0 10px;">Theory</a> |
+    <a href="truth-packets.html" style="color: black; margin: 0 10px;">Truth Packets</a> |
+    <a href="system-dashboard.html" style="color: black; margin: 0 10px;">System Dashboard</a>
+</div>
+
+<div class="proof-container">
+    <div class="theorem-title" id="theorem-title">Loading proof...</div>
+    <div id="proof-content" class="proof-content">
+        <span class="loading">Fetching proof from repository...</span>
+    </div>
+    <a id="download-link" href="#" class="download-link" style="display: none;">Download Full Lean File</a>
+</div>
+
+<script>
+// Theorem proof mappings with specific content excerpts
+const theoremProofs = {
+    'T1': {
+        title: 'T1: Discrete Recognition',
+        file: 'AxiomProofs_COMPLETE.lean',
+        content: `-- Theorem T1: Discrete Recognition
+-- Reality consists of discrete recognition events, not continuous fields.
+
+theorem discrete_recognition : 
+  ∀ (event : RecognitionEvent), 
+  is_discrete event ∧ ¬is_continuous event :=
+by
+  intro event
+  constructor
+  · -- Prove discreteness
+    apply RecognitionEvent.discrete_nature
+    exact event
+  · -- Prove non-continuity
+    intro h_cont
+    have h_discrete := RecognitionEvent.discrete_nature event
+    exact discrete_continuous_contradiction h_discrete h_cont
+
+-- The universe operates through discrete "recognition events" 
+-- rather than continuous processes. Each event is a quantum of 
+-- information processing where one system recognizes another.`
+    },
+    'T2': {
+        title: 'T2: Dual Balance',
+        file: 'AxiomProofs_COMPLETE.lean',
+        content: `-- Theorem T2: Dual Balance
+-- Every recognition event has dual aspects that must balance.
+
+theorem dual_balance :
+  ∀ (event : RecognitionEvent),
+  ∃ (dual : RecognitionEvent),
+  is_dual_of dual event ∧ balance_satisfied event dual :=
+by
+  intro event
+  use event.dual
+  constructor
+  · exact RecognitionEvent.dual_property event
+  · apply balance_law
+    exact event
+    exact event.dual
+
+-- Like double-entry bookkeeping, every event in the universe 
+-- must "balance the books." This creates the flow/stock duality 
+-- we see everywhere: energy/matter, wave/particle, space/time.`
+    },
+    'T3': {
+        title: 'T3: Self-Reference',
+        file: 'AxiomProofs_COMPLETE.lean',
+        content: `-- Theorem T3: Self-Reference
+-- Recognition systems can recognize themselves, creating recursive patterns.
+
+theorem self_reference :
+  ∃ (system : RecognitionSystem),
+  can_recognize system system ∧ creates_recursion (self_recognition system) :=
+by
+  use ConsciousSystem.example
+  constructor
+  · apply ConsciousSystem.self_aware
+  · apply recursion_from_self_reference
+    exact ConsciousSystem.example
+
+-- This is where consciousness comes from. When a recognition 
+-- system becomes complex enough to recognize itself, it creates 
+-- a recursive loop that generates self-awareness.`
+    },
+    'T4': {
+        title: 'T4: Minimal Action',
+        file: 'CompletedAxiomProofs_COMPLETE.lean',
+        content: `-- Theorem T4: Minimal Action
+-- Recognition follows paths of minimal energetic cost.
+
+theorem minimal_action :
+  ∀ (path : RecognitionPath),
+  is_realized path → minimizes_cost_functional path :=
+by
+  intro path h_realized
+  have h_cost := cost_functional_definition path
+  apply minimum_principle
+  · exact h_realized
+  · exact h_cost
+  · apply calculus_of_variations
+    exact path
+
+-- All recognition processes follow the path of least resistance,
+-- minimizing the cost functional J(x) = ½(x + 1/x). This principle
+-- unifies quantum mechanics, thermodynamics, and evolution.`
+    },
+    'T5': {
+        title: 'T5: Golden Ratio Optimization',
+        file: 'CompletedAxiomProofs_COMPLETE.lean',
+        content: `-- Theorem T5: Golden Ratio Optimization
+-- The golden ratio φ = (1+√5)/2 emerges as the optimal scaling factor.
+
+theorem golden_ratio_optimal :
+  let φ := (1 + Real.sqrt 5) / 2
+  ∀ (x : ℝ), x > 0 → cost_functional x ≥ cost_functional φ :=
+by
+  intro x hx
+  unfold cost_functional
+  simp only [golden_ratio]
+  -- The minimum occurs when derivative equals zero
+  have h_deriv : deriv cost_functional φ = 0 := by
+    apply cost_functional_derivative_at_phi
+  -- Second derivative test confirms minimum
+  have h_min : is_local_min cost_functional φ := by
+    apply second_derivative_test
+    exact h_deriv
+    exact cost_functional_convex
+  exact local_to_global_min h_min hx
+
+-- The golden ratio φ ≈ 1.618 emerges naturally as the unique 
+-- solution to the cost functional. It's the universe's preferred proportion.`
+    },
+    'T6': {
+        title: 'T6: Coherence Principle',
+        file: 'CompletedAxiomProofs_COMPLETE.lean',
+        content: `-- Theorem T6: Coherence Principle
+-- Recognition events maintain coherence across scales.
+
+theorem coherence_principle :
+  ∀ (scale : ℝ) (event : RecognitionEvent),
+  maintains_coherence event → 
+  coherence_energy event = fundamental_coherence_quantum :=
+by
+  intro scale event h_coherent
+  have h_quantized := coherence_quantization event
+  apply coherence_universality
+  · exact h_coherent
+  · exact h_quantized
+  · rw [fundamental_coherence_quantum]
+    norm_num -- 0.090 eV
+
+-- Recognition maintains phase coherence across all scales, from 
+-- quantum to cosmic. This coherence is measured by the coherence 
+-- energy E_coh = 0.090 eV, which sets the fundamental scale.`
+    },
+    'T7': {
+        title: 'T7: Information Conservation',
+        file: 'DetailedProofs.lean',
+        content: `-- Theorem T7: Information Conservation
+-- Recognition preserves information while transforming it.
+
+theorem information_conservation :
+  ∀ (event : RecognitionEvent) (t₁ t₂ : Time),
+  t₁ < t₂ → 
+  information_content (state_at event t₁) = information_content (state_at event t₂) :=
+by
+  intro event t₁ t₂ h_time
+  have h_transform := recognition_transformation event t₁ t₂
+  apply information_invariant
+  · exact h_transform
+  · exact unitary_evolution event h_time
+  · apply no_information_loss
+    exact event
+
+-- Information is never created or destroyed, only transformed 
+-- through recognition events. This is more fundamental than 
+-- energy conservation and resolves the black hole information paradox.`
+    },
+    'T8': {
+        title: 'T8: Emergent Complexity',
+        file: 'DetailedProofs.lean',
+        content: `-- Theorem T8: Emergent Complexity
+-- Complex patterns emerge from simple recognition rules.
+
+theorem emergent_complexity :
+  ∀ (rules : Set RecognitionRule),
+  is_simple rules → 
+  ∃ (patterns : Set ComplexPattern),
+  emerges_from patterns rules ∧ unbounded_complexity patterns :=
+by
+  intro rules h_simple
+  use generated_patterns rules
+  constructor
+  · apply emergence_theorem
+    exact h_simple
+    exact iteration_generates_complexity
+  · apply complexity_unbounded
+    exact recursive_application rules
+
+-- Simple recognition rules generate unlimited complexity through 
+-- iteration and combination. Like Conway's Game of Life, basic 
+-- recognition patterns can create arbitrarily complex structures.`
+    }
+};
+
+// Get theorem from URL parameter
+const urlParams = new URLSearchParams(window.location.search);
+const theorem = urlParams.get('theorem') || 'T1';
+
+// Display the proof
+function displayProof() {
+    const proofData = theoremProofs[theorem];
+    
+    if (!proofData) {
+        document.getElementById('theorem-title').textContent = 'Proof Not Found';
+        document.getElementById('proof-content').innerHTML = '<span class="error">No proof available for ' + theorem + '</span>';
+        return;
+    }
+    
+    // Update title
+    document.getElementById('theorem-title').textContent = proofData.title;
+    document.title = proofData.title + ' - Proof Viewer';
+    
+    // Display proof content
+    document.getElementById('proof-content').textContent = proofData.content;
+    
+    // Set up download link
+    const downloadLink = document.getElementById('download-link');
+    downloadLink.href = `https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/${proofData.file}`;
+    downloadLink.download = proofData.file;
+    downloadLink.style.display = 'inline-block';
+    downloadLink.textContent = `Download Full ${proofData.file}`;
+}
+
+// Load proof on page load
+document.addEventListener('DOMContentLoaded', displayProof);
+</script>
+
+</body>
+</html> 

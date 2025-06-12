@@ -511,27 +511,9 @@
         function displayProofs(container, proofs, theorem) {
             let html = '<strong>Lean Proofs:</strong> ';
             
-            // Theorem-specific proof mapping
-            const theoremSpecificProofs = {
-                'T1': { file: 'AxiomProofs_COMPLETE.lean', section: 'T1-T3' },
-                'T2': { file: 'AxiomProofs_COMPLETE.lean', section: 'T1-T3' },
-                'T3': { file: 'AxiomProofs_COMPLETE.lean', section: 'T1-T3' },
-                'T4': { file: 'CompletedAxiomProofs_COMPLETE.lean', section: 'T4-T6' },
-                'T5': { file: 'CompletedAxiomProofs_COMPLETE.lean', section: 'T4-T6' },
-                'T6': { file: 'CompletedAxiomProofs_COMPLETE.lean', section: 'T4-T6' },
-                'T7': { file: 'DetailedProofs.lean', section: 'T7-T8' },
-                'T8': { file: 'DetailedProofs.lean', section: 'T7-T8' }
-            };
-            
-            const specificProof = theoremSpecificProofs[theorem];
-            
-            if (specificProof) {
-                const downloadUrl = `https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/${specificProof.file}`;
-                html += `<a href="${downloadUrl}" download="${specificProof.file}" class="proof-link" title="Download ${specificProof.file}">${specificProof.file}</a>`;
-                html += ` <span style="color: #666; font-size: 0.85em;">(${specificProof.section})</span>`;
-            } else {
-                html += '<span style="color: #666; font-size: 0.9em;">Proof in development</span>';
-            }
+            // Link to the proof viewer for this specific theorem
+            const viewerUrl = `proof-viewer.html?theorem=${theorem}`;
+            html += `<a href="${viewerUrl}" class="proof-link" title="View ${theorem} Proof">View Proof</a>`;
             
             // Add link to view all proofs
             html += ' <a href="truth-packets.html" class="proof-link" style="background: #666;">All →</a>';
