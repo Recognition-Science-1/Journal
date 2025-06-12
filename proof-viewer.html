@@ -50,7 +50,7 @@
             padding: 10px 20px;
             text-decoration: none;
             display: inline-block;
-            margin: 10px 0;
+            margin: 10px 5px;
             border: none;
             cursor: pointer;
             font-family: monospace;
@@ -66,6 +66,15 @@
         .error {
             color: red;
             font-weight: bold;
+        }
+        .paper-downloads {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid black;
+        }
+        .download-section-title {
+            font-weight: bold;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -88,6 +97,12 @@
         <span class="loading">Fetching proof from repository...</span>
     </div>
     <button id="download-button" class="download-link" style="display: none;" onclick="downloadProof()">Download Full Lean File</button>
+    
+    <div id="paper-downloads" class="paper-downloads" style="display: none;">
+        <div class="download-section-title">📚 T1 Explanation Papers:</div>
+        <button class="download-link" onclick="downloadExplanationPaper('tex')">Download LaTeX Paper (.tex)</button>
+        <button class="download-link" onclick="downloadExplanationPaper('md')">Download Markdown Paper (.md)</button>
+    </div>
 </div>
 
 <script>
@@ -317,6 +332,38 @@ async function downloadProof() {
     }
 }
 
+// Function to download T1 explanation papers
+async function downloadExplanationPaper(format) {
+    let filename, url;
+    
+    if (format === 'tex') {
+        filename = 'T1_Discrete_Recognition_Paper.tex';
+        url = 'T1_Discrete_Recognition_Paper.tex';
+    } else if (format === 'md') {
+        filename = 'T1_Discrete_Recognition_Explained.md';
+        url = 'T1_Discrete_Recognition_Explained.md';
+    }
+    
+    try {
+        const response = await fetch(url);
+        const content = await response.text();
+        
+        const blob = new Blob([content], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
+        
+    } catch (error) {
+        console.error('Download failed:', error);
+        alert('Unable to download the file. Please try again.');
+    }
+}
+
 // Display the proof
 function displayProof() {
     const proofData = theoremProofs[theorem];
@@ -340,6 +387,11 @@ function displayProof() {
     const downloadButton = document.getElementById('download-button');
     downloadButton.style.display = 'inline-block';
     downloadButton.textContent = `Download Full ${proofData.file}`;
+    
+    // Show T1 explanation papers if this is T1
+    if (theorem === 'T1') {
+        document.getElementById('paper-downloads').style.display = 'block';
+    }
 }
 
 // Load proof on page load
