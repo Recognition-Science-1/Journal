@@ -248,7 +248,7 @@
         </div>
         <div class="metric">
             <span class="metric-label">Engine:</span>
-            <span class="metric-value">Lean 4 + Coq</span>
+            <span class="metric-value" id="layer2-engine">Lean 4 + Coq</span>
         </div>
         <div class="metric">
             <span class="metric-label">Queue:</span>
@@ -377,9 +377,11 @@
 <script src="truth-ledger.js"></script>
 <script src="reality-crawler.js"></script>
 <script src="uncertainty-pruner.js"></script>
+<script src="recognition-api-integration.js"></script>
 <script>
 let systemStartTime = Date.now();
 let dashboardUpdateInterval;
+let recognitionAPI = new RecognitionAPI();
 
 // Initialize system
 document.addEventListener('DOMContentLoaded', function() {
@@ -406,9 +408,43 @@ function initializeSystem() {
         // Load example data
         loadExampleData();
         
+        // Load Lean proofs from GitHub
+        loadGitHubProofs();
+        
         logMessage('System initialization complete', 'success');
         updateSystemStatus();
     }, 1000);
+}
+
+async function loadGitHubProofs() {
+    logMessage('Connecting to Jonathan\'s GitHub repository...', 'info');
+    
+    try {
+        const proofsLoaded = await recognitionAPI.loadLeanProofsIntoLedger(truthLedger);
+        
+        if (proofsLoaded > 0) {
+            logMessage(`Successfully loaded ${proofsLoaded} Lean proofs from GitHub`, 'success');
+            
+            // Update layer 2 display
+            document.getElementById('layer2-engine').textContent = 'Lean 4 (Live GitHub)';
+            
+            // Add GitHub status to Layer 2
+            const layer2Panel = document.querySelector('.layer-panel:nth-child(2)');
+            if (layer2Panel && !document.getElementById('github-status')) {
+                const githubMetric = document.createElement('div');
+                githubMetric.className = 'metric';
+                githubMetric.innerHTML = `
+                    <span class="metric-label">GitHub Status:</span>
+                    <span class="metric-value" id="github-status">✅ Connected</span>
+                `;
+                layer2Panel.appendChild(githubMetric);
+            }
+        } else {
+            logMessage('No Lean proofs found in repository', 'warning');
+        }
+    } catch (error) {
+        logMessage(`GitHub connection error: ${error.message}`, 'error');
+    }
 }
 
 function loadExampleData() {
@@ -448,6 +484,9 @@ function startDashboardUpdates() {
     // Update dashboard every 2 seconds
     dashboardUpdateInterval = setInterval(updateDashboard, 2000);
     updateDashboard(); // Initial update
+    
+    // Auto-fetch from GitHub every 5 minutes
+    setInterval(loadGitHubProofs, 300000); // 5 minutes = 300,000 ms
 }
 
 function updateDashboard() {
@@ -487,6 +526,12 @@ function updateLayerMetrics() {
     document.getElementById('layer2-proofs').textContent = stats.totalProofs;
     document.getElementById('layer2-verified').textContent = stats.verifiedProofs;
     document.getElementById('layer2-validating').textContent = stats.totalProofs - stats.verifiedProofs;
+    
+    // Update engine info if we have GitHub proofs
+    const engineElement = document.getElementById('layer2-engine');
+    if (engineElement) {
+        engineElement.textContent = stats.totalProofs > 3 ? 'Lean 4 (Live GitHub)' : 'Lean 4 + Coq';
+    }
     
     // Layer 3: Prediction Ledger
     document.getElementById('layer3-predictions').textContent = stats.totalPredictions;

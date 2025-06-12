@@ -498,7 +498,104 @@ class RecognitionAPI {
         console.log(`🚀 Recognition Science API integration started. Updates every ${this.updateInterval/1000} seconds.`);
     }
 
-    // Clear cache manually
+    // Parse Lean proofs and convert to truth packets for the ledger
+    async loadLeanProofsIntoLedger(truthLedger) {
+        console.log('📚 Loading Lean proofs from Jonathan\'s repository...');
+        
+        try {
+            // Get formal proofs from the repository
+            const formalProofs = await this.getFormalProofs();
+            const theorems = await this.getTheorems();
+            
+            // Combine both sources
+            const allProofs = [...formalProofs, ...theorems];
+            
+            let loadedCount = 0;
+            
+            for (const proof of allProofs) {
+                // Parse Lean file to extract theorem information
+                const theoremData = this.parseLeanFile(proof.content);
+                
+                if (theoremData) {
+                    // Convert to truth packet format
+                    const proofPacket = {
+                        title: theoremData.name || proof.name.replace('.lean', ''),
+                        dependencies: theoremData.dependencies || [],
+                        proof: theoremData.proof || proof.content.substring(0, 500) + '...',
+                        predictions: theoremData.predictions || [],
+                        author: 'Jonathan Washburn',
+                        code: proof.content,
+                        verificationEngine: 'Lean4',
+                        sourceFile: proof.name
+                    };
+                    
+                    // Submit to truth ledger
+                    truthLedger.submitProof(proofPacket);
+                    loadedCount++;
+                }
+            }
+            
+            console.log(`✅ Loaded ${loadedCount} Lean proofs into the ledger`);
+            return loadedCount;
+            
+        } catch (error) {
+            console.error('❌ Error loading Lean proofs:', error);
+            return 0;
+        }
+    }
+    
+    // Parse a Lean file to extract theorem information
+    parseLeanFile(leanContent) {
+        if (!leanContent) return null;
+        
+        try {
+            // Extract theorem declarations
+            const theoremRegex = /theorem\s+(\w+).*?:=\s*by\s*(.*?)(?=theorem|\z)/gs;
+            const matches = [...leanContent.matchAll(theoremRegex)];
+            
+            if (matches.length === 0) return null;
+            
+            // Take the first theorem as the main one
+            const [, theoremName, proofBody] = matches[0];
+            
+            // Extract dependencies (imports and axioms used)
+            const importRegex = /import\s+(\S+)/g;
+            const axiomRegex = /axiom\s+(\w+)/g;
+            const dependencies = [];
+            
+            const imports = [...leanContent.matchAll(importRegex)];
+            imports.forEach(match => dependencies.push(match[1]));
+            
+            const axioms = [...leanContent.matchAll(axiomRegex)];
+            axioms.forEach(match => dependencies.push(match[1]));
+            
+            // Try to extract predictions from comments
+            const predictions = [];
+            const predictionRegex = /-- Prediction:\s*(.+)/g;
+            const predMatches = [...leanContent.matchAll(predictionRegex)];
+            predMatches.forEach(match => predictions.push(match[1]));
+            
+            // Extract description from docstring
+            const docstringRegex = new RegExp(`/-- ([^-]+) --/\\s*theorem\\s+${theoremName}`, 's');
+            const docMatch = leanContent.match(docstringRegex);
+            const description = docMatch ? docMatch[1].trim() : '';
+            
+            return {
+                name: theoremName,
+                description: description,
+                dependencies: [...new Set(dependencies)], // Remove duplicates
+                proof: proofBody.trim(),
+                predictions: predictions,
+                rawContent: leanContent
+            };
+            
+        } catch (error) {
+            console.error('Error parsing Lean file:', error);
+            return null;
+        }
+    }
+
+    // Clear cache
     clearCache() {
         this.cache.clear();
         console.log('🗑️ Cache cleared');

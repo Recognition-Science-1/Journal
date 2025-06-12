@@ -175,8 +175,10 @@
 </div>
 
 <script src="truth-ledger.js"></script>
+<script src="recognition-api-integration.js"></script>
 <script>
 let allPackets = [];
+let recognitionAPI = new RecognitionAPI();
 
 function loadPackets() {
     allPackets = [];
@@ -320,8 +322,66 @@ function refreshLedger() {
 document.addEventListener('DOMContentLoaded', function() {
     loadPackets();
     
-    // Auto-refresh every 10 seconds
+    // Load Lean proofs from Jonathan's GitHub
+    loadLeanProofsFromGitHub();
+    
+    // Auto-refresh display every 10 seconds
     setInterval(loadPackets, 10000);
+    
+    // Auto-fetch from GitHub every 5 minutes
+    setInterval(loadLeanProofsFromGitHub, 300000); // 5 minutes = 300,000 ms
+});
+
+// Load Lean proofs from Jonathan's GitHub repository
+async function loadLeanProofsFromGitHub() {
+    console.log('🔄 Fetching Lean proofs from Jonathan\'s repository...');
+    
+    const loadingMessage = document.createElement('div');
+    loadingMessage.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #000; color: white; padding: 10px 20px; z-index: 1000;';
+    loadingMessage.textContent = 'Loading Lean proofs from GitHub...';
+    document.body.appendChild(loadingMessage);
+    
+    try {
+        const proofsLoaded = await recognitionAPI.loadLeanProofsIntoLedger(truthLedger);
+        
+        if (proofsLoaded > 0) {
+            loadingMessage.textContent = `✅ Loaded ${proofsLoaded} Lean proofs!`;
+            loadingMessage.style.background = '#28a745';
+            
+            // Refresh the display
+            setTimeout(() => {
+                loadPackets();
+                document.body.removeChild(loadingMessage);
+            }, 2000);
+        } else {
+            loadingMessage.textContent = '⚠️ No Lean proofs found';
+            loadingMessage.style.background = '#ffc107';
+            setTimeout(() => document.body.removeChild(loadingMessage), 3000);
+        }
+    } catch (error) {
+        console.error('Error loading Lean proofs:', error);
+        loadingMessage.textContent = '❌ Error loading proofs';
+        loadingMessage.style.background = '#dc3545';
+        setTimeout(() => document.body.removeChild(loadingMessage), 3000);
+    }
+}
+
+// Add a manual refresh button for GitHub proofs
+function addGitHubRefreshButton() {
+    const filterBar = document.querySelector('.filter-bar');
+    if (filterBar) {
+        const githubButton = document.createElement('button');
+        githubButton.className = 'refresh-btn';
+        githubButton.textContent = 'LOAD GITHUB PROOFS';
+        githubButton.onclick = loadLeanProofsFromGitHub;
+        githubButton.style.marginLeft = '1em';
+        filterBar.appendChild(githubButton);
+    }
+}
+
+// Add the GitHub refresh button after DOM loads
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(addGitHubRefreshButton, 100);
 });
 
 // Add some example data for demonstration

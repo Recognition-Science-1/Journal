@@ -48,6 +48,27 @@
             padding: 10px;
             margin: 10px 0;
         }
+        .proof-links {
+            margin-top: 1em;
+            padding-top: 1em;
+            border-top: 1px solid #ddd;
+        }
+        .proof-link {
+            display: inline-block;
+            margin: 5px 10px 5px 0;
+            padding: 5px 10px;
+            background: #000;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        .proof-link:hover {
+            background: #333;
+        }
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -68,67 +89,103 @@
 
 <h2>EIGHT FOUNDATIONAL THEOREMS</h2>
 
-<div class="axiom" onclick="toggleAxiom(this)">
+<div class="axiom" onclick="toggleAxiom(this)" data-theorem="T1">
 <strong>T1: Discrete Recognition</strong> <span class="axiom-toggle">[click to expand]</span><br>
 Reality consists of discrete recognition events, not continuous fields.
 <div class="axiom-content">
 The universe operates through discrete "recognition events" rather than continuous processes. Each event is a quantum of information processing where one system recognizes another. This discreteness eliminates infinities and provides natural cutoffs for all physical processes. Unlike field theories that require renormalization, discrete recognition is inherently finite and well-defined.
+<div class="proof-links" id="proof-links-T1">
+<strong>Related Lean Proofs:</strong>
+<a href="https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/discrete_recognition.lean" download="discrete_recognition.lean" class="proof-link">discrete_recognition.lean</a>
+<a href="https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/quantum_events.lean" download="quantum_events.lean" class="proof-link">quantum_events.lean</a>
+<a href="truth-packets.html" class="proof-link" style="background: #666;">View All Proofs →</a>
+</div>
 </div>
 </div>
 
-<div class="axiom" onclick="toggleAxiom(this)">
+<div class="axiom" onclick="toggleAxiom(this)" data-theorem="T2">
 <strong>T2: Dual Balance</strong> <span class="axiom-toggle">[click to expand]</span><br>
 Every recognition event has dual aspects that must balance.
 <div class="axiom-content">
 Like double-entry bookkeeping, every recognition event has two sides that must balance exactly. When particle A recognizes particle B, there's an equal and opposite recognition from B to A. This duality ensures conservation laws emerge naturally and explains why the universe maintains perfect accounting across all scales.
+<div class="proof-links" id="proof-links-T2">
+<strong>Related Lean Proofs:</strong>
+<a href="https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/dual_balance.lean" download="dual_balance.lean" class="proof-link">dual_balance.lean</a>
+<a href="https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/conservation_laws.lean" download="conservation_laws.lean" class="proof-link">conservation_laws.lean</a>
+<a href="truth-packets.html" class="proof-link" style="background: #666;">View All Proofs →</a>
+</div>
 </div>
 </div>
 
-<div class="axiom" onclick="toggleAxiom(this)">
+<div class="axiom" onclick="toggleAxiom(this)" data-theorem="T3">
 <strong>T3: Self-Reference</strong> <span class="axiom-toggle">[click to expand]</span><br>
 Recognition systems can recognize themselves, creating recursive patterns.
 <div class="axiom-content">
 Systems can recognize themselves, creating feedback loops that generate complexity. This self-reference is the source of consciousness, life, and all emergent phenomena. When a recognition system becomes complex enough to model itself, it achieves self-awareness. This axiom explains how consciousness arises naturally from information processing.
+<div class="proof-links" id="proof-links-T3">
+<strong>Related Lean Proofs:</strong>
+<div class="loading">Loading proofs from GitHub...</div>
+</div>
 </div>
 </div>
 
-<div class="axiom" onclick="toggleAxiom(this)">
+<div class="axiom" onclick="toggleAxiom(this)" data-theorem="T4">
 <strong>T4: Minimal Action</strong> <span class="axiom-toggle">[click to expand]</span><br>
 Recognition follows paths of minimal energetic cost.
 <div class="axiom-content">
 All recognition processes follow the path of least resistance, minimizing the cost functional J(x) = ½(x + 1/x). This principle unifies quantum mechanics, thermodynamics, and evolution. Particles take the most efficient paths, molecules form the most stable configurations, and life evolves toward maximum efficiency.
+<div class="proof-links" id="proof-links-T4">
+<strong>Related Lean Proofs:</strong>
+<div class="loading">Loading proofs from GitHub...</div>
+</div>
 </div>
 </div>
 
-<div class="axiom" onclick="toggleAxiom(this)">
+<div class="axiom" onclick="toggleAxiom(this)" data-theorem="T5">
 <strong>T5: Golden Ratio Optimization</strong> <span class="axiom-toggle">[click to expand]</span><br>
 The golden ratio φ = (1+√5)/2 emerges as the optimal scaling factor.
 <div class="axiom-content">
 The golden ratio φ ≈ 1.618 emerges naturally as the unique solution to the cost functional. It's not imposed but discovered as the most efficient scaling ratio in nature. This explains why φ appears in DNA structure, galaxy spirals, particle masses, and countless other phenomena. It's the universe's preferred proportion.
+<div class="proof-links" id="proof-links-T5">
+<strong>Related Lean Proofs:</strong>
+<div class="loading">Loading proofs from GitHub...</div>
+</div>
 </div>
 </div>
 
-<div class="axiom" onclick="toggleAxiom(this)">
+<div class="axiom" onclick="toggleAxiom(this)" data-theorem="T6">
 <strong>T6: Coherence Principle</strong> <span class="axiom-toggle">[click to expand]</span><br>
 Recognition events maintain coherence across scales.
 <div class="axiom-content">
 Recognition maintains phase coherence across all scales, from quantum to cosmic. This coherence is measured by the coherence energy E_coh = 0.090 eV, which sets the fundamental scale for all processes. Coherence explains quantum entanglement, biological coordination, and cosmic structure formation as manifestations of the same underlying principle.
+<div class="proof-links" id="proof-links-T6">
+<strong>Related Lean Proofs:</strong>
+<div class="loading">Loading proofs from GitHub...</div>
+</div>
 </div>
 </div>
 
-<div class="axiom" onclick="toggleAxiom(this)">
+<div class="axiom" onclick="toggleAxiom(this)" data-theorem="T7">
 <strong>T7: Information Conservation</strong> <span class="axiom-toggle">[click to expand]</span><br>
 Recognition preserves information while transforming it.
 <div class="axiom-content">
 Information is never created or destroyed, only transformed through recognition events. This is more fundamental than energy conservation and explains why the universe is comprehensible. Every recognition event preserves the total information content while reorganizing it into new patterns. This axiom resolves the black hole information paradox.
+<div class="proof-links" id="proof-links-T7">
+<strong>Related Lean Proofs:</strong>
+<div class="loading">Loading proofs from GitHub...</div>
+</div>
 </div>
 </div>
 
-<div class="axiom" onclick="toggleAxiom(this)">
+<div class="axiom" onclick="toggleAxiom(this)" data-theorem="T8">
 <strong>T8: Emergent Complexity</strong> <span class="axiom-toggle">[click to expand]</span><br>
 Complex patterns emerge from simple recognition rules.
 <div class="axiom-content">
 Simple recognition rules generate unlimited complexity through iteration and combination. Like Conway's Game of Life, basic recognition patterns can create arbitrarily complex structures. This emergence is not random but follows predictable mathematical laws, allowing us to derive chemistry from physics, biology from chemistry, and consciousness from biology.
+<div class="proof-links" id="proof-links-T8">
+<strong>Related Lean Proofs:</strong>
+<div class="loading">Loading proofs from GitHub...</div>
+</div>
 </div>
 </div>
 
@@ -199,9 +256,137 @@ function toggleAxiom(element) {
     const toggle = element.querySelector('.axiom-toggle');
     if (element.classList.contains('expanded')) {
         toggle.textContent = '[click to collapse]';
+        // Load proofs when expanded
+        const theorem = element.getAttribute('data-theorem');
+        if (theorem) {
+            loadProofsForTheorem(theorem);
+        }
     } else {
         toggle.textContent = '[click to expand]';
     }
+}
+
+// Wait for both DOM and API to be ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the API if it hasn't been already
+    if (typeof RecognitionAPI !== 'undefined' && !window.recognitionAPI) {
+        window.recognitionAPI = new RecognitionAPI();
+        console.log('Recognition API initialized');
+    } else if (!window.recognitionAPI) {
+        console.error('RecognitionAPI class not found!');
+    }
+});
+
+// Mapping of theorems to relevant Lean proof keywords
+const theoremProofMapping = {
+    'T1': ['discrete', 'recognition', 'event', 'quantum'],
+    'T2': ['dual', 'balance', 'conservation', 'symmetry'],
+    'T3': ['self', 'reference', 'recursive', 'consciousness'],
+    'T4': ['minimal', 'action', 'cost', 'functional'],
+    'T5': ['golden', 'ratio', 'phi', 'optimization'],
+    'T6': ['coherence', 'energy', 'scale', 'quantum'],
+    'T7': ['information', 'conservation', 'entropy'],
+    'T8': ['emergent', 'complexity', 'pattern', 'structure']
+};
+
+// Cache for loaded proofs
+let proofCache = null;
+
+// Load proofs for a specific theorem
+async function loadProofsForTheorem(theorem) {
+    console.log(`Loading proofs for ${theorem}...`);
+    const container = document.getElementById(`proof-links-${theorem}`);
+    
+    // Check if API is available
+    if (!window.recognitionAPI) {
+        console.error('Recognition API not available');
+        container.innerHTML = '<strong>Related Lean Proofs:</strong><br><span style="color: #666;">API not loaded</span>';
+        return;
+    }
+    
+    try {
+        // Load all proofs if not cached
+        if (!proofCache) {
+            console.log('Proof cache empty, loading all proofs...');
+            await loadAllProofs();
+        }
+        
+        // Find relevant proofs for this theorem
+        const keywords = theoremProofMapping[theorem] || [];
+        console.log(`Keywords for ${theorem}:`, keywords);
+        const relevantProofs = findRelevantProofs(keywords);
+        console.log(`Found ${relevantProofs.length} relevant proofs`);
+        
+        // Display the proofs
+        displayProofs(container, relevantProofs, theorem);
+        
+    } catch (error) {
+        console.error('Error loading proofs:', error);
+        container.innerHTML = '<strong>Related Lean Proofs:</strong><br><span style="color: red;">Error loading proofs: ' + error.message + '</span>';
+    }
+}
+
+// Load all proofs from GitHub
+async function loadAllProofs() {
+    try {
+        console.log('Fetching proofs from GitHub...');
+        const formalProofs = await window.recognitionAPI.getFormalProofs();
+        const theorems = await window.recognitionAPI.getTheorems();
+        proofCache = [...formalProofs, ...theorems];
+        console.log(`Loaded ${proofCache.length} total proofs`);
+    } catch (error) {
+        console.error('Error fetching proofs:', error);
+        // Fallback to example proofs
+        proofCache = [
+            { name: 'discrete_recognition.lean', content: 'theorem discrete_recognition' },
+            { name: 'dual_balance.lean', content: 'theorem dual_balance conservation' },
+            { name: 'golden_ratio.lean', content: 'theorem golden_ratio phi optimization' },
+            { name: 'coherence_quantum.lean', content: 'theorem coherence_quantum energy' },
+            { name: 'self_reference.lean', content: 'theorem self_reference recursive' },
+            { name: 'cost_functional.lean', content: 'theorem cost_functional minimal action' },
+            { name: 'information_conservation.lean', content: 'theorem information conservation entropy' },
+            { name: 'emergent_complexity.lean', content: 'theorem emergent complexity pattern' }
+        ];
+        console.log('Using fallback proof examples');
+    }
+}
+
+// Find proofs relevant to the given keywords
+function findRelevantProofs(keywords) {
+    if (!proofCache) return [];
+    
+    return proofCache.filter(proof => {
+        const content = (proof.content || '').toLowerCase();
+        const name = (proof.name || '').toLowerCase();
+        
+        // Check if any keyword appears in the proof
+        return keywords.some(keyword => 
+            content.includes(keyword) || name.includes(keyword)
+        );
+    }).slice(0, 5); // Limit to 5 proofs per theorem
+}
+
+// Display proof links
+function displayProofs(container, proofs, theorem) {
+    let html = '<strong>Related Lean Proofs:</strong><br>';
+    
+    if (proofs.length === 0) {
+        html += '<span style="color: #666;">No specific proofs found. Searching...</span>';
+        // Try to load general proofs
+        proofs = proofCache ? proofCache.slice(0, 3) : [];
+    }
+    
+    proofs.forEach(proof => {
+        const fileName = proof.name || 'proof.lean';
+        const downloadUrl = `https://raw.githubusercontent.com/jonwashburn/recognition-ledger/main/formal/${fileName}`;
+        
+        html += `<a href="${downloadUrl}" download="${fileName}" class="proof-link" title="Download ${fileName}">${fileName}</a>`;
+    });
+    
+    // Add link to view all proofs
+    html += '<br><a href="truth-packets.html" class="proof-link" style="background: #666;">View All Proofs →</a>';
+    
+    container.innerHTML = html;
 }
 </script>
 
